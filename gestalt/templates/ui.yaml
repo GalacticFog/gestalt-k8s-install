@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gestalt-ui
+spec:
+  replicas: 1
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        gestalt-app: ui
+    spec:
+      containers:
+      - name: gestalt-ui
+        image: galacticfog/gestalt-ui-react:{{ .Values.Common.ReleaseTag }}
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: META_API_URL
+          value: "{{ .Values.Meta.Protocol }}://{{ .Values.Meta.Hostname }}:{{ .Values.Meta.Port }}"
+        - name: SEC_API_URL
+          value: "{{ .Values.Security.Protocol }}://{{ .Values.Security.Hostname }}:{{ .Values.Security.Port }}"

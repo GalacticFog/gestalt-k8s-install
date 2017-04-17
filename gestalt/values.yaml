@@ -1,0 +1,55 @@
+# ServiceName: gestalt-platform
+# Namespace: galacticfog
+
+Common:
+  # Docker image tag
+  ReleaseTag: kube-1.1.0
+
+DB:
+  Hostname: gestalt-db.gestalt-system
+  Port: 5432
+  # Username: gestaltdev
+  Username: postgres
+  Password: letmein
+  Resources:
+    Cpu: 100m
+    Memory: 512Mi
+    Storage: 1Gi
+  Replicas: 2
+  # UseExternalDB: False
+  # UseHA: True
+  # HA:
+  #   NumberOfSecondaryNodes: 1
+  #   DatabaseSizeMB: 100
+
+Security:
+  Hostname: gestalt-security.gestalt-system
+  Port: 9455
+  Protocol: http
+  AdminUser: gestalt-admin
+  AdminPassword: letmein
+  DatabaseName: gestalt-security
+
+Rabbit:
+  Hostname: gestalt-rabbit.gestalt-system
+  Port: 5672
+  HttpPort: 15672
+  # Exchange: "policy-exchange"
+  # Route: "policy"
+
+Meta:
+  Hostname: gestalt-meta.gestalt-system
+  Port: 10131
+  Protocol: http
+  DatabaseName: gestalt-meta
+
+Laser:
+  DatabaseName: laser-db
+  Cpu: 0.25
+  Memory: 1024
+
+Gateway:
+  DatabaseName: gateway-db
+
+Kong:
+  DatabaseName: kong-db

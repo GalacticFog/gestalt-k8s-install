@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gestalt-meta
+  labels:
+    gestalt-app: meta
+spec:
+  type: LoadBalancer
+  selector:
+    gestalt-app: meta
+  ports:
+    - name: http-api
+      port: {{ .Values.Meta.Port }}
+      targetPort: service-api

@@ -1,0 +1,1 @@
+Test of user message... Namespace is {{ .Release.Namespace }}

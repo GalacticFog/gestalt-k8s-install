@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gestalt-rabbit
+spec:
+  selector:
+    gestalt-app: rabbit
+  ports:
+    - name: service-api
+      port: {{.Values.Rabbit.Port}}
+      targetPort: service-api
+    - name: http-api
+      port: {{.Values.Rabbit.HttpPort}}
+      targetPort: http-api

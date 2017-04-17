@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gestalt-meta
+spec:
+  replicas: 1
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        gestalt-app: meta
+    spec:
+      containers:
+      - name: gestalt-meta
+        image: "galacticfog/gestalt-meta:{{ .Values.Common.ReleaseTag }}"
+        ports:
+        - containerPort: 9000
+          name: service-api
+        env:
+        - name: DATABASE_HOSTNAME
+          value: "{{ .Values.DB.Hostname }}"
+        - name: DATABASE_NAME
+          value: "{{ .Values.Meta.DatabaseName }}"
+        - name: DATABASE_PASSWORD
+          value: "{{ .Values.DB.Password }}"
+        - name: DATABASE_PORT
+          value: "{{ .Values.DB.Port }}"
+        - name: DATABASE_USERNAME
+          value: "{{ .Values.DB.Username }}"
+        - name: GESTALT_SECURITY_HOSTNAME
+          value: "{{ .Values.Security.Hostname }}"
+        - name: GESTALT_SECURITY_PORT
+          value: "{{ .Values.Security.Port }}"
+        - name: GESTALT_SECURITY_PROTOCOL
+          value: "{{ .Values.Security.Protocol }}"
+        - name: GESTALT_SECURITY_REALM
+          value: "https://security.test.galacticfog.com"
+        - name: RABBIT_HOST
+          value: "{{ .Values.Rabbit.Hostname }}"
+        - name: RABBIT_PORT
+          value: "{{ .Values.Rabbit.Port }}"
+        - name: RABBIT_HTTP_PORT
+          value: "{{ .Values.Rabbit.HttpPort }}"
+        - name: RABBIT_EXCHANGE
+          value: "policy-exchange"
+        - name: RABBIT_ROUTE
+          value: "policy"

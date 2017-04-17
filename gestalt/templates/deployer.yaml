@@ -1,0 +1,66 @@
+# This is a pod w/ restartPolicy=Never so that the installer only runs once.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gestalt-deployer
+  labels:
+    gestalt-app: deployer
+spec:
+  restartPolicy: Never
+  containers:
+  - name: gestalt-deployer
+    image: galacticfog/gestalt-deployer:latest
+    # 'deploy' arg signals deployment of gestalt platform
+    args: ["deploy"]
+    env:
+    - name: CONTAINER_IMAGE_RELEASE_TAG
+      value: "{{ .Values.Common.ReleaseTag }}"
+    - name: KUBECONFIG_DATA
+      value: "{{ .Values.kubeconfig }}"
+      # Database settings
+    - name: DATABASE_HOSTNAME
+      value: "{{ .Values.DB.Hostname }}"
+    - name: DATABASE_PASSWORD
+      value: "{{ .Values.DB.Password }}"
+    - name: DATABASE_PORT
+      value: "{{ .Values.DB.Port }}"
+    - name: DATABASE_USERNAME
+      value: "{{ .Values.DB.Username }}"
+      # Security settings
+    - name: SECURITY_DB_NAME
+      value: "{{ .Values.Security.DatabaseName }}"
+    - name: SECURITY_HOSTNAME
+      value: "{{ .Values.Security.Hostname }}"
+    - name: SECURITY_PORT
+      value: "{{ .Values.Security.Port }}"
+    - name: SECURITY_PROTOCOL
+      value: "{{ .Values.Security.Protocol }}"
+    - name: SECURITY_ADMIN_USERNAME
+      value: "{{ .Values.Security.AdminUser }}"
+    - name: SECURITY_ADMIN_PASSWORD
+      value: "{{ .Values.Security.AdminPassword }}"
+      # Meta settings
+    - name: META_HOSTNAME
+      value: "{{ .Values.Meta.Hostname }}"
+    - name: META_PORT
+      value: "{{ .Values.Meta.Port }}"
+    - name: META_PROTOCOL
+      value: "{{ .Values.Meta.Protocol }}"
+      # Rabbit settings
+    - name: RABBIT_HOSTNAME
+      value: "{{ .Values.Rabbit.Hostname }}"
+    - name: RABBIT_PORT
+      value: "{{ .Values.Rabbit.Port }}"
+      # Laser settings
+    - name: LASER_DB_NAME
+      value: "{{ .Values.Laser.DatabaseName }}"
+    - name: LASER_CPU
+      value: "{{ .Values.Laser.Cpu }}"
+    - name: LASER_MEMORY
+      value: "{{ .Values.Laser.Memory }}"
+      # Gateway settings
+    - name: GATEWAY_DB_NAME
+      value: "{{ .Values.Gateway.DatabaseName }}"
+      # Kong settings
+    - name: KONG_DB_NAME
+      value: "{{ .Values.Kong.DatabaseName }}"
