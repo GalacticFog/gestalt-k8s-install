@@ -32,8 +32,8 @@ spec:
           value: "{{ .Values.Security.Port }}"
         - name: GESTALT_SECURITY_PROTOCOL
           value: "{{ .Values.Security.Protocol }}"
-        - name: GESTALT_SECURITY_REALM
-          value: "https://security.test.galacticfog.com"
+        # - name: GESTALT_SECURITY_REALM
+        #   value: "https://security.test.galacticfog.com"
         - name: RABBIT_HOST
           value: "{{ .Values.Rabbit.Hostname }}"
         - name: RABBIT_PORT
