@@ -39,7 +39,7 @@ $ ./helm_install_gestalt.sh
 
 Find the User Interface service endpoint, and navigate your browser to the URL:
 ```
-$ kubectl describe service gestalt-ui
+$ kubectl describe service gestalt-ui --namespace=gestalt-system
 ...
 LoadBalancer Ingress:	ad9f553e323f411e7bd9c0a5e7968435-1588235664.us-east-1.elb.amazonaws.com
 ...
