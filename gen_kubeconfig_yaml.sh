@@ -5,7 +5,7 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-data=`base64 $1`
+data=`base64 -w0 $1`
 outfile=kube_provider_config.yaml
 
 cat > $outfile << EOF
