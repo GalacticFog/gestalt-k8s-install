@@ -1,4 +1,7 @@
 #!/bin/bash
+
+namespace=gestalt-system
+
 echo "Checking for kube_provider_config.yaml"
 echo ""
 if [ ! -f kube_provider_config.yaml ]; then
@@ -13,19 +16,19 @@ if [ ! -f kube_provider_config.yaml ]; then
   exit 1
 fi
 
-echo "Checking for 'gestalt-system' namespace"
-kubectl get namespace gestalt-system
+echo "Checking for '$namespace' namespace"
+kubectl get namespace $namespace
 if [ $? -ne 0 ]; then
   echo ""
-  echo "'gestalt-system' namespace must exist before installing gestalt platform.  Create by running"
+  echo "[ERROR] '$namespace' namespace must exist before installing gestalt platform.  Create by running"
   echo "the following command:"
   echo ""
-  echo "  kubectl create namespace gestalt-system"
+  echo "  kubectl create namespace $namespace"
   echo ""
   exit 1
 fi
 
 echo "Invoking helm install..."
-cmd="helm install --namespace gestalt-system ./gestalt -n gestalt-platform -f kube_provider_config.yaml"
+cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f kube_provider_config.yaml"
 echo "$cmd"
 $cmd
