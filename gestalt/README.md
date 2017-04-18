@@ -8,42 +8,39 @@
 ## Chart Details
 This chart will do the following:
 
-* Deploy the Gestalt Platform
+* Deploy the Gestalt Platform to your Kubernetes cluster
 
-## Installing the Chart
+## Preparing and Installing the Chart
 
-1) Prepare kubernetes provider configuration file to be used by gestalt:
-
-```
-$ ./gen_kubeconfig_yaml.sh kubeproviderconfig
-
-Encoded kubeproviderconfig to kube_provider_config.yaml. Pass with '-f' to helm install command, e.g.
-
-    helm install ./gestalt -n gestalt-platform -f kube_provider_config.yaml
-```
-
-2) Install with the following helm command:
+Prepare kubernetes provider configuration file to be used by gestalt:
 
 ```
-$ helm install ./gestalt -n gestalt-platform -f kube_provider_config.yaml
+$ ./gen_kubeconfig_yaml.sh ~/.kube/config
+
+Encoded kubernetes config file (/home/example/.kube/config) to kube_provider_config.yaml.
+
+Pass with '-f' to helm install command, e.g.
+
+    helm install --namespace gestalt-system ./gestalt -n gestalt-platform -f kube_provider_config.yaml
 ```
+
 
 ## Configuration
 Modify the values in ```values.yaml```
 
-## Perform a dry run:
 
-```
-helm install --debug --dry-run .
-```
+## Deploy Gestalt Platform using Helm:
 
-## Install Gestalt platform:
-
+Create a namespace (e.g. 'gestalt-system'):
 ```
-$ helm install ./gestalt -n gestalt-platform -f kube_provider_config.yaml
+$ kubectl create namespace gestalt-system
+```
+Install using Helm:
+```
+$ helm install --namespace gestalt-system ./gestalt -n gestalt-platform -f kube_provider_config.yaml
 NAME:   gestalt-platform
-LAST DEPLOYED: Tue Apr 11 22:33:11 2017
-NAMESPACE: gestalt-deploy-test-1
+LAST DEPLOYED: Tue Apr 18 16:25:13 2017
+NAMESPACE: gestalt-system
 STATUS: DEPLOYED
 
 RESOURCES:
@@ -53,32 +50,64 @@ gestalt-db  Opaque  3     3s
 
 ==> v1/Service
 NAME                   CLUSTER-IP    EXTERNAL-IP  PORT(S)             AGE
-gestalt-rabbit         10.0.51.39    <none>       5672/TCP,15672/TCP  3s
-gestalt-meta           10.0.231.121  <none>       10131/TCP           3s
-gestalt-security       10.0.94.215   <none>       9455/TCP            3s
+gestalt-security       10.0.196.202  <pending>    9455:31704/TCP      3s
 gestalt-platform-etcd  None          <none>       2380/TCP,2379/TCP   3s
-gestalt-db             10.0.29.233   <none>       5432/TCP            3s
+gestalt-ui             10.0.47.144   <pending>    80:30008/TCP        3s
+gestalt-db             10.0.136.194  <none>       5432/TCP            3s
+gestalt-meta           10.0.16.222   <pending>    10131:32631/TCP     3s
+gestalt-rabbit         10.0.51.143   <none>       5672/TCP,15672/TCP  3s
 
 ==> apps/v1beta1/StatefulSet
 NAME                   DESIRED  CURRENT  AGE
 gestalt-platform-etcd  3        1        3s
 gestalt-db             2        1        2s
 
+==> v1/Pod
+NAME              READY  STATUS             RESTARTS  AGE
+gestalt-deployer  0/1    ContainerCreating  0         3s
+
 ==> extensions/v1beta1/Deployment
 NAME              DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
-gestalt-meta      1        1        1           0          3s
-gestalt-deployer  1        1        1           0          3s
-gestalt-rabbit    1        1        1           0          3s
-gestalt-security  1        1        1           0          3s
+gestalt-rabbit    1        1        1           1          3s
+gestalt-meta      1        1        1           1          3s
+gestalt-security  1        1        1           1          3s
+gestalt-ui        1        1        1           1          2s
 
 ==> v1/Endpoints
 NAME        ENDPOINTS  AGE
 gestalt-db  <none>     2s
 
+
+NOTES:
+
+    Gestalt platform deployment initiated to namespace 'gestalt-system'.
+
+    Deployment takes several minutes to complete.  To view status of deployment,
+    view the gestalt-deployer container logs:
+
+      kubectl --namespace=gestalt-system logs gestalt-deployer
+
+
+    UI Access - Once Gestalt platform is deployed, the User Interface is accessible from the
+    'gestalt-ui' service. For details, use the LoadBalancer Ingress.  Run the following:
+
+      kubectl describe services gestalt-ui --namespace=gestalt-system
+
+    Default credentials for the UI are specified in values.yaml:
+
+      Security:
+        AdminUser:      "gestalt-admin"
+        AdminPassword:  "<password>"
+
+    You may access the Gestalt platform documentation at
+
+        http://docs.galacticfog.com/
+
 ```
 
+## Deleting the Gestalt Platform Deployment
 
-Delete Gestalt platform and data volumes:
+Delete Gestalt platform deployment and namespace:
 ```
 $ helm list
 NAME            	REVISION	UPDATED                 	STATUS  	CHART        	NAMESPACE            
@@ -86,20 +115,21 @@ gestalt-platform	1       	Tue Apr 11 22:33:11 2017	DEPLOYED	gestalt-0.0.1	gestal
 
 $ helm delete --purge gestalt-platform
 
-$ kubectl get pvc
-NAME                              STATUS    VOLUME                                     CAPACITY   ACCESSMODES   AGE
-datadir-gestalt-platform-etcd-0   Bound     pvc-601207de-1f28-11e7-bd9c-0a5e79684354   1Gi        RWO           16m
-datadir-gestalt-platform-etcd-1   Bound     pvc-6037855d-1f28-11e7-bd9c-0a5e79684354   1Gi        RWO           16m
-datadir-gestalt-platform-etcd-2   Bound     pvc-60690fdf-1f28-11e7-bd9c-0a5e79684354   1Gi        RWO           16m
-pgdata-gestalt-db-0               Bound     pvc-6094e305-1f28-11e7-bd9c-0a5e79684354   1Gi        RWO           16m
-pgdata-gestalt-db-1               Bound     pvc-609f46ce-1f28-11e7-bd9c-0a5e79684354   1Gi        RWO           16m
-
-$ kubectl delete pvc --all
-persistentvolumeclaim "datadir-gestalt-platform-etcd-0" deleted
-persistentvolumeclaim "datadir-gestalt-platform-etcd-1" deleted
-persistentvolumeclaim "datadir-gestalt-platform-etcd-2" deleted
-persistentvolumeclaim "pgdata-gestalt-db-0" deleted
-persistentvolumeclaim "pgdata-gestalt-db-1" deleted
+$ helm delete namespace gestalt-system
 ```
 
-> **Tip**: You can use the default [values.yaml](values.yaml)
+Delete provider resources created outside of Helm:
+```
+$ kubectl get services --all-namespaces
+NAMESPACE                              NAME                       CLUSTER-IP     EXTERNAL-IP        PORT(S)                         AGE
+548f2d87-3f5f-4962-941b-b204a60d6abd   default-kong               10.0.112.188   <nodes>            8001:32355/TCP,8000:31235/TCP   32m
+8ded91ae-322c-4de6-90e5-d6a89e096310   lambda-provider            10.0.68.159    <nodes>            9000:31368/TCP                  32m
+aaf236e6-2711-4c7a-a8a7-5051fada5a8c   default-gateway-provider   10.0.62.15     <nodes>            9000:32642/TCP                  32m
+ee56e43e-a1bd-4643-84ac-511cab54bee5   gestalt-policy-provider    10.0.31.228    <nodes>            9000:31047/TCP                  32m
+
+$ kubectl delete namespace \
+548f2d87-3f5f-4962-941b-b204a60d6abd \
+8ded91ae-322c-4de6-90e5-d6a89e096310 \
+aaf236e6-2711-4c7a-a8a7-5051fada5a8c \
+ee56e43e-a1bd-4643-84ac-511cab54bee5
+```
