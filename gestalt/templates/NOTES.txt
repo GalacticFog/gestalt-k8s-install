@@ -1,1 +1,23 @@
-Test of user message... Namespace is {{ .Release.Namespace }}
+
+    Gestalt platform deployment initiated to namespace '{{ .Release.Namespace }}'.
+
+    Deployment takes several minutes to complete.  To view status of deployment,
+    view the gestalt-deployer container logs:
+
+      kubectl --namespace={{ .Release.Namespace }} logs gestalt-deployer
+
+
+    UI Access - Once Gestalt platform is deployed, the User Interface is accessible from the
+    'gestalt-ui' service. For details, use the LoadBalancer Ingress.  Run the following:
+
+      kubectl describe services gestalt-ui --namespace={{ .Release.Namespace }}
+
+    Default credentials for the UI are specified in values.yaml:
+
+      Security:
+        AdminUser:      "{{ .Values.Security.AdminUser }}"
+        AdminPassword:  "{{ .Values.Security.AdminPassword }}"
+
+    You may access the Gestalt platform documentation at
+
+        http://docs.galacticfog.com/

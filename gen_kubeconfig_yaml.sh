@@ -13,25 +13,9 @@ cat > $outfile << EOF
 kubeconfig: $data
 EOF
 
-echo "Encoded $1 to $outfile. Pass with '-f' to helm install command, e.g."
+echo "Encoded $1 to $outfile. "
 echo ""
-echo "    helm install ./gestalt -n gestalt-platform -f kube_provider_config.yaml"
+echo "Pass with '-f' to helm install command, e.g."
 echo ""
-
-# cat > create_kube_provider_payload.json << EOF
-# {
-#   "name": "KubernetesProvider-1",
-#   "description": "A Kubernetes Cluster.",
-#   "resource_type": "Gestalt::Configuration::Provider::CaaS::Kubernetes",
-#   "properties": {
-#     "config": {
-#       "env": {
-#         "public": {},
-#         "private": {}
-#       }
-#     },
-#     "services": [],
-#     "locations": [],
-#     "data": "$data"
-#   }
-# }
+echo "    helm install --namespace gestalt-system ./gestalt -n gestalt-platform -f kube_provider_config.yaml"
+echo ""

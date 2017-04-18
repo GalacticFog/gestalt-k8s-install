@@ -1,8 +1,8 @@
 name: gestalt
 home: http://www.galacticfog.com
-version: 0.0.1
-description: Cloud native infrastructure platform with
-icon: https://raw.githubusercontent.com/galacticfog/gestalt/master/logos/gestalt-horizontal-color.png
+version: 1.0.0
+description: Cloud-native container management platform and serverless engine
+# icon: https://raw.githubusercontent.com/galacticfog/gestalt/master/logos/gestalt-horizontal-color.png
 sources:
   - https://github.com/GalacticFog
 maintainers:

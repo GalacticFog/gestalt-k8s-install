@@ -3,14 +3,12 @@
 ## Prerequisites Details
 * Kubernetes 1.5
 * PV support on the underlying infrastructure
-
-## Todo
-* TBD
+* Volumes configured or Dynamic Storage Provisioning enabled
 
 ## Chart Details
 This chart will do the following:
 
-* Deploy the Gestalt Platform services
+* Deploy the Gestalt Platform
 
 ## Installing the Chart
 

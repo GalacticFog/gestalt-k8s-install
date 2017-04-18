@@ -9,7 +9,7 @@ spec:
   restartPolicy: Never
   containers:
   - name: gestalt-deployer
-    image: galacticfog/gestalt-deployer:latest
+    image: "galacticfog/gestalt-deployer:{{ .Values.Common.ReleaseTag }}"
     # 'deploy' arg signals deployment of gestalt platform
     args: ["deploy"]
     env:
