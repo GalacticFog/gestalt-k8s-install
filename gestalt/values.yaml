@@ -6,7 +6,7 @@ Common:
   ReleaseTag: kube-1.1.0
 
 DB:
-  Hostname: gestalt-db.gestalt-system
+  Hostname: gestalt-db
   Port: 5432
   # Username: gestaltdev
   Username: postgres
@@ -23,7 +23,7 @@ DB:
   #   DatabaseSizeMB: 100
 
 Security:
-  Hostname: gestalt-security.gestalt-system
+  Hostname: gestalt-security
   Port: 9455
   Protocol: http
   AdminUser: gestalt-admin
@@ -31,14 +31,14 @@ Security:
   DatabaseName: gestalt-security
 
 Rabbit:
-  Hostname: gestalt-rabbit.gestalt-system
+  Hostname: gestalt-rabbit
   Port: 5672
   HttpPort: 15672
   # Exchange: "policy-exchange"
   # Route: "policy"
 
 Meta:
-  Hostname: gestalt-meta.gestalt-system
+  Hostname: gestalt-meta
   Port: 10131
   Protocol: http
   DatabaseName: gestalt-meta

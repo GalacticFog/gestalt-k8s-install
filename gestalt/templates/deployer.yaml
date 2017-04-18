@@ -19,7 +19,7 @@ spec:
       value: "{{ .Values.kubeconfig }}"
       # Database settings
     - name: DATABASE_HOSTNAME
-      value: "{{ .Values.DB.Hostname }}"
+      value: "{{ .Values.DB.Hostname }}.{{ .Release.Namespace }}"
     - name: DATABASE_PASSWORD
       value: "{{ .Values.DB.Password }}"
     - name: DATABASE_PORT
@@ -30,7 +30,7 @@ spec:
     - name: SECURITY_DB_NAME
       value: "{{ .Values.Security.DatabaseName }}"
     - name: SECURITY_HOSTNAME
-      value: "{{ .Values.Security.Hostname }}"
+      value: "{{ .Values.Security.Hostname }}.{{ .Release.Namespace }}"
     - name: SECURITY_PORT
       value: "{{ .Values.Security.Port }}"
     - name: SECURITY_PROTOCOL
@@ -41,14 +41,14 @@ spec:
       value: "{{ .Values.Security.AdminPassword }}"
       # Meta settings
     - name: META_HOSTNAME
-      value: "{{ .Values.Meta.Hostname }}"
+      value: "{{ .Values.Meta.Hostname }}.{{ .Release.Namespace }}"
     - name: META_PORT
       value: "{{ .Values.Meta.Port }}"
     - name: META_PROTOCOL
       value: "{{ .Values.Meta.Protocol }}"
       # Rabbit settings
     - name: RABBIT_HOSTNAME
-      value: "{{ .Values.Rabbit.Hostname }}"
+      value: "{{ .Values.Rabbit.Hostname }}.{{ .Release.Namespace }}"
     - name: RABBIT_PORT
       value: "{{ .Values.Rabbit.Port }}"
       # Laser settings
