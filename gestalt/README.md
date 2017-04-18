@@ -110,8 +110,9 @@ NOTES:
 Delete Gestalt platform deployment and namespace:
 ```
 $ helm list
-NAME            	REVISION	UPDATED                 	STATUS  	CHART        	NAMESPACE            
-gestalt-platform	1       	Tue Apr 11 22:33:11 2017	DEPLOYED	gestalt-0.0.1	gestalt-deploy-test-1
+$ helm list
+NAME            	REVISION	UPDATED                 	STATUS  	CHART        	NAMESPACE       
+gestalt-platform	1       	Tue Apr 18 16:25:13 2017	DEPLOYED	gestalt-1.0.0	gestalt-system
 
 $ helm delete --purge gestalt-platform
 
