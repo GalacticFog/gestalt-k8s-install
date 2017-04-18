@@ -3,10 +3,14 @@
 ## Prerequisites
 
 * Kubernetes 1.5+ with Helm installed
-* PV support on the underlying infrastructure
-* Volumes configured or Dynamic Storage Provisioning enabled
+* Persistent Volume support, either static or dynamic
 
-## Install
+### Storage Requirements
+* If you are running Kubernetes in a public cloud provider you may use a distribution that supports auto-allocating storage (dynamic volume provisioning), such as kubernetes.io on AWS or GKE.
+
+* If you are running Kubernetes on-premise, you either need static volumes or a storage solution that supports dynamic provisioning.
+
+## Install Gestalt Platform
 
 ### Step 1 - Install Kubernetes (or use an existing Kubernetes cluster)
 
