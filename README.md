@@ -1,30 +1,29 @@
 # Gestalt Platform Quick Start
 
+## Step 1 - Install Kubernetes (or use an existing Kubernetes cluster)
 
-## Prepare kubernetes provider configuration file to be used by gestalt
-
+Verify your cluster is available:
 ```
-$ ./gen_kubeconfig_yaml.sh kubeproviderconfig
-Encoded kubeproviderconfig to kube_provider_config.yaml. Pass with '-f' to helm install command, e.g.
-
-    helm install ./gestalt -n gestalt-platform -f kube_provider_config.yaml
+$ kubectl cluster-info
 ```
 
 
-## Configure the Chart
+## Step 2 - Prepare kubernetes provider configuration file to be used by gestalt
 
-```vi ./gestalt/values.yaml```
-
-
-
-## Install the Chart
-
-Install either with the following helm command:
-
+Generate the configuration file:
 ```
-$ helm install ./gestalt -n gestalt-platform -f kube_provider_config.yaml
+$ ./gen_kubeconfig_yaml.sh /path/to/cluster/kubeconfig
 ```
 
-Or by using the helper script:
+## Step 3 - Create 'gestalt-system' namespace in the Kubernetes cluster
 
-```$ ./helm_install_gestalt.sh```
+```
+$ kubectl create namespace gestalt-system
+```
+
+
+## Step 4 - Run the installer
+
+```
+$ ./helm_install_gestalt.sh
+```
