@@ -5,7 +5,17 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-data=`base64 -w0 $1`
+os=`uname`
+
+if [ "$os" == "Darwin" ]; then
+  data=`base64 $1`
+elif [ "$os" == "Linux" ]; then
+  data=`base64 -w0 $1`
+else
+  echo "Could not handle OS type '$os', aborting."
+  exit 1
+fi
+
 outfile=kube_provider_config.yaml
 namespace=gestalt-system
 
