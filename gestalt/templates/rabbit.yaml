@@ -13,6 +13,7 @@ spec:
       containers:
       - name: gestalt-rabbit
         image: "galacticfog/rabbit:{{ .Values.Common.ReleaseTag }}"
+        imagePullPolicy: Always
         ports:
         - containerPort: {{.Values.Rabbit.Port}}
           name: service-api

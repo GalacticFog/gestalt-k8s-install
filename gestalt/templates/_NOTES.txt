@@ -1,0 +1,14 @@
+
+  Gestalt platform deployment initiated to namespace '{{ .Release.Namespace }}'.
+
+  Deployment takes several minutes.  Once complete, the User Interface is accessible from the
+        'gestalt-ui' service
+
+    - Deployment Status:    kubectl --namespace={{ .Release.Namespace }} logs gestalt-deployer
+
+    - UI Access:            kubectl describe services gestalt-ui --namespace={{ .Release.Namespace }}
+
+    - Gestalt Admin:        User:      "{{ .Values.Security.AdminUser }}"
+                            Password:  "{{ .Values.Security.AdminPassword }}"
+
+    - Documentation:        http://docs.galacticfog.com/

@@ -12,6 +12,7 @@ spec:
       containers:
       - name: gestalt-ui
         image: galacticfog/gestalt-ui-react:{{ .Values.Common.ReleaseTag }}
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: http

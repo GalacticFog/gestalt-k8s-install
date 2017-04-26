@@ -13,6 +13,7 @@ spec:
       containers:
       - name: gestalt-security
         image: "galacticfog/gestalt-security:{{ .Values.Common.ReleaseTag }}"
+        imagePullPolicy: Always
         ports:
         - containerPort: 9000
           name: service-api
