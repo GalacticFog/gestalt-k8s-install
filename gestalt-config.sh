@@ -12,17 +12,10 @@ randompw() {
 generate_gestalt_config() {
 cat - << EOF
 
-# # Override sub-chart with persistent volume settings
-# gestalt-db:
-#   StorageClassAnnotation: "volume.beta.kubernetes.io/storage-class: $PV_STORAGE_CLASS"
-#   etcd:
-#     StorageClassAnnotation: "volume.beta.kubernetes.io/storage-class: $PV_STORAGE_CLASS"
-
-# Uncomment for default storage provisioner (1.5)
 gestalt-db:
-  StorageClassAnnotation: "volume.alpha.kubernetes.io/storage-class: default"
+  StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
   etcd:
-    StorageClassAnnotation: "volume.alpha.kubernetes.io/storage-class: default"
+    StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
 
 Common:
   ReleaseTag: $DOCKER_RELEASE_TAG
