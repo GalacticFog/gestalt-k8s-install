@@ -1,8 +1,7 @@
 # This file is included by the installer
-# Change configuration values below
 
-DOCKER_RELEASE_TAG=kube-1.1.0
-
+# Include variables for configuration
+. gestalt-config.rc
 
 random() { cat /dev/urandom | env LC_CTYPE=C tr -dc $1 | head -c $2; echo; }
 
@@ -12,6 +11,13 @@ randompw() {
 
 generate_gestalt_config() {
 cat - << EOF
+
+# Override sub-chart with persistent volume settings
+gestalt-db:
+  PersistentVolumeStorageClass: $PV_STORAGE_CLASS
+  etcd:
+    PersistentVolumeStorageClass: $PV_STORAGE_CLASS
+
 Common:
   ReleaseTag: $DOCKER_RELEASE_TAG
 

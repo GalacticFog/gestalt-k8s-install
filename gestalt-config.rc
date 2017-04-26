@@ -2,3 +2,10 @@
 # Change values below
 
 DOCKER_RELEASE_TAG=kube-1.1.0
+
+# Use 'rbd' for Canonical Kubernetes 1.6 with Ceph PVs
+# PV_STORAGE_CLASS=rbd
+
+# Default for when Kube cluster supports Dynamic Volume Provisioning
+# and has a default Storage Class configured
+PV_STORAGE_CLASS=default

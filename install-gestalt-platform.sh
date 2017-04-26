@@ -35,16 +35,31 @@ check_for_helm() {
   echo "OK - Helm is installed."
 }
 
+# check_for_existing_namespace() {
+#   echo "Checking for existing Kubernetes namespace '$namespace'..."
+#   kubectl get namespace $namespace > /dev/null 2>&1
+#   if [ $? -eq 0 ]; then
+#     echo ""
+#     echo "Kubernetes namespace '$namespace' already exists, aborting.  To delete the namespace, run the following command:"
+#     echo ""
+#     echo "  kubectl delete namespace $namespace"
+#     echo ""
+#     exit_with_error "Kubernetes namespace '$namespace' already exists, aborting."
+#   fi
+#   echo "OK - Kubernetes namespace '$namespace' does not exist."
+# }
+
 check_for_existing_namespace() {
   echo "Checking for existing Kubernetes namespace '$namespace'..."
   kubectl get namespace $namespace > /dev/null 2>&1
   if [ $? -eq 0 ]; then
-    echo ""
-    echo "Kubernetes namespace '$namespace' already exists, aborting.  To delete the namespace, run the following command:"
-    echo ""
-    echo "  kubectl delete namespace $namespace"
-    echo ""
-    exit_with_error "Kubernetes namespace '$namespace' already exists, aborting."
+    while true; do
+        read -p "$* Kubernetes namespace '$namespace' already exists, proceed? [y/n]: " yn
+        case $yn in
+            [Yy]*) return 0  ;;
+            [Nn]*) echo "Aborted" ; exit  1 ;;
+        esac
+    done
   fi
   echo "OK - Kubernetes namespace '$namespace' does not exist."
 }
@@ -89,6 +104,10 @@ EOF
 }
 
 create_namespace() {
+  echo "Checking for existing Kubernetes namespace '$namespace'..."
+  kubectl get namespace $namespace > /dev/null 2>&1
+
+  if [ $? -ne 0 ]; then
     echo "Creating namespace '$namespace'..."
     echo ""
     kubectl create namespace $namespace
@@ -97,6 +116,7 @@ create_namespace() {
     # Wait for namespace to be created
     sleep 5
     echo "Namespace $namespace created."
+  fi
 }
 
 run_helm_install() {

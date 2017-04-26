@@ -3,6 +3,11 @@ Name: gestalt-db
 Component: gestalt-db
 ImagePullPolicy: IfNotPresent
 
+# Persistent Volume Storage Annotations
+PersistentVolumeStorageClass: default
+etcd:
+  PersistentVolumeStorageClass: default
+
 # The image to use. Spilo is the dockerized Patroni
 Spilo:
   # this image was built from https://github.com/zalando/spilo/tree/master/postgres-appliance
