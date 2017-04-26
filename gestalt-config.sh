@@ -1,41 +1,38 @@
-# ServiceName: gestalt-platform
-# Namespace: galacticfog
+# This file is included by the installer
+# Change configuration values below
 
+DOCKER_RELEASE_TAG=kube-1.1.0
+
+
+random() { cat /dev/urandom | env LC_CTYPE=C tr -dc $1 | head -c $2; echo; }
+
+randompw() {
+  random [:alnum:] 16
+}
+
+generate_gestalt_config() {
+cat - << EOF
 Common:
-  # Docker image tag
-  ReleaseTag: kube-1.1.0
+  ReleaseTag: $DOCKER_RELEASE_TAG
 
 DB:
   Hostname: gestalt-db
   Port: 5432
-  # Username: gestaltdev
   Username: postgres
   Password: letmein
-  Resources:
-    Cpu: 100m
-    Memory: 512Mi
-    Storage: 1Gi
-  Replicas: 2
-  # UseExternalDB: False
-  # UseHA: True
-  # HA:
-  #   NumberOfSecondaryNodes: 1
-  #   DatabaseSizeMB: 100
 
 Security:
   Hostname: gestalt-security
   Port: 9455
   Protocol: http
   AdminUser: gestalt-admin
-  AdminPassword: letmein
+  AdminPassword: "`randompw`"
   DatabaseName: gestalt-security
 
 Rabbit:
   Hostname: gestalt-rabbit
   Port: 5672
   HttpPort: 15672
-  # Exchange: "policy-exchange"
-  # Route: "policy"
 
 Meta:
   Hostname: gestalt-meta
@@ -53,3 +50,5 @@ Gateway:
 
 Kong:
   DatabaseName: kong-db
+EOF
+}

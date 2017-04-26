@@ -1,0 +1,4 @@
+# This file is included by gestalt-config.sh
+# Change values below
+
+DOCKER_RELEASE_TAG=kube-1.1.0

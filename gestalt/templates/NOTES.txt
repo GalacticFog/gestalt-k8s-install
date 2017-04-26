@@ -4,13 +4,13 @@
     Deployment takes several minutes to complete.  To view status of deployment,
     view the gestalt-deployer container logs:
 
-      kubectl --namespace={{ .Release.Namespace }} logs gestalt-deployer
+      ./view-install-status.sh
 
 
     UI Access - Once Gestalt platform is deployed, the User Interface is accessible from the
     'gestalt-ui' service. For details, use the LoadBalancer Ingress.  Run the following:
 
-      kubectl describe services gestalt-ui --namespace={{ .Release.Namespace }}
+      ./view-access-info.sh
 
     Default credentials for the UI are specified in values.yaml:
 
