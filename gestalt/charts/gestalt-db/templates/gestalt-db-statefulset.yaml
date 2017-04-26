@@ -77,11 +77,7 @@ spec:
   - metadata:
       name: pgdata
       annotations:
-        # For Kube 1.6
-        # volume.beta.kubernetes.io/storage-class: {{ .Values.PersistentVolumeStorageClass }}
-
-        # For Kube 1.5
-        volume.alpha.kubernetes.io/storage-class: default
+        {{.Values.StorageClassAnnotation}}
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
