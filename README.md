@@ -6,7 +6,7 @@
 * PV support on the underlying infrastructure
 * Volumes configured or Dynamic Storage Provisioning enabled
 
-## Install
+## Installation
 
 ### Step 1 - Install Kubernetes (or use an existing Kubernetes cluster)
 
@@ -16,31 +16,36 @@ $ kubectl cluster-info
 ```
 
 
-### Step 2 - Prepare kubernetes provider configuration file to be used by gestalt
-
-Generate the configuration file:
-```
-$ ./gen_kubeconfig_yaml.sh /path/to/cluster/kubeconfig
-```
-
-### Step 3 - Create 'gestalt-system' namespace in the Kubernetes cluster
+### Step 2 - Install and initialize Helm
 
 ```
-$ kubectl create namespace gestalt-system
+# Example for macOS
+$ brew install helm
+
+$ helm init
 ```
 
-### Step 4 - Run the installer
+### Step 3 - Run the installer
 
 ```
-$ ./helm_install_gestalt.sh
+$ ./install-gestalt-platform.sh
 ```
 
-## Access Gestalt Platform
+## Other Actions
+### View install status
 
-Find the User Interface service endpoint, and navigate your browser to the URL:
 ```
-$ kubectl describe service gestalt-ui --namespace=gestalt-system
-...
-LoadBalancer Ingress:	ad9f553e323f411e7bd9c0a5e7968435-1588235664.us-east-1.elb.amazonaws.com
-...
+$ ./view-install-status.sh
+```
+
+### Access Gestalt Platform
+
+```
+$ ./view-access-info.sh
+```
+
+### Uninstall Gestalt Platform
+
+```
+$ ./remove-gestalt-platform.sh
 ```
