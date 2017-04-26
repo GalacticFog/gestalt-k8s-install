@@ -12,20 +12,53 @@ exit_on_error() {
 }
 
 check_for_kube() {
+  echo "Checking for Kubernetes..."
+
   kubectl cluster-info > ./tmp/cluster-info
   exit_on_error "Kubernetes cluster not accessible, aborting."
+
+  echo "The target cluster is:"
+  echo `cat ./tmp/cluster-info`
 }
 
 check_for_helm() {
+  echo "Checking for helm..."
   helm >/dev/null 2>&1
   exit_on_error "'helm' could not be found. Install helm first."
 
-  helm version
-  exit_on_error "'helm' doesn't seem to be configured. Run 'helm init'"
+  helm version > /dev/null
+  exit_on_error "'helm' doesn't seem to be configured. Try running 'helm version' or 'helm init'"
+}
+
+check_for_existing_namespace() {
+  echo "Checking for existing '$namespace' namespace..."
+  kubectl get namespace $namespace > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    echo ""
+    echo "Namespace '$namespace' already exists, aborting.  To delete the namespace, run the following command:"
+    echo ""
+    echo "  kubectl delete namespace $namespace"
+    echo ""
+    exit_with_error "Kubernetes namespace '$namespace' exists, aborting."
+  fi
+}
+
+prompt_to_continue(){
+  echo ""
+  echo "Gestalt Platform is ready to be installed in the '$namespace' namespace."
+  echo ""
+
+  while true; do
+      read -p "$* Proceed with Gestalt Platform installation? [y/n]: " yn
+      case $yn in
+          [Yy]*) return 0  ;;
+          [Nn]*) echo "Aborted" ; exit  1 ;;
+      esac
+  done
 }
 
 process_kubeconfig() {
-  echo "Processing kubeconfig..."
+  echo "Processing kubectl configuration (this gets passed to the installer)..."
 
   os=`uname`
   outfile=./tmp/kubeconfig.yaml
@@ -43,39 +76,31 @@ process_kubeconfig() {
 
   echo "Writing kubernetes config to $outfile"
 
-cat > $outfile << EOF
-## Encoded kubernetes config file ($1) to $outfile.
-##
-## Pass with '-f' to helm install command, e.g.
-##
-##    helm install --namespace $namespace ./gestalt -n gestalt-platform -f kube_provider_config.yaml
-##
-
+  cat > $outfile << EOF
 # data encoded from $1
 kubeconfig: $data
 EOF
 }
 
 create_namespace() {
-  echo "Checking for '$namespace' namespace"
-  kubectl get namespace $namespace > /dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    echo ""
-    echo "Namespace '$namespace' does not exist.  Creating..."
+    echo "Creating namespace '$namespace'..."
     echo ""
     kubectl create namespace $namespace
-    if [ $? -ne 0 ]; then
-      echo "Error creating namespace, aborting."
-      exit 1
-    fi
+    exit_on_error "Error creating namespace '$namespace', aborting."
+
+    # Wait for namespace to be created
     sleep 5
     echo "Namespace $namespace created."
-  fi
 }
 
+run_helm_install() {
+  echo "Installing using helm..."
+  cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml"
+  echo "$cmd"
+  $cmd
+}
 
 namespace=gestalt-system
-logfile=gestalt-platform-install.log
 
 mkdir -p ./tmp
 exit_on_error "Could not create './tmp', aborting. Check filesystem permissions and try again."
@@ -84,14 +109,12 @@ check_for_kube
 
 check_for_helm
 
+check_for_existing_namespace
+
+prompt_to_continue
+
 process_kubeconfig
 
 create_namespace
 
-# read -p "Do you want to install? [y/N[]]" -n 1 -r
-# echo    # (optional) move to a new line
-# if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-echo "Installing using helm..."
-cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml"
-echo "$cmd"
-$cmd
+run_helm_install
