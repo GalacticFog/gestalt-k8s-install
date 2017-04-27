@@ -131,11 +131,12 @@ run_helm_install() {
   exit_on_error "Installation failed!"
 
   echo ""  | tee -a $notes
-  echo "Gestalt Platform installation completed. Install notes saved to '$notes'."
+  echo "Install notes saved to '$notes'."
 }
 
 run_post_install() {
   if [ ! -z "$POST_INSTALL_SCRIPT" ]; then
+    echo ""
     echo "Running post install script: $POST_INSTALL_SCRIPT ..."
     $POST_INSTALL_SCRIPT
     echo "Done."
