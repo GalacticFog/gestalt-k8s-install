@@ -40,7 +40,7 @@ DB:
   Hostname: gestalt-db
   Port: 5432
   Username: postgres
-  Password: letmein
+  Password: "$DB_INITIAL_PASSWORD"
 
 Security:
   Hostname: gestalt-security
