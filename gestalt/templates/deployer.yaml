@@ -9,9 +9,9 @@ spec:
   restartPolicy: Never
   containers:
   - name: gestalt-deployer
-    image: "galacticfog/gestalt-deployer:{{ .Values.Common.ReleaseTag }}"
+    # image: "galacticfog/gestalt-deployer:{{ .Values.Common.ReleaseTag }}"
     # TODO - change back to release label
-    # image: "galacticfog/gestalt-deployer:latest"
+    image: "galacticfog/gestalt-deployer:latest"
     imagePullPolicy: Always
     # 'deploy' arg signals deployment of gestalt platform
     args: ["deploy"]
@@ -20,6 +20,10 @@ spec:
       value: "{{ .Values.Common.ReleaseTag }}"
     - name: KUBECONFIG_DATA
       value: "{{ .Values.kubeconfig }}"
+    - name: KUBE_DYNAMIC_LB_ENABLED
+      value: "{{ .Values.DynamicLoadbalancerEnabled }}"
+    - name: EXTERNAL_GATEWAY_LB_HOSTNAME
+      value: "{{ .Values.ExternalLBs.Gateway }}"
       # Database settings
     - name: DATABASE_HOSTNAME
       value: "{{ .Values.DB.Hostname }}.{{ .Release.Namespace }}"

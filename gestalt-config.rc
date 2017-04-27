@@ -3,8 +3,20 @@
 
 DOCKER_RELEASE_TAG=kube-1.1.0
 
-# Use for Kube clusters using default backend
-PV_STORAGE_ANNOTATION="volume.alpha.kubernetes.io/storage-class: default"
+## AWS Kubernetes Settings (default StorageClass supporting dynamic volume
+## provisioning)
 
-## Use this for Canonical Kubernetes using Ceph Persistent Volume Backend (rbd)
-# PV_STORAGE_ANNOTATION="volume.beta.kubernetes.io/storage-class: rbd"
+# PV_STORAGE_ANNOTATION="volume.alpha.kubernetes.io/storage-class: default"
+# KUBE_DYNAMIC_LOADBALANCER_ENABLED=Yes
+
+
+
+## Canonical Kubernetes settings (Ceph backend, no Load Balancer)
+
+POST_INSTALL_SCRIPT=./helpers/cdk-post-install.sh
+
+PV_STORAGE_ANNOTATION="volume.beta.kubernetes.io/storage-class: rbd"
+
+KUBE_DYNAMIC_LOADBALANCER_ENABLED=No
+
+EXTERNAL_GATEWAY_LB_HOSTNAME=cdk1-gestalt-gateway-246356622.us-east-1.elb.amazonaws.com

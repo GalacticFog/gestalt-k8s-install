@@ -9,6 +9,8 @@ randompw() {
   random [:alnum:] 16
 }
 
+DB_INITIAL_PASSWORD=`randompw`
+
 generate_gestalt_config() {
 cat - << EOF
 
@@ -16,6 +18,20 @@ gestalt-db:
   StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
   etcd:
     StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
+
+  # Randomized initial database credentials
+  Credentials:
+    Superuser: "$DB_INITIAL_PASSWORD"
+    Admin: "$DB_INITIAL_PASSWORD"
+    Standby: "$DB_INITIAL_PASSWORD"
+
+
+# If true, will use Service of type Load Balancer to dynamically create
+DynamicLoadbalancerEnabled: $KUBE_DYNAMIC_LOADBALANCER_ENABLED
+
+# Applies if Dynamic LB is not available/enabled
+ExternalLBs:
+  Gateway: $EXTERNAL_GATEWAY_LB_HOSTNAME
 
 Common:
   ReleaseTag: $DOCKER_RELEASE_TAG

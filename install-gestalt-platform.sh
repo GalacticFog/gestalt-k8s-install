@@ -1,7 +1,7 @@
 #!/bin/bash
 
 exit_with_error() {
-  echo "[Error] $1"
+  echo "[Error] $@"
   exit 1
 }
 
@@ -123,13 +123,23 @@ run_helm_install() {
   notes=GESTALT_ACCESS_INFO.txt
   cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml -f ./tmp/gestalt-config.yaml"
 
-  echo "Installing Gestalt Platform to Kubernetes using Helm..."
-  echo "  Command: $cmd"
+  echo "[Installation initiated at `date`]" >> $notes
+
+  echo "Installing Gestalt Platform to Kubernetes using Helm..." | tee -a $notes
+  echo "Command: $cmd"  | tee -a $notes
   $cmd | tee -a $notes
   exit_on_error "Installation failed!"
 
-  echo ""
+  echo ""  | tee -a $notes
   echo "Gestalt Platform installation completed. Install notes saved to '$notes'."
+}
+
+run_post_install() {
+  if [ ! -z "$POST_INSTALL_SCRIPT" ]; then
+    echo "Running post install script: $POST_INSTALL_SCRIPT ..."
+    $POST_INSTALL_SCRIPT
+    echo "Done."
+  fi
 }
 
 . gestalt-config.sh
@@ -154,3 +164,5 @@ generate_gestalt_config > ./tmp/gestalt-config.yaml
 create_namespace
 
 run_helm_install
+
+run_post_install
