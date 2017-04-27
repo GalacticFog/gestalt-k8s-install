@@ -1,12 +1,12 @@
-# Gestalt Platform Kubernetes Install Quick Start
+# Installing Gestalt Platform on Kubernetes - Quick Start
 
 ## Requirements
 
-Kubernetes Cluster:
+Target Kubernetes Cluster:
 * Kubernetes 1.5+ with Helm installed
-* PV support on the underlying infrastructure (static or dynamic)
+* PV support on the underlying infrastructure, either dynamic (e.g. Kubernetes configured with Cloud Provider and Default Storage Provisioner) or static (e.g. Canonical Kubernetes using Ceph storage / RBD volumes)
 
-Workstation:
+Workstation running the Installer:
 * Mac OS or Linux
 * kubectl configured for the cluster
 * helm client installed
