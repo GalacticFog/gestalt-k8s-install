@@ -9,6 +9,11 @@ randompw() {
   random [:alnum:] 16
 }
 
+# Set a random password if not set by user
+if [ -z "$GESTALT_ADMIN_PASSWORD" ]; then
+  GESTALT_ADMIN_PASSWORD=`randompw`
+fi
+
 DB_INITIAL_PASSWORD=`randompw`
 
 generate_gestalt_config() {
@@ -47,7 +52,7 @@ Security:
   Port: 9455
   Protocol: http
   AdminUser: gestalt-admin
-  AdminPassword: "`randompw`"
+  AdminPassword: "$GESTALT_ADMIN_PASSWORD"
   DatabaseName: gestalt-security
 
 Rabbit:

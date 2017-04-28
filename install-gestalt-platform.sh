@@ -35,36 +35,36 @@ check_for_helm() {
   echo "OK - Helm is installed."
 }
 
-# check_for_existing_namespace() {
-#   echo "Checking for existing Kubernetes namespace '$namespace'..."
-#   kubectl get namespace $namespace > /dev/null 2>&1
-#   if [ $? -eq 0 ]; then
-#     echo ""
-#     echo "Kubernetes namespace '$namespace' already exists, aborting.  To delete the namespace, run the following command:"
-#     echo ""
-#     echo "  kubectl delete namespace $namespace"
-#     echo ""
-#     exit_with_error "Kubernetes namespace '$namespace' already exists, aborting."
-#   fi
-#   echo "OK - Kubernetes namespace '$namespace' does not exist."
-# }
-
 check_for_existing_namespace() {
   echo "Checking for existing Kubernetes namespace '$namespace'..."
   kubectl get namespace $namespace > /dev/null 2>&1
   if [ $? -eq 0 ]; then
-    while true; do
-        read -p "$* Kubernetes namespace '$namespace' already exists, proceed? [y/n]: " yn
-        case $yn in
-            [Yy]*) return 0  ;;
-            [Nn]*) echo "Aborted" ; exit  1 ;;
-        esac
-    done
+    echo ""
+    echo "Kubernetes namespace '$namespace' already exists, aborting.  To delete the namespace, run the following command:"
+    echo ""
+    echo "  kubectl delete namespace $namespace"
+    echo ""
+    exit_with_error "Kubernetes namespace '$namespace' already exists, aborting."
   fi
   echo "OK - Kubernetes namespace '$namespace' does not exist."
 }
 
-prompt_to_continue(){
+# check_for_existing_namespace() {
+#   echo "Checking for existing Kubernetes namespace '$namespace'..."
+#   kubectl get namespace $namespace > /dev/null 2>&1
+#   if [ $? -eq 0 ]; then
+#     while true; do
+#         read -p "$* Kubernetes namespace '$namespace' already exists, proceed? [y/n]: " yn
+#         case $yn in
+#             [Yy]*) return 0  ;;
+#             [Nn]*) echo "Aborted" ; exit  1 ;;
+#         esac
+#     done
+#   fi
+#   echo "OK - Kubernetes namespace '$namespace' does not exist."
+# }
+
+prompt_to_continue() {
   echo ""
   echo "Gestalt Platform is ready to be installed in the '$namespace' namespace."
   echo ""
@@ -143,27 +143,35 @@ run_post_install() {
   fi
 }
 
+prompt_or_wait_to_continue() {
+  if [ -z "$GESTALT_AUTOMATED_INSTALL" ]; then
+      prompt_to_continue
+  else
+    echo "About to proceed with installation, press Ctrl-C to cancel..."
+    sleep 5
+  fi
+}
+
+# ------------ Main -----------------
+
+# Include configuration
 . gestalt-config.sh
 
+# Constant. namespace cannot be changed from 'gestalt-system' for now
+# as other scripts assume it.
 namespace=gestalt-system
 
 mkdir -p ./tmp
 exit_on_error "Could not create './tmp', aborting. Check filesystem permissions and try again."
 
 check_for_kube
-
 check_for_helm
-
 check_for_existing_namespace
 
-prompt_to_continue
+prompt_or_wait_to_continue
 
 process_kubeconfig
-
 generate_gestalt_config > ./tmp/gestalt-config.yaml
-
 create_namespace
-
 run_helm_install
-
 run_post_install

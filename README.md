@@ -37,6 +37,7 @@ $ vi gestalt-config.rc
 
 $ ./install-gestalt-platform.sh
 ```
+Note: for an automated install with no user prompts, set environment variable `GESTALT_AUTOMATED_INSTALL=1` prior to running the installer.
 
 ## Other Actions
 ### View install status
