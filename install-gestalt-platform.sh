@@ -49,7 +49,7 @@ check_for_existing_namespace() {
   echo "OK - Kubernetes namespace '$namespace' does not exist."
 }
 
-# check_for_existing_namespace() {
+# check_for_existing_namespace_ask() {
 #   echo "Checking for existing Kubernetes namespace '$namespace'..."
 #   kubectl get namespace $namespace > /dev/null 2>&1
 #   if [ $? -eq 0 ]; then
@@ -84,15 +84,22 @@ process_kubeconfig() {
   os=`uname`
   outfile=./tmp/kubeconfig.yaml
 
-  kubectl config view --raw > ./tmp/kubeconfig
-  exit_on_error "Could not process kube config, aborting."
+  if [ -z "$KUBECONFIG_DATA"]; then
+    echo "Obtaining kubeconfig from kubectl."
 
-  if [ "$os" == "Darwin" ]; then
-    data=`base64 ./tmp/kubeconfig`
-  elif [ "$os" == "Linux" ]; then
-    data=`base64 -w0 ./tmp/kubeconfig`
+    kubectl config view --raw > ./tmp/kubeconfig
+    exit_on_error "Could not process kube config, aborting."
+
+    if [ "$os" == "Darwin" ]; then
+      data=`base64 ./tmp/kubeconfig`
+    elif [ "$os" == "Linux" ]; then
+      data=`base64 ./tmp/kubeconfig | tr -d '\n'`
+    else
+      exit_with_error "Could not handle OS type '$os', aborting."
+    fi
   else
-    exit_with_error "Could not handle OS type '$os', aborting."
+    echo "kubeconfig data was provided via environment variable."
+    data=$KUBECONFIG_DATA
   fi
 
   cat > $outfile << EOF
