@@ -11,6 +11,13 @@ exit_on_error() {
   fi
 }
 
+check_for_required_tools() {
+  which base64    ; exit_on_error "'base64' not found, aborting."
+  which tr        ; exit_on_error "'tr' not found, aborting."
+  which helm      ; exit_on_error "'helm' not found, aborting."
+  which kubectl   ; exit_on_error "'kubectl' not found, aborting."
+}
+
 check_for_kube() {
   echo "Checking for Kubernetes..."
 
@@ -95,7 +102,8 @@ process_kubeconfig() {
     elif [ "$os" == "Linux" ]; then
       data=`base64 ./tmp/kubeconfig | tr -d '\n'`
     else
-      exit_with_error "Could not handle OS type '$os', aborting."
+      echo "Warning: unknown OS type '$os', treating as Linux"
+      data=`base64 ./tmp/kubeconfig | tr -d '\n'`
     fi
   else
     echo "kubeconfig data was provided via environment variable."
@@ -160,6 +168,8 @@ prompt_or_wait_to_continue() {
 }
 
 # ------------ Main -----------------
+
+check_for_required_tools
 
 # Include configuration
 . gestalt-config.sh
