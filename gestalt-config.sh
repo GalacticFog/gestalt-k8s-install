@@ -6,7 +6,8 @@
 random() { cat /dev/urandom | env LC_CTYPE=C tr -dc $1 | head -c $2; echo; }
 
 randompw() {
-  random [:alnum:] 16
+  # Generate a random password (16 characters) that starts with an alpha character
+  echo `random [:alpha:] 1``random [:alnum:] 15`
 }
 
 # Set a random password if not set by user
