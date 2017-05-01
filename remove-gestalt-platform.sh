@@ -9,21 +9,22 @@ check_for_gestalt() {
 
   helm status $name >/dev/null 2>&1
   if [ $? -ne 0 ]; then
-    exit_with_error "Helm deployment '$name' not found, aborting."
+    echo "Nothing to do - Helm deployment '$name' not found."
+    exit 1
   fi
   echo "OK - Helm deployment '$name' found."
 
   kubectl get namespace $namespace > /dev/null 2>&1
   if [ $? -ne 0 ]; then
-    exit_with_error "Kubernetes namespace '$namespace' isn't present, aborting."
+    echo "Nothing to do - Kubernetes namespace '$namespace' isn't present."
+    exit 1
   fi
   echo "OK - Kubernetes namespace '$namespace' found."
-
 }
 
 prompt_to_continue(){
   echo ""
-  echo "Gestalt Platform will be removed and namespace '$namespace' will be deleted."
+  echo "Gestalt Platform will be removed from '$context' and namespace '$namespace' will be deleted."
   echo "This cannot be undone."
   echo ""
 

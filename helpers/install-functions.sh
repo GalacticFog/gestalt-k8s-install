@@ -139,7 +139,7 @@ create_namespace() {
 
 run_helm_install() {
   notes=GESTALT_ACCESS_INFO.txt
-  cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml -f ./tmp/gestalt-config.yaml"
+  cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml -f $1"
 
   echo "[Installation initiated at `date`]" >> $notes
 

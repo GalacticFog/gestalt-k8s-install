@@ -43,13 +43,14 @@ Common:
   ReleaseTag: $DOCKER_RELEASE_TAG
 
 DB:
-  Hostname: gestalt-db
+  # Hostname must be fully qualified for Kong service
+  Hostname: gestalt-db.gestalt-system.svc.cluster.local
   Port: 5432
   Username: postgres
   Password: "$DB_INITIAL_PASSWORD"
 
 Security:
-  Hostname: gestalt-security
+  Hostname: gestalt-security.gestalt-system
   Port: 9455
   Protocol: http
   AdminUser: gestalt-admin
@@ -57,12 +58,12 @@ Security:
   DatabaseName: gestalt-security
 
 Rabbit:
-  Hostname: gestalt-rabbit
+  Hostname: gestalt-rabbit.gestalt-system
   Port: 5672
   HttpPort: 15672
 
 Meta:
-  Hostname: gestalt-meta
+  Hostname: gestalt-meta.gestalt-system
   Port: 10131
   Protocol: http
   DatabaseName: gestalt-meta
