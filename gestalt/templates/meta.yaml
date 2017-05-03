@@ -8,6 +8,7 @@ spec:
     metadata:
       labels:
         gestalt-app: meta
+        gestalt-deployment: {{ .Values.deploymentLabel }}
     spec:
       containers:
       - name: gestalt-meta
@@ -22,7 +23,10 @@ spec:
         - name: DATABASE_NAME
           value: "{{ .Values.Meta.DatabaseName }}"
         - name: DATABASE_PASSWORD
-          value: "{{ .Values.DB.Password }}"
+          valueFrom:
+            secretKeyRef:
+              name: gestalt-secrets
+              key: db-password
         - name: DATABASE_PORT
           value: "{{ .Values.DB.Port }}"
         - name: DATABASE_USERNAME
@@ -33,8 +37,6 @@ spec:
           value: "{{ .Values.Security.Port }}"
         - name: GESTALT_SECURITY_PROTOCOL
           value: "{{ .Values.Security.Protocol }}"
-        # - name: GESTALT_SECURITY_REALM
-        #   value: "https://security.test.galacticfog.com"
         - name: RABBIT_HOST
           value: "{{ .Values.Rabbit.Hostname }}"
         - name: RABBIT_PORT

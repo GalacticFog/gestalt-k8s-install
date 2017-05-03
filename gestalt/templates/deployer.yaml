@@ -5,6 +5,7 @@ metadata:
   name: gestalt-deployer
   labels:
     gestalt-app: deployer
+    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   restartPolicy: Never
   containers:
@@ -14,7 +15,7 @@ spec:
     # image: "galacticfog/gestalt-deployer:latest"
     imagePullPolicy: Always
     # 'deploy' arg signals deployment of gestalt platform
-    args: ["deploy"]
+    args: ["deploy", "debug"]
     env:
     - name: CONTAINER_IMAGE_RELEASE_TAG
       value: "{{ .Values.Common.ReleaseTag }}"
@@ -28,7 +29,10 @@ spec:
     - name: DATABASE_HOSTNAME
       value: "{{ .Values.DB.Hostname }}"
     - name: DATABASE_PASSWORD
-      value: "{{ .Values.DB.Password }}"
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: db-password
     - name: DATABASE_PORT
       value: "{{ .Values.DB.Port }}"
     - name: DATABASE_USERNAME
@@ -45,7 +49,10 @@ spec:
     - name: SECURITY_ADMIN_USERNAME
       value: "{{ .Values.Security.AdminUser }}"
     - name: SECURITY_ADMIN_PASSWORD
-      value: "{{ .Values.Security.AdminPassword }}"
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: admin-password
       # Meta settings
     - name: META_HOSTNAME
       value: "{{ .Values.Meta.Hostname }}"

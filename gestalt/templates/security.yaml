@@ -2,6 +2,9 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: gestalt-security
+  labels:
+    gestalt-app: security
+    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   strategy:
     type: Recreate
@@ -9,6 +12,7 @@ spec:
     metadata:
       labels:
         gestalt-app: security
+        gestalt-deployment: {{ .Values.deploymentLabel }}
     spec:
       containers:
       - name: gestalt-security
@@ -25,7 +29,10 @@ spec:
         - name: DATABASE_USERNAME
           value: "{{ .Values.DB.Username }}"
         - name: DATABASE_PASSWORD
-          value: "{{ .Values.DB.Password }}"
+          valueFrom:
+            secretKeyRef:
+              name: gestalt-secrets
+              key: db-password
         - name: DATABASE_NAME
           value: "gestalt-security"
         - name: OAUTH_RATE_LIMITING_AMOUNT

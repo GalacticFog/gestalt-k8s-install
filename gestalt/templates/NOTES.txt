@@ -12,8 +12,8 @@ Gestalt platform deployment initiated to namespace '{{ .Release.Namespace }}'.
 
     Default credentials for the UI:
 
-        User:      "{{ .Values.Security.AdminUser }}"
-        Password:  "{{ .Values.Security.AdminPassword }}"
+        User:      {{ .Values.Security.AdminUser }}
+        Password:  {{ .Values.Security.AdminPassword }}
 
     You may access the Gestalt platform documentation at
 

@@ -4,6 +4,7 @@ metadata:
   name: gestalt-meta
   labels:
     gestalt-app: meta
+    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   type: LoadBalancer
   selector:

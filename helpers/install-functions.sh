@@ -18,11 +18,14 @@ check_for_required_tools() {
   echo "OK - Required tools found."
 }
 
+get_kube_context() {
+  echo `kubectl config view | grep ^current-context: | awk '{print $2}'`
+}
+
 check_for_kube() {
   echo "Checking for Kubernetes..."
 
-  context=`kubectl config view | grep ^current-context: | awk '{print $2}'`
-  echo "Using Kubernetes context: $context"
+  echo "Using Kubernetes context: `get_kube_context`"
 
   kubectl cluster-info > ./tmp/cluster-info
   exit_on_error "Kubernetes cluster not accessible, aborting."
@@ -76,7 +79,7 @@ check_for_existing_namespace() {
 
 prompt_to_continue() {
   echo ""
-  echo "Gestalt Platform is ready to be installed in the '$namespace' namespace."
+  echo "Gestalt Platform is ready to be installed to Kubernetes cluster '`get_kube_context`' in the '$namespace' namespace."
   echo ""
 
   while true; do
@@ -138,7 +141,7 @@ create_namespace() {
 }
 
 run_helm_install() {
-  notes=GESTALT_ACCESS_INFO.txt
+  notes=GESTALT_ACCESS_INFO-$GESTALT_DEPLOY_LABEL.txt
   cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml -f $1"
 
   echo "[Installation initiated at `date`]" >> $notes

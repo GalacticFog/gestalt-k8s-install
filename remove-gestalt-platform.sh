@@ -24,7 +24,7 @@ check_for_gestalt() {
 
 prompt_to_continue(){
   echo ""
-  echo "Gestalt Platform will be removed from '$context' and namespace '$namespace' will be deleted."
+  echo "Gestalt Platform will be removed from Kubernetes cluster '`get_kube_context`' and namespace '$namespace' will be deleted."
   echo "This cannot be undone."
   echo ""
 

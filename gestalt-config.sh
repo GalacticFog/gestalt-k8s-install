@@ -10,6 +10,12 @@ randompw() {
   echo `random [:alpha:] 1``random [:alnum:] 15`
 }
 
+randomlabel() {
+  echo `random [:xdigit:] 4 | tr '[:upper:]' '[:lower:]'`
+}
+
+GESTALT_DEPLOY_LABEL=`randomlabel`
+
 # Set a random password if not set by user
 if [ -z "$GESTALT_ADMIN_PASSWORD" ]; then
   GESTALT_ADMIN_PASSWORD=`randompw`
@@ -19,6 +25,8 @@ DB_INITIAL_PASSWORD=`randompw`
 
 generate_gestalt_config() {
 cat - << EOF
+
+deploymentLabel: $GESTALT_DEPLOY_LABEL
 
 gestalt-db:
   StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"

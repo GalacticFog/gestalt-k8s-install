@@ -2,6 +2,9 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: gestalt-rabbit
+  labels:
+    gestalt-app: rabbit
+    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   strategy:
     type: Recreate
@@ -9,6 +12,7 @@ spec:
     metadata:
       labels:
         gestalt-app: rabbit
+        gestalt-deployment: {{ .Values.deploymentLabel }}
     spec:
       containers:
       - name: gestalt-rabbit
