@@ -67,7 +67,7 @@ check_for_existing_namespace() {
 #   kubectl get namespace $namespace > /dev/null 2>&1
 #   if [ $? -eq 0 ]; then
 #     while true; do
-#         read -p "$* Kubernetes namespace '$namespace' already exists, proceed? [y/n]: " yn
+#         read -p " Kubernetes namespace '$namespace' already exists, proceed? [y/n]: " yn
 #         case $yn in
 #             [Yy]*) return 0  ;;
 #             [Nn]*) echo "Aborted" ; exit  1 ;;
@@ -129,7 +129,6 @@ do_prompt_to_continue() {
       esac
   done
 }
-
 
 process_kubeconfig() {
   echo "Processing kubectl configuration (this gets passed to the installer)..."
