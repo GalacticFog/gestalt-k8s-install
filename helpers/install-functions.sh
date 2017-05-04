@@ -77,19 +77,59 @@ check_for_existing_namespace() {
 #   echo "OK - Kubernetes namespace '$namespace' does not exist."
 # }
 
+check_for_prior_install() {
+  echo "Checking for prior installation..."
+
+  kubectl get services --all-namespaces | grep default-kong > ./tmp/existing_kong_service
+  if [ $? -eq 0 ]; then
+    echo ""
+    echo "Warning: There are existing namespaces that appear to be from a prior install:"
+    cat ./tmp/existing_namespaces
+    echo ""
+    exit_with_error "'default-kong' service already present"
+  fi
+
+
+  kubectl get namespaces | grep -E '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}' > ./tmp/existing_namespaces
+  if [ $? -eq 0 ]; then
+    echo ""
+    echo "Warning: There are existing namespaces that appear to be from a prior install:"
+    cat ./tmp/existing_namespaces
+    echo ""
+
+    if [ -z "$GESTALT_AUTOMATED_INSTALL" ]; then
+      do_prompt_to_continue \
+        "There appear to be existing namespaces. Recommand inspecting and deleting these namespaces before continuing." \
+        "Proceed anyway?"
+    else
+      echo "Continuing anyway since this is an automated install, press Ctrl-C to cancel..."
+      sleep 5
+    fi
+  else
+    echo "OK - No prior installation found."
+  fi
+}
+
 prompt_to_continue() {
+  do_prompt_to_continue \
+    "Gestalt Platform is ready to be installed to Kubernetes cluster '`get_kube_context`' in the '$namespace' namespace." \
+    "Proceed with Gestalt Platform installation?"
+}
+
+do_prompt_to_continue() {
   echo ""
-  echo "Gestalt Platform is ready to be installed to Kubernetes cluster '`get_kube_context`' in the '$namespace' namespace."
+  echo $1
   echo ""
 
   while true; do
-      read -p "$* Proceed with Gestalt Platform installation? [y/n]: " yn
+      read -p "$2 [y/n]: " yn
       case $yn in
           [Yy]*) return 0  ;;
           [Nn]*) echo "Aborted" ; exit  1 ;;
       esac
   done
 }
+
 
 process_kubeconfig() {
   echo "Processing kubectl configuration (this gets passed to the installer)..."

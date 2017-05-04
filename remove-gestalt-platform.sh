@@ -45,6 +45,7 @@ remove_gestalt_platform() {
   kubectl delete namespace $namespace
 }
 
+mkdir -p ./tmp
 
 namespace=gestalt-system
 

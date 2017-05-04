@@ -14,6 +14,8 @@ randomlabel() {
   echo `random [:xdigit:] 4 | tr '[:upper:]' '[:lower:]'`
 }
 
+# Calculate initial values for variables
+
 GESTALT_DEPLOY_LABEL=`randomlabel`
 
 # Set a random password if not set by user
@@ -23,6 +25,21 @@ fi
 
 DB_INITIAL_PASSWORD=`randompw`
 
+# By default, the service type will be NodePort, however if
+# Dynamic LB is enabled, use the 'LoadBalancer' type for which
+# Kubernetes attempts to dynamically provision a load balancer.
+case $KUBE_DYNAMIC_LB_ENABLED in
+  [YyTt1]*)
+    KUBE_DYNAMIC_LB_ENABLED=1
+    PUBLIC_KUBE_SERVICE_TYPE=LoadBalancer
+    ;;
+  *)
+    KUBE_DYNAMIC_LB_ENABLED=0
+    PUBLIC_KUBE_SERVICE_TYPE=NodePort
+    ;;
+esac
+
+# Generate the configuration file
 generate_gestalt_config() {
 cat - << EOF
 
@@ -42,6 +59,8 @@ gestalt-db:
 
 # If true, will use Service of type Load Balancer to dynamically create
 DynamicLoadbalancerEnabled: $KUBE_DYNAMIC_LOADBALANCER_ENABLED
+
+PublicServiceType: $PUBLIC_KUBE_SERVICE_TYPE
 
 # Applies if Dynamic LB is not available/enabled
 ExternalLBs:

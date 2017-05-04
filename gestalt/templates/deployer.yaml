@@ -15,7 +15,8 @@ spec:
     # image: "galacticfog/gestalt-deployer:latest"
     imagePullPolicy: Always
     # 'deploy' arg signals deployment of gestalt platform
-    args: ["deploy", "debug"]
+    # args: ["deploy", "debug"]
+    args: ["deploy"]
     env:
     - name: CONTAINER_IMAGE_RELEASE_TAG
       value: "{{ .Values.Common.ReleaseTag }}"

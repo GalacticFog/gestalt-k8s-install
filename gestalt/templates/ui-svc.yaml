@@ -6,7 +6,7 @@ metadata:
     gestalt-app: ui
     gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
-  type: LoadBalancer
+  type: {{ .Values.PublicServiceType }}
   selector:
     gestalt-app: ui
   ports:

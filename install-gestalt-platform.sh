@@ -18,6 +18,8 @@ check_for_kube
 check_for_helm
 check_for_existing_namespace
 
+check_for_prior_install
+
 prompt_or_wait_to_continue
 
 process_kubeconfig
