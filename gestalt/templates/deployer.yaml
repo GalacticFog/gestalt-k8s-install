@@ -11,8 +11,6 @@ spec:
   containers:
   - name: gestalt-deployer
     image: "galacticfog/gestalt-deployer:{{ .Values.Common.ReleaseTag }}"
-    # TODO - change back to release label
-    # image: "galacticfog/gestalt-deployer:latest"
     imagePullPolicy: Always
     # 'deploy' arg signals deployment of gestalt platform
     # args: ["deploy", "debug"]
