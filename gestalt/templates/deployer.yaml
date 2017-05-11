@@ -13,8 +13,8 @@ spec:
     image: "galacticfog/gestalt-deployer:{{ .Values.Common.ReleaseTag }}"
     imagePullPolicy: Always
     # 'deploy' arg signals deployment of gestalt platform
-    # args: ["deploy", "debug"]
-    args: ["deploy"]
+    # 'debug' arg signals debug output
+    args: ["deploy", "{{ .Values.DebugMode }}"]
     env:
     - name: CONTAINER_IMAGE_RELEASE_TAG
       value: "{{ .Values.Common.ReleaseTag }}"
@@ -22,8 +22,10 @@ spec:
       value: "{{ .Values.kubeconfig }}"
     - name: KUBE_DYNAMIC_LB_ENABLED
       value: "{{ .Values.DynamicLoadbalancerEnabled }}"
-    - name: EXTERNAL_GATEWAY_LB_HOSTNAME
-      value: "{{ .Values.ExternalLBs.Gateway }}"
+    - name: EXTERNAL_GATEWAY_DNSNAME
+      value: "{{ .Values.ExternalGateway.DnsName }}"
+    - name: EXTERNAL_GATEWAY_PROTOCOL
+      value: "{{ .Values.ExternalGateway.Protocol }}"
       # Database settings
     - name: DATABASE_HOSTNAME
       value: "{{ .Values.DB.Hostname }}"

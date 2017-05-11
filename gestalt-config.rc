@@ -4,6 +4,8 @@
 # Typically no need to change
 DOCKER_RELEASE_TAG=kube-1.1.0
 
+GESTALT_INSTALL_MODE="non-debug"  # if set to 'debug', debug mode enabled
+
 
 ### AWS Kubernetes Settings (default StorageClass supporting dynamic volume provisioning) ###
 
@@ -21,4 +23,6 @@ KUBE_DYNAMIC_LOADBALANCER_ENABLED=Yes
 #
 # KUBE_DYNAMIC_LOADBALANCER_ENABLED=No
 #
-# EXTERNAL_GATEWAY_LB_HOSTNAME=cdk1-gestalt-gateway-246356622.us-east-1.elb.amazonaws.com
+# EXTERNAL_GATEWAY_DNSNAME=gestalt-apis.cdk-test.galacticfog.com
+#
+# EXTERNAL_GATEWAY_PROTOCOL=https

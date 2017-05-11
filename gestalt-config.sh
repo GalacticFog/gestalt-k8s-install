@@ -63,8 +63,11 @@ DynamicLoadbalancerEnabled: $KUBE_DYNAMIC_LOADBALANCER_ENABLED
 PublicServiceType: $PUBLIC_KUBE_SERVICE_TYPE
 
 # Applies if Dynamic LB is not available/enabled
-ExternalLBs:
-  Gateway: $EXTERNAL_GATEWAY_LB_HOSTNAME
+ExternalGateway:
+  DnsName: $EXTERNAL_GATEWAY_DNSNAME
+  Protocol: $EXTERNAL_GATEWAY_PROTOCOL
+
+Mode: $GESTALT_INSTALL_MODE
 
 Common:
   ReleaseTag: $DOCKER_RELEASE_TAG
