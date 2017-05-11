@@ -136,7 +136,7 @@ process_kubeconfig() {
   os=`uname`
   outfile=./tmp/kubeconfig.yaml
 
-  if [ -z "$KUBECONFIG_DATA"]; then
+  if [ -z "$KUBECONFIG_DATA" ]; then
     echo "Obtaining kubeconfig from kubectl."
 
     kubectl config view --raw > ./tmp/kubeconfig
