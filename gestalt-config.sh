@@ -28,13 +28,13 @@ DB_INITIAL_PASSWORD=`randompw`
 # By default, the service type will be NodePort, however if
 # Dynamic LB is enabled, use the 'LoadBalancer' type for which
 # Kubernetes attempts to dynamically provision a load balancer.
-case $KUBE_DYNAMIC_LB_ENABLED in
+case $KUBE_DYNAMIC_LOADBALANCER_ENABLED in
   [YyTt1]*)
-    KUBE_DYNAMIC_LB_ENABLED=1
+    KUBE_DYNAMIC_LOADBALANCER_ENABLED=Yes
     PUBLIC_KUBE_SERVICE_TYPE=LoadBalancer
     ;;
   *)
-    KUBE_DYNAMIC_LB_ENABLED=0
+    KUBE_DYNAMIC_LOADBALANCER_ENABLED=No
     PUBLIC_KUBE_SERVICE_TYPE=NodePort
     ;;
 esac

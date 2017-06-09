@@ -22,6 +22,16 @@ get_kube_context() {
   echo `kubectl config view | grep ^current-context: | awk '{print $2}'`
 }
 
+check_kubeconfig() {
+  echo "Checking Kubernetes config..."
+
+  local contexts=$(kubectl config view | grep "\- context\:" | wc -l)
+  if [ "$contexts" -gt 1 ]; then
+    exit_with_error "Kubernetes config has more than one context (kubectl config view). There must only be one context, aborting."
+  fi
+  echo "OK - kubeconfig has exactly one context."
+}
+
 check_for_kube() {
   echo "Checking for Kubernetes..."
 
