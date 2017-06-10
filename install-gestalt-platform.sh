@@ -14,6 +14,7 @@ exit_on_error "Could not create './tmp', aborting. Check filesystem permissions 
 # Include configuration
 . gestalt-config.sh
 
+check_kubeconfig
 check_for_kube
 check_for_helm
 check_for_existing_namespace
