@@ -16,14 +16,25 @@ randomlabel() {
 
 # Calculate initial values for variables
 
-GESTALT_DEPLOY_LABEL=`randomlabel`
-
 # Set a random password if not set by user
-if [ -z "$GESTALT_ADMIN_PASSWORD" ]; then
-  GESTALT_ADMIN_PASSWORD=`randompw`
+if [ -z "$GESTALT_ADMIN_USERNAME" ]; then
+  GESTALT_ADMIN_USERNAME=gestalt-admin
+  echo "Admin username not set, defaulting to '$GESTALT_ADMIN_USERNAME'"
 fi
 
-DB_INITIAL_PASSWORD=`randompw`
+if [ -z "$GESTALT_ADMIN_PASSWORD" ]; then
+  GESTALT_ADMIN_PASSWORD=`randompw`
+  echo "Admin password not set, generating random password"
+fi
+
+if [ -z "$DATABASE_NAME" ]; then
+  DATABASE_NAME=postgres
+  echo "Defaulting to database name '$DATABASE_NAME'"
+fi
+
+if [ -z "$PV_STORAGE_ANNOTATION" ]; then
+  PV_STORAGE_ANNOTATION="volume.alpha.kubernetes.io/storage-class: default"
+fi
 
 # By default, the service type will be NodePort, however if
 # Dynamic LB is enabled, use the 'LoadBalancer' type for which
@@ -39,23 +50,13 @@ case $KUBE_DYNAMIC_LOADBALANCER_ENABLED in
     ;;
 esac
 
-# Generate the configuration file
+# Generate the configuration file and echos to stdout
 generate_gestalt_config() {
+
+# other configuration
 cat - << EOF
 
-deploymentLabel: $GESTALT_DEPLOY_LABEL
-
-gestalt-db:
-  StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
-  etcd:
-    StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
-
-  # Randomized initial database credentials
-  Credentials:
-    Superuser: "$DB_INITIAL_PASSWORD"
-    Admin: "$DB_INITIAL_PASSWORD"
-    Standby: "$DB_INITIAL_PASSWORD"
-
+deploymentLabel: `randomlabel`
 
 # If true, will use Service of type Load Balancer to dynamically create
 DynamicLoadbalancerEnabled: $KUBE_DYNAMIC_LOADBALANCER_ENABLED
@@ -70,20 +71,16 @@ ExternalGateway:
 Mode: $GESTALT_INSTALL_MODE
 
 Common:
-  ReleaseTag: $DOCKER_RELEASE_TAG
+  ReleaseTag: $COMMON_RELEASE_TAG
 
-DB:
-  # Hostname must be fully qualified for Kong service
-  Hostname: gestalt-db.gestalt-system.svc.cluster.local
-  Port: 5432
-  Username: postgres
-  Password: "$DB_INITIAL_PASSWORD"
+Installer:
+  ReleaseTag: $INSTALLER_RELEASE_TAG
 
 Security:
   Hostname: gestalt-security.gestalt-system
   Port: 9455
   Protocol: http
-  AdminUser: gestalt-admin
+  AdminUser: "$GESTALT_ADMIN_USERNAME"
   AdminPassword: "$GESTALT_ADMIN_PASSWORD"
   DatabaseName: gestalt-security
 
@@ -108,5 +105,56 @@ Gateway:
 
 Kong:
   DatabaseName: kong-db
+
+# Database configuration:
 EOF
+
+case $PROVISION_INTERNAL_DATABASE in
+  [YyTt1]*)
+
+# Only used if provioning an internal database (gestalt-db chart)
+DB_INITIAL_PASSWORD=`randompw`
+
+cat - << EOF
+# Provision an internal database using the 'gestalt-db' sub chart
+provision-internal-db: true
+
+gestalt-db:
+  StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
+  etcd:
+    StorageClassAnnotation: "$PV_STORAGE_ANNOTATION"
+
+  # Randomized initial database credentials
+  Credentials:
+    Superuser: "$DB_INITIAL_PASSWORD"
+    Admin: "$DB_INITIAL_PASSWORD"
+    Standby: "$DB_INITIAL_PASSWORD"
+
+# Internal DB settings
+DB:
+  # Hostname must be fully qualified for Kong service
+  Hostname: gestalt-db.gestalt-system.svc.cluster.local
+  Port: 5432
+  Username: postgres
+  Password: "$DB_INITIAL_PASSWORD"
+  DbName: $DATABASE_NAME
+EOF
+
+    ;;
+  *) cat - << EOF
+# Use an external database
+provision-internal-db: false
+
+# External DB settings:
+DB:
+  # Hostname must be fully qualified for Kong service
+  Hostname: $DATABASE_HOSTNAME
+  Port: $DATABASE_PORT
+  Username: $DATABASE_USER
+  Password: $DATABASE_PASSWORD
+  DbName: $DATABASE_NAME
+EOF
+    ;;
+esac
+
 }

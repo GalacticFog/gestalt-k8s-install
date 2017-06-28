@@ -9,6 +9,25 @@ exit_on_error() {
   fi
 }
 
+check_for_required_environment_variables() {
+  retval=0
+
+  for e in $@; do
+    if [ -z "${!e}" ]; then
+      echo "Required environment variable \"$e\" not defined."
+      retval=1
+    fi
+  done
+
+  if [ $retval -ne 0 ]; then
+    echo "One or more required environment variables not defined, aborting."
+    exit 1
+  else
+    echo "All required environment variables found."
+  fi
+}
+
+
 check_for_required_tools() {
   echo "Checking for required tools..."
   which base64    >/dev/null 2>&1 ; exit_on_error "'base64' not found, aborting."
@@ -140,6 +159,30 @@ do_prompt_to_continue() {
   done
 }
 
+summarize_config() {
+  echo
+  echo "Configuration Summary:"
+  echo " - Target Kubernetes cluster: `get_kube_context` ('$namespace' namespace)"
+  echo " - Gestalt Admin User: $GESTALT_ADMIN_USERNAME"
+  echo " - Extenal Gateway: $EXTERNAL_GATEWAY_PROTOCOL://$EXTERNAL_GATEWAY_DNSNAME"
+  echo
+  echo " - Gestalt database settings:"
+  case $PROVISION_INTERNAL_DATABASE in
+    [YyTt1]*)
+      echo "    Provisioning an internal database."
+      ;;
+    *)
+      echo "    Host: $DATABASE_HOSTNAME"
+      echo "    Port: $DATABASE_PORT"
+      echo "    Name: $DATABASE_NAME"
+      echo "    User: $DATABASE_USER"
+      ;;
+  esac
+  echo
+  echo " - Common release: $COMMON_RELEASE_TAG"
+  echo " - Installer release: $INSTALLER_RELEASE_TAG"
+}
+
 process_kubeconfig() {
   echo "Processing kubectl configuration (this gets passed to the installer)..."
 
@@ -189,19 +232,32 @@ create_namespace() {
   fi
 }
 
+## Method w/ Notes
+# run_helm_install() {
+#   notes=GESTALT_ACCESS_INFO-$GESTALT_DEPLOY_LABEL.txt
+#   cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml -f $1"
+#
+#   echo "[Installation initiated at `date`]" >> $notes
+#
+#   echo "Installing Gestalt Platform to Kubernetes using Helm..." | tee -a $notes
+#   echo "Command: $cmd"  | tee -a $notes
+#   $cmd | tee -a $notes
+#
+#   exit_on_error "Installation failed!"
+#
+#   echo ""  | tee -a $notes
+#   echo "Install notes saved to '$notes'."
+# }
+
 run_helm_install() {
-  notes=GESTALT_ACCESS_INFO-$GESTALT_DEPLOY_LABEL.txt
   cmd="helm install --namespace $namespace ./gestalt -n gestalt-platform -f ./tmp/kubeconfig.yaml -f $1"
 
-  echo "[Installation initiated at `date`]" >> $notes
+  echo "[Installation initiated at `date`]"
+  echo "Installing Gestalt Platform to Kubernetes using Helm..."
+  echo "Command: $cmd"
+  $cmd
 
-  echo "Installing Gestalt Platform to Kubernetes using Helm..." | tee -a $notes
-  echo "Command: $cmd"  | tee -a $notes
-  $cmd | tee -a $notes
   exit_on_error "Installation failed!"
-
-  echo ""  | tee -a $notes
-  echo "Install notes saved to '$notes'."
 }
 
 run_post_install() {

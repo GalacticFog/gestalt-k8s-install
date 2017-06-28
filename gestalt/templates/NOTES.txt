@@ -1,22 +1,18 @@
-
-Gestalt platform deployment initiated to namespace '{{ .Release.Namespace }}'.
-
-    To view status of deployment, run the following:
-
-        ./view-install-status.sh
-
-    UI Access - Once Gestalt platform is deployed, the User Interface is accessible from the
-    'gestalt-ui' service. For details, use the LoadBalancer Ingress.  Run the following:
-
-        ./view-access-info.sh
-
-    Default credentials for the UI:
+ - Gestalt platform deployment initiated to namespace '{{ .Release.Namespace }}'.  Default credentials for Gestalt Platform:
 
         User:      {{ .Values.Security.AdminUser }}
         Password:  {{ .Values.Security.AdminPassword }}
 
-    You may access the Gestalt platform documentation at
+ - Credentials for the Gestalt Platform are stored in the 'gestalt-secrets' Secret in the '{{ .Release.Namespace }}' namespace.
+
+ - You may access the Gestalt platform documentation at
 
         http://docs.galacticfog.com/
 
-Gestalt Platform installation initiated, and will take several minutes to complete."
+Gestalt Platform installation initiated, and will take several minutes to complete.  Run the following to view status:
+
+    ./view-install-status.sh
+
+Once available, the Portal is accessible via the 'gestalt-ui' service. To view the service, run the following:
+
+    ./view-access-info.sh

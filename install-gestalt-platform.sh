@@ -6,6 +6,10 @@ namespace=gestalt-system
 
 . helpers/install-functions.sh
 
+#TODO - parameterize
+# . helpers/aws-functions.sh
+
+
 check_for_required_tools
 
 mkdir -p ./tmp
@@ -21,6 +25,7 @@ check_for_existing_namespace
 
 check_for_prior_install
 
+summarize_config
 prompt_or_wait_to_continue
 
 process_kubeconfig

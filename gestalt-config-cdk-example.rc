@@ -7,7 +7,10 @@ GESTALT_ADMIN_USERNAME=
 GESTALT_ADMIN_PASSWORD=
 
 # ------------- API Gateway settings ----------------------------------------------
-KUBE_DYNAMIC_LOADBALANCER_ENABLED=Yes
+
+# -- Disable since CDK doesn't have cloud provider configured
+KUBE_DYNAMIC_LOADBALANCER_ENABLED=No
+
 EXTERNAL_GATEWAY_DNSNAME="apis.cluster.example.com"
 EXTERNAL_GATEWAY_PROTOCOL="https"
 
@@ -24,9 +27,17 @@ PROVISION_INTERNAL_DATABASE=Yes
 # DATABASE_PASSWORD=abcdefghijkl
 
 
+# --------- CDK Settings ----------------------------------------------------------
+# -- 'debug' for more verbose output in the gestalt installer
+# GESTALT_INSTALL_MODE=debug
+
+# -- Run a post-install script
+POST_INSTALL_SCRIPT=./helpers/cdk-post-install.sh
+
+# -- for Ceph backend: rbd storage
+PV_STORAGE_ANNOTATION="volume.beta.kubernetes.io/storage-class: rbd"
+
+
 # ------------ Installer settings, typically no need to change --------------------
 COMMON_RELEASE_TAG="release-1.2.0"
 INSTALLER_RELEASE_TAG="release-1.2.0-2"
-
-# -- 'debug' for more verbose output in the gestalt installer
-# GESTALT_INSTALL_MODE=debug

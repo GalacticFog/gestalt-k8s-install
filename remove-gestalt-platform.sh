@@ -45,6 +45,32 @@ remove_gestalt_platform() {
   kubectl delete namespace $namespace
 }
 
+remove_gestalt_namespaces() {
+
+  local namespaces=$( kubectl get namespaces | grep -E '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}' | awk '{print $1}')
+  if [ $? -eq 0 ] && [ ! -z "$namespaces" ]; then
+    echo ""
+    echo "Warning: There are existing namespaces that appear to be from a prior install:"
+    echo "$namespaces"
+    echo ""
+
+    while true; do
+        read -p "$* Delete these namespaces? [y/n]: " yn
+        case $yn in
+            [Yy]*) do_delete_namespaces $namespaces ; break ;;
+            [Nn]*) break ;;
+        esac
+    done
+  else
+    echo "No gestalt namespaces found"
+  fi
+}
+
+do_delete_namespaces() {
+  kubectl delete namespace $@
+  echo "Done deleting namespaces."
+}
+
 mkdir -p ./tmp
 
 namespace=gestalt-system
@@ -60,5 +86,7 @@ check_for_gestalt
 prompt_to_continue
 
 remove_gestalt_platform
+
+remove_gestalt_namespaces
 
 echo "Done."

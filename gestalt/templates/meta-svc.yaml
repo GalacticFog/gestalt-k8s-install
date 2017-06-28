@@ -6,7 +6,8 @@ metadata:
     gestalt-app: meta
     gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
-  type: {{ .Values.PublicServiceType }}
+  # type: {{ .Values.PublicServiceType }}
+  type: NodePort
   selector:
     gestalt-app: meta
   ports:

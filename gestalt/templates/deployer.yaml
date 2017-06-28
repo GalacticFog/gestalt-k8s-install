@@ -10,7 +10,7 @@ spec:
   restartPolicy: Never
   containers:
   - name: gestalt-deployer
-    image: "galacticfog/gestalt-deployer:{{ .Values.Common.ReleaseTag }}"
+    image: "galacticfog/gestalt-deployer:{{ .Values.Installer.ReleaseTag | default .Values.Common.ReleaseTag }}"
     imagePullPolicy: Always
     # 'deploy' arg signals deployment of gestalt platform
     # 'debug' arg signals debug output
@@ -37,7 +37,12 @@ spec:
     - name: DATABASE_PORT
       value: "{{ .Values.DB.Port }}"
     - name: DATABASE_USERNAME
-      value: "{{ .Values.DB.Username }}"
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: db-username
+    - name: DATABASE_NAME
+      value: "{{ .Values.DB.DbName }}"
       # Security settings
     - name: SECURITY_DB_NAME
       value: "{{ .Values.Security.DatabaseName }}"
@@ -48,7 +53,10 @@ spec:
     - name: SECURITY_PROTOCOL
       value: "{{ .Values.Security.Protocol }}"
     - name: SECURITY_ADMIN_USERNAME
-      value: "{{ .Values.Security.AdminUser }}"
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: admin-username
     - name: SECURITY_ADMIN_PASSWORD
       valueFrom:
         secretKeyRef:

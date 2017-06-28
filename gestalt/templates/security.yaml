@@ -27,7 +27,10 @@ spec:
         - name: DATABASE_PORT
           value: "{{ .Values.DB.Port }}"
         - name: DATABASE_USERNAME
-          value: "{{ .Values.DB.Username }}"
+          valueFrom:
+            secretKeyRef:
+              name: gestalt-secrets
+              key: db-username
         - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
