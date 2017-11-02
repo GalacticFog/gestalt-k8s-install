@@ -1,5 +1,7 @@
 # Installing Gestalt Platform on Kubernetes
 
+Installer repository: https://github.com/GalacticFog/gestalt-k8s-install
+
 ## Prerequisites
 
 Target Kubernetes Cluster:
