@@ -4,14 +4,13 @@ metadata:
   name: gestalt-rabbit
   labels:
     gestalt-app: rabbit
-    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   selector:
     gestalt-app: rabbit
   ports:
     - name: service-api
-      port: {{.Values.Rabbit.Port}}
+      port: {{.Values.rabbit.port}}
       targetPort: service-api
     - name: http-api
-      port: {{.Values.Rabbit.HttpPort}}
+      port: {{.Values.rabbit.httpPort}}
       targetPort: http-api

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    gestalt-app: ui
+  name: gestalt-ui
+spec:
+  rules:
+  - host: "{{ .Values.ui.ingress.host }}"
+    http:
+      paths:
+      - backend:
+          serviceName: gestalt-ui
+          servicePort: 80

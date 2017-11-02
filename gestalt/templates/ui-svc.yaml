@@ -4,9 +4,8 @@ metadata:
   name: gestalt-ui
   labels:
     gestalt-app: ui
-    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
-  type: {{ .Values.PublicServiceType }}
+  type: {{ .Values.ui.exposedServiceType }}
   selector:
     gestalt-app: ui
   ports:

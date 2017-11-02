@@ -5,7 +5,7 @@
 check_for_gestalt() {
   echo "Checking for existing Gestalt Platform..."
 
-  name=gestalt-platform
+  name=$INSTALL_PREFIX
 
   helm status $name >/dev/null 2>&1
   if [ $? -ne 0 ]; then
@@ -14,17 +14,17 @@ check_for_gestalt() {
   fi
   echo "OK - Helm deployment '$name' found."
 
-  kubectl get namespace $namespace > /dev/null 2>&1
+  kubectl get namespace $INSTALL_NAMESPACE > /dev/null 2>&1
   if [ $? -ne 0 ]; then
-    echo "Nothing to do - Kubernetes namespace '$namespace' isn't present."
+    echo "Nothing to do - Kubernetes namespace '$INSTALL_NAMESPACE' isn't present."
     exit 1
   fi
-  echo "OK - Kubernetes namespace '$namespace' found."
+  echo "OK - Kubernetes namespace '$INSTALL_NAMESPACE' found."
 }
 
 prompt_to_continue(){
   echo ""
-  echo "Gestalt Platform will be removed from Kubernetes cluster '`get_kube_context`' and namespace '$namespace' will be deleted."
+  echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`' and namespace '$INSTALL_NAMESPACE' will be deleted."
   echo "This cannot be undone."
   echo ""
 
@@ -38,11 +38,11 @@ prompt_to_continue(){
 }
 
 remove_gestalt_platform() {
-  echo "Removing gestalt-platform ..."
-  helm delete --purge gestalt-platform
+  echo "Removing Helm deployment '$INSTALL_PREFIX' ..."
+  helm delete --purge $INSTALL_PREFIX
 
-  echo "Deleting namespace '$namespace'..."
-  kubectl delete namespace $namespace
+  echo "Deleting namespace '$INSTALL_NAMESPACE'..."
+  kubectl delete namespace $INSTALL_NAMESPACE
 }
 
 remove_gestalt_namespaces() {
@@ -71,9 +71,18 @@ do_delete_namespaces() {
   echo "Done deleting namespaces."
 }
 
-mkdir -p ./tmp
+INSTALL_PREFIX=$1
+INSTALL_NAMESPACE=$2
 
-namespace=gestalt-system
+if [ -z "$INSTALL_PREFIX" ]; then
+  # exit_with_error "Must specify INSTALL_PREFIX"
+  INSTALL_PREFIX=gestalt
+fi
+
+if [ -z "$INSTALL_NAMESPACE" ]; then
+  INSTALL_NAMESPACE=${INSTALL_PREFIX}-system
+fi
+
 
 # Check for pre-reqs
 check_for_required_tools

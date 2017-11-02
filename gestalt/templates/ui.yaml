@@ -4,24 +4,22 @@ metadata:
   name: gestalt-ui
   labels:
     gestalt-app: ui
-    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   replicas: 1
   template: # create pods using pod definition in this template
     metadata:
       labels:
         gestalt-app: ui
-        gestalt-deployment: {{ .Values.deploymentLabel }}
     spec:
       containers:
       - name: gestalt-ui
-        image: galacticfog/gestalt-ui-react:{{ .Values.Common.ReleaseTag }}
-        imagePullPolicy: Always
+        image: "{{ .Values.ui.image }}"
+        imagePullPolicy: {{ .Values.common.imagePullPolicy }}
         ports:
         - containerPort: 80
           name: http
         env:
         - name: META_API_URL
-          value: "{{ .Values.Meta.Protocol }}://{{ .Values.Meta.Hostname }}:{{ .Values.Meta.Port }}"
+          value: "{{ .Values.meta.protocol }}://{{ .Values.meta.hostname }}:{{ .Values.meta.port }}"
         - name: SEC_API_URL
-          value: "{{ .Values.Security.Protocol }}://{{ .Values.Security.Hostname }}:{{ .Values.Security.Port }}"
+          value: "{{ .Values.security.protocol }}://{{ .Values.security.hostname }}:{{ .Values.security.port }}"

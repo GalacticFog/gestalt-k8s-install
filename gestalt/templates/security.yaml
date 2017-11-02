@@ -4,7 +4,6 @@ metadata:
   name: gestalt-security
   labels:
     gestalt-app: security
-    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   strategy:
     type: Recreate
@@ -12,20 +11,19 @@ spec:
     metadata:
       labels:
         gestalt-app: security
-        gestalt-deployment: {{ .Values.deploymentLabel }}
     spec:
       containers:
       - name: gestalt-security
-        image: "galacticfog/gestalt-security:{{ .Values.Common.ReleaseTag }}"
-        imagePullPolicy: Always
+        image: "{{ .Values.security.image }}"
+        imagePullPolicy: {{ .Values.common.imagePullPolicy }}
         ports:
         - containerPort: 9000
           name: service-api
         env:
         - name: DATABASE_HOSTNAME
-          value: "{{ .Values.DB.Hostname }}"
+          value: "{{ .Values.db.hostname }}"
         - name: DATABASE_PORT
-          value: "{{ .Values.DB.Port }}"
+          value: "{{ .Values.db.port }}"
         - name: DATABASE_USERNAME
           valueFrom:
             secretKeyRef:

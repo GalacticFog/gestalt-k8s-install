@@ -4,13 +4,12 @@ metadata:
   name: gestalt-meta
   labels:
     gestalt-app: meta
-    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
-  # type: {{ .Values.PublicServiceType }}
-  type: NodePort
+  type: {{ .Values.meta.exposedServiceType }}
+  # type: NodePort
   selector:
     gestalt-app: meta
   ports:
     - name: http-api
-      port: {{ .Values.Meta.Port }}
+      port: {{ .Values.meta.port }}
       targetPort: service-api
