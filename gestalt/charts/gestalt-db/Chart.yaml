@@ -1,9 +1,0 @@
-name: gestalt-db
-description: "Gestalt-db based on Patroni"
-version: 0.0.1
-home: https://github.com/galacticfog/gestalt-db
-sources:
-  - https://github.com/galacticfog/gestalt-db
-maintainers:
-  - name: Gestalt Team @ GalacticFog
-    email: team@galacticfog.com

@@ -1,0 +1,125 @@
+# This is a pod w/ restartPolicy=Never so that the installer only runs once.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gestalt-installer
+  labels:
+    gestalt-app: installer
+spec:
+  restartPolicy: Never
+  containers:
+  - name: gestalt-installer
+    image: "{{ .Values.installer.image }}"
+    imagePullPolicy: {{ .Values.common.imagePullPolicy }}
+    # 'deploy' arg signals deployment of gestalt platform
+    # 'debug' arg signals debug output
+    args: ["install", "{{ .Values.debugMode }}"]
+    env:
+
+    # General settings
+    # TODO: Not used
+    # - name: ENSEMBLE_RELEASE_TAG
+    #   value: "{{ .Values.common.releaseTag }}"
+    - name: KUBECONFIG_DATA
+      value: "{{ .Values.installer.kubeconfig }}"
+    - name: USE_DYNAMIC_LOADBALANCERS
+      value: "{{ .Values.installer.useDynamicLoadBalancers }}"
+    - name: EXTERNAL_GATEWAY_HOST
+      value: "{{ .Values.installer.externalGateway.dnsName }}"
+    - name: EXTERNAL_GATEWAY_PROTOCOL
+      value: "{{ .Values.installer.externalGateway.protocol }}"
+
+    # Database settings
+    - name: DATABASE_HOSTNAME
+      value: "{{ .Values.db.hostname }}"
+    - name: DATABASE_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: db-password
+    - name: DATABASE_PORT
+      value: "{{ .Values.db.port }}"
+    - name: DATABASE_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: db-username
+    - name: DATABASE_NAME
+      value: "{{ .Values.db.databaseName }}"
+
+    # Security settings
+    - name: SECURITY_DB_NAME
+      value: "{{ .Values.security.databaseName }}"
+    - name: SECURITY_HOSTNAME
+      value: "{{ .Values.security.hostname }}"
+    - name: SECURITY_PORT
+      value: "{{ .Values.security.port }}"
+    - name: SECURITY_PROTOCOL
+      value: "{{ .Values.security.protocol }}"
+    - name: SECURITY_ADMIN_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: admin-username
+    - name: SECURITY_ADMIN_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: gestalt-secrets
+          key: admin-password
+
+    # Meta settings
+    - name: META_HOSTNAME
+      value: "{{ .Values.meta.hostname }}"
+    - name: META_PORT
+      value: "{{ .Values.meta.port }}"
+    - name: META_PROTOCOL
+      value: "{{ .Values.meta.protocol }}"
+
+    # Rabbit settings
+    - name: RABBIT_HOSTNAME
+      value: "{{ .Values.rabbit.hostname }}"
+    - name: RABBIT_PORT
+      value: "{{ .Values.rabbit.port }}"
+
+    #
+    # -- Installer-provisioned services --
+    #
+
+    # Laser settings
+    - name: LASER_IMAGE
+      value: "{{ .Values.laser.image }}"
+    - name: LASER_DB_NAME
+      value: "{{ .Values.laser.databaseName }}"
+    - name: LASER_CPU
+      value: "{{ .Values.laser.cpu }}"
+    - name: LASER_MEMORY
+      value: "{{ .Values.laser.memory }}"
+    # Laser Executor Images
+    - name: LASER_EXECUTOR_DOTNET_IMAGE
+      value: "{{ .Values.laser.executorImages.dotNet }}"
+    - name: LASER_EXECUTOR_GOLANG_IMAGE
+      value: "{{ .Values.laser.executorImages.golang }}"
+    - name: LASER_EXECUTOR_JS_IMAGE
+      value: "{{ .Values.laser.executorImages.js }}"
+    - name: LASER_EXECUTOR_JVM_IMAGE
+      value: "{{ .Values.laser.executorImages.jvm }}"
+    - name: LASER_EXECUTOR_PYTHON_IMAGE
+      value: "{{ .Values.laser.executorImages.python }}"
+    - name: LASER_EXECUTOR_RUBY_IMAGE
+      value: "{{ .Values.laser.executorImages.ruby }}"
+
+    # Policy Settings
+    - name: POLICY_IMAGE
+      value: "{{ .Values.policy.image }}"
+
+    # Gateway Manager settings
+    - name: GATEWAY_MGR_IMAGE
+      value: "{{ .Values.gatewayManager.image }}"
+    - name: GATEWAY_MGR_DB_NAME
+      value: "{{ .Values.gatewayManager.databaseName }}"
+
+    # Kong settings
+    - name: KONG_IMAGE
+      value: "{{ .Values.kong.image }}"
+    - name: KONG_DB_NAME
+      value: "{{ .Values.kong.databaseName }}"

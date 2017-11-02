@@ -1,0 +1,47 @@
+#!/bin/bash
+
+. helpers/install-functions.sh
+
+configfile=$1
+if [ -z "$configfile" ]; then
+  exit_with_error "Must specify a configuration file"
+fi
+
+if [ ! -f "$configfile" ]; then
+  exit_with_error "Configuration file '$configfile' not found, aborting."
+fi
+
+echo "Checking environment..."
+
+# mkdir -p ./tmp
+# exit_on_error "Could not create './tmp', aborting. Check filesystem permissions and try again."
+
+check_for_required_tools
+
+# Include configuration
+. $configfile
+
+INSTALL_PREFIX=${INSTALL_PREFIX-gestalt}
+INSTALL_NAMESPACE="${INSTALL_PREFIX}-system"
+
+# Environment checks
+check_kubeconfig
+check_for_kube
+check_for_helm
+check_for_existing_namespace
+check_for_prior_install
+
+# Build Helm config
+. helpers/build-gestalt-config.sh
+process_kubeconfig
+generate_gestalt_config > gestalt-config.yaml
+echo "Helm chart configuration generated."
+
+# Prompt to continue
+summarize_config
+prompt_or_wait_to_continue
+
+# Perform Gestalt installation
+create_namespace
+run_helm_install          gestalt-config.yaml
+run_post_install

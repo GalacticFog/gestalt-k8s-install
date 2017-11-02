@@ -4,7 +4,6 @@ metadata:
   name: gestalt-rabbit
   labels:
     gestalt-app: rabbit
-    gestalt-deployment: {{ .Values.deploymentLabel }}
 spec:
   strategy:
     type: Recreate
@@ -12,14 +11,13 @@ spec:
     metadata:
       labels:
         gestalt-app: rabbit
-        gestalt-deployment: {{ .Values.deploymentLabel }}
     spec:
       containers:
       - name: gestalt-rabbit
-        image: "galacticfog/rabbit:{{ .Values.Common.ReleaseTag }}"
-        imagePullPolicy: Always
+        image: "{{ .Values.rabbit.image }}"
+        imagePullPolicy: {{ .Values.common.imagePullPolicy }}
         ports:
-        - containerPort: {{.Values.Rabbit.Port}}
+        - containerPort: {{.Values.rabbit.port}}
           name: service-api
-        - containerPort: {{.Values.Rabbit.HttpPort}}
+        - containerPort: {{.Values.rabbit.httpPort}}
           name: http-api

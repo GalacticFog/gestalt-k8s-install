@@ -8,45 +8,53 @@ spec:
     metadata:
       labels:
         gestalt-app: meta
-        gestalt-deployment: {{ .Values.deploymentLabel }}
     spec:
       containers:
       - name: gestalt-meta
-        image: "galacticfog/gestalt-meta:{{ .Values.Common.ReleaseTag }}"
-        imagePullPolicy: Always
+        image: "{{ .Values.meta.image }}"
+        imagePullPolicy: {{ .Values.common.imagePullPolicy }}
         ports:
         - containerPort: 9000
           name: service-api
+        # TODO - 
+        # resources:
+        #   requests:
+        #     cpu: 250m
+        #     memory: "2Gi"
+        #   limits:
+        #     memory: "2Gi"
         env:
         - name: DATABASE_HOSTNAME
-          value: "{{ .Values.DB.Hostname }}"
+          value: "{{ .Values.db.hostname }}"
         - name: DATABASE_NAME
-          value: "{{ .Values.Meta.DatabaseName }}"
+          value: "{{ .Values.meta.databaseName }}"
         - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: gestalt-secrets
               key: db-password
         - name: DATABASE_PORT
-          value: "{{ .Values.DB.Port }}"
+          value: "{{ .Values.db.port }}"
         - name: DATABASE_USERNAME
           valueFrom:
             secretKeyRef:
               name: gestalt-secrets
               key: db-username
         - name: GESTALT_SECURITY_HOSTNAME
-          value: "{{ .Values.Security.Hostname }}"
+          value: "{{ .Values.security.hostname }}"
         - name: GESTALT_SECURITY_PORT
-          value: "{{ .Values.Security.Port }}"
+          value: "{{ .Values.security.port }}"
         - name: GESTALT_SECURITY_PROTOCOL
-          value: "{{ .Values.Security.Protocol }}"
+          value: "{{ .Values.security.protocol }}"
         - name: RABBIT_HOST
-          value: "{{ .Values.Rabbit.Hostname }}"
+          value: "{{ .Values.rabbit.hostname }}"
         - name: RABBIT_PORT
-          value: "{{ .Values.Rabbit.Port }}"
+          value: "{{ .Values.rabbit.port }}"
         - name: RABBIT_HTTP_PORT
-          value: "{{ .Values.Rabbit.HttpPort }}"
+          value: "{{ .Values.rabbit.httpPort }}"
         - name: RABBIT_EXCHANGE
           value: "policy-exchange"
         - name: RABBIT_ROUTE
           value: "policy"
+        - name: META_AUDIT_ENABLED
+          value: "false"
