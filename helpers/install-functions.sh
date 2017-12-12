@@ -196,10 +196,20 @@ run_helm_install() {
   exit_on_error "Installation failed!"
 }
 
+run_pre_install() {
+  if [ ! -z "$PRE_INSTALL_SCRIPT" ]; then
+    echo ""
+    echo "Running pre-install: $PRE_INSTALL_SCRIPT ..."
+    . ./helpers/$PRE_INSTALL_SCRIPT
+    exit_on_error "Pre-install script failed, aborting."
+  fi
+  echo
+}
+
 run_post_install() {
   if [ ! -z "$POST_INSTALL_SCRIPT" ]; then
     echo ""
-    echo "Running post install: $POST_INSTALL_SCRIPT ..."
+    echo "Running post-install: $POST_INSTALL_SCRIPT ..."
     . ./helpers/$POST_INSTALL_SCRIPT
   fi
   echo

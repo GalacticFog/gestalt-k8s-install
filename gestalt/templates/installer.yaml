@@ -28,6 +28,8 @@ spec:
       value: "{{ .Values.installer.externalGateway.dnsName }}"
     - name: EXTERNAL_GATEWAY_PROTOCOL
       value: "{{ .Values.installer.externalGateway.protocol }}"
+    - name: KONG_INGRESS_SERVICE_NAME
+      value: "{{ .Values.installer.externalGateway.kongServiceName }}"
 
     # Database settings
     - name: DATABASE_HOSTNAME
@@ -101,6 +103,8 @@ spec:
       value: "{{ .Values.laser.executorImages.golang }}"
     - name: LASER_EXECUTOR_JS_IMAGE
       value: "{{ .Values.laser.executorImages.js }}"
+    - name: LASER_EXECUTOR_NODEJS_IMAGE
+      value: "{{ .Values.laser.executorImages.nodejs }}"
     - name: LASER_EXECUTOR_JVM_IMAGE
       value: "{{ .Values.laser.executorImages.jvm }}"
     - name: LASER_EXECUTOR_PYTHON_IMAGE

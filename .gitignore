@@ -1,3 +1,4 @@
 tmp
 *.log
 gestalt-config.yaml
+_*

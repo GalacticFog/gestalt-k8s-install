@@ -44,7 +44,11 @@ Recommend 4 CPUs and 8GB memory for the minikube cluster.
 ```sh
 brew cask install minikube
 
-minikube start --memory 8192 --cpus 4 --vm-driver virtual-box
+```
+
+```sh
+# Start
+minikube start --memory 8192 --cpus 4 --vm-driver virtualbox
 
 ```
 
