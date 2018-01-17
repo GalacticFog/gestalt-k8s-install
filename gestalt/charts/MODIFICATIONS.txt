@@ -1,5 +1,0 @@
-[postgresql]
-
- - Removed the following line from deployment.yaml due to issue: https://github.com/kubernetes/minikube/issues/2256
-
-   # subPath: {{ .Values.persistence.subPath }}

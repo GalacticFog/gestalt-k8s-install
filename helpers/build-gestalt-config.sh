@@ -196,8 +196,9 @@ process_kubeconfig() {
 
   if [ -z "$KUBECONFIG_DATA" ]; then
     echo "Obtaining kubeconfig from kubectl"
-
     data=$(kubectl config view --raw --flatten=true --minify=true)
+    echo "Converting any instance of 'https://localhost' to 'https://kubernetes.default.svc.cluster.local'"
+    data=$(echo "$data" | sed 's/https:\/\/localhost/https:\/\/kubernetes.default.svc.cluster.local/g')
     exit_on_error "Could not process kube config, aborting."
 
     if [ "$os" == "Darwin" ]; then

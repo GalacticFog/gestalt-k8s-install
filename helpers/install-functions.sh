@@ -34,6 +34,7 @@ check_for_required_tools() {
   # echo "Checking for required tools..."
   which base64    >/dev/null 2>&1 ; exit_on_error "'base64' not found, aborting."
   which tr        >/dev/null 2>&1 ; exit_on_error "'tr' not found, aborting."
+  which sed        >/dev/null 2>&1 ; exit_on_error "'sed' not found, aborting."
   which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
   which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' not found, aborting."
   echo "OK - Required tools found."
