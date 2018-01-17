@@ -26,15 +26,16 @@ brew install helm
 helm init
 ```
 
-3\. Set Configuration options
+3\. Run the installer using one of the provided configuration files:
 ```sh
-vi gestalt-config.conf
+./install-gestalt-platform [environment-specific configuration file]
 ```
 
-4\. Run the installer
+## Quick Start for Kubernetes on Docker for Desktop (on MacOS)
 ```sh
-./install-gestalt-platform your_config_file.conf
+./install-gestalt-platform docker-for-desktop.conf
 ```
+
 
 ## Quick Start for Minikube (on MacOS)
 
