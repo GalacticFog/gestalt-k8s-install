@@ -34,7 +34,8 @@ check_for_required_tools() {
   # echo "Checking for required tools..."
   which base64    >/dev/null 2>&1 ; exit_on_error "'base64' not found, aborting."
   which tr        >/dev/null 2>&1 ; exit_on_error "'tr' not found, aborting."
-  which sed        >/dev/null 2>&1 ; exit_on_error "'sed' not found, aborting."
+  which sed       >/dev/null 2>&1 ; exit_on_error "'sed' not found, aborting."
+  which sudo      >/dev/null 2>&1 ; exit_on_error "'sudo' not found, aborting."
   which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
   which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' not found, aborting."
   echo "OK - Required tools found."
@@ -192,7 +193,7 @@ run_helm_install() {
   cmd="helm install --namespace $INSTALL_NAMESPACE ./gestalt -n $INSTALL_PREFIX -f $1"
   echo "Installing Gestalt Platform to Kubernetes using Helm..."
   echo "Command: $cmd"
-  $cmd
+  $cmd > /dev/null 2>&1
 
   exit_on_error "Installation failed!"
 }
@@ -223,4 +224,52 @@ prompt_or_wait_to_continue() {
     echo "About to proceed with installation, press Ctrl-C to cancel..."
     sleep 5
   fi
+}
+
+wait_for_install_completion() {
+  echo "Waiting for installation to complete"
+  for i in `seq 1 50`; do
+    echo -n "."
+
+    line=$(kubectl logs -n gestalt-system gestalt-installer --tail 10 2> /dev/null)
+
+    echo "$line" | grep "^\[Success\] Gestalt platform installation completed." > /dev/null
+    if [ $? -eq 0 ]; then
+      echo
+      echo "Installation complete."
+      return
+    fi
+    # Check for failure - no success message, but end of file found
+    echo "$line" | grep "^Sleeping forever so container stays running..." > /dev/null
+    if [ $? -eq 0 ]; then
+      echo
+      exit_with_error "Installation failed."
+    fi
+
+    sleep 5
+    # Show progress more frequently than actual check
+    echo -n "."
+    sleep 5
+  done
+  echo
+  exit_with_error "Installation did not complete within expected timeframe."
+}
+
+display_summary() {
+  echo ""
+  echo "  - Login credentials:"
+  echo ""
+  echo "         URL:       $GESTALT_LOGIN_URL"
+  echo "         User:      $GESTALT_ADMIN_USERNAME"
+  echo "         Password:  $GESTALT_ADMIN_PASSWORD"
+  echo ""
+  echo "  - You may access the Gestalt platform documentation at"
+  echo ""
+  echo "         http://docs.galacticfog.com/"
+  echo ""
+  echo "  - You may view a log of the installation with the following:"
+  echo ""
+  echo "     ./view-installer-logs     (Ctrl-C to stop)"
+  echo ""
+  echo "Done."
 }

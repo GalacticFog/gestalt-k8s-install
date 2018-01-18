@@ -2,26 +2,6 @@
 
 . helpers/install-functions.sh
 
-check_for_gestalt() {
-  echo "Checking for existing Gestalt Platform..."
-
-  name=$INSTALL_PREFIX
-
-  helm status $name >/dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    echo "Nothing to do - Helm deployment '$name' not found."
-    exit 1
-  fi
-  echo "OK - Helm deployment '$name' found."
-
-  kubectl get namespace $INSTALL_NAMESPACE > /dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    echo "Nothing to do - Kubernetes namespace '$INSTALL_NAMESPACE' isn't present."
-    exit 1
-  fi
-  echo "OK - Kubernetes namespace '$INSTALL_NAMESPACE' found."
-}
-
 prompt_to_continue(){
   echo ""
   echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`' and namespace '$INSTALL_NAMESPACE' will be deleted."
@@ -38,15 +18,28 @@ prompt_to_continue(){
 }
 
 remove_gestalt_platform() {
-  echo "Removing Helm deployment '$INSTALL_PREFIX' ..."
-  helm delete --purge $INSTALL_PREFIX
+  name=$INSTALL_PREFIX
+  helm status $name >/dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo "Nothing to do - Helm deployment '$name' not found."
+  else
+    echo "OK - Helm deployment '$name' found."
 
-  echo "Deleting namespace '$INSTALL_NAMESPACE'..."
-  kubectl delete namespace $INSTALL_NAMESPACE
+    echo "Removing Helm deployment '$INSTALL_PREFIX' ..."
+
+    helm delete --purge $INSTALL_PREFIX
+  fi
+
+  kubectl get namespace $INSTALL_NAMESPACE > /dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo "Nothing to do - Kubernetes namespace '$INSTALL_NAMESPACE' isn't present."
+  else
+    echo "Deleting namespace '$INSTALL_NAMESPACE'..."
+    kubectl delete namespace $INSTALL_NAMESPACE
+  fi
 }
 
 remove_gestalt_namespaces() {
-
   local namespaces=$( kubectl get namespaces | grep -E '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}' | awk '{print $1}')
   if [ $? -eq 0 ] && [ ! -z "$namespaces" ]; then
     echo ""
@@ -90,7 +83,7 @@ check_for_kube
 check_for_helm
 
 # Sanity check that gestalt-platform exists
-check_for_gestalt
+# check_for_gestalt
 
 prompt_to_continue
 

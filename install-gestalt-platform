@@ -47,3 +47,5 @@ run_pre_install
 create_namespace
 run_helm_install          gestalt-config.yaml
 run_post_install
+wait_for_install_completion
+display_summary
