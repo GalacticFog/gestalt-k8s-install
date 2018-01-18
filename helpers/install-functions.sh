@@ -227,7 +227,7 @@ prompt_or_wait_to_continue() {
 }
 
 wait_for_install_completion() {
-  echo "Waiting for installation to complete"
+  echo "Waiting for Gestalt Platform installation to complete"
   for i in `seq 1 50`; do
     echo -n "."
 

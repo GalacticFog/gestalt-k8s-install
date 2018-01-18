@@ -11,18 +11,18 @@ function addhost() {
 
         if [ -n "$(grep $HOSTNAME /etc/hosts)" ]
             then
-                echo "$HOSTNAME already exists:";
+                echo "'$HOSTNAME' already exists:";
                 echo $(grep $HOSTNAME /etc/hosts);
             else
-                echo "Adding $HOSTNAME to your /etc/hosts";
+                echo "Adding '$HOSTNAME' to /etc/hosts";
                 printf "%s\t%s\n" "$IP" "$HOSTNAME" | sudo tee -a /etc/hosts > /dev/null;
 
                 if [ -n "$(grep $HOSTNAME /etc/hosts)" ]
                     then
-                        echo "$HOSTNAME was added succesfully:";
+                        echo "'$HOSTNAME' was added succesfully:";
                         echo $(grep $HOSTNAME /etc/hosts);
                     else
-                        echo "Failed to add $HOSTNAME";
+                        echo "Failed to add '$HOSTNAME'";
                 fi
         fi
     else

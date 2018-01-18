@@ -6,10 +6,10 @@ function removehost() {
 
         if [ -n "$(grep $HOSTNAME /etc/hosts)" ]
         then
-            echo "$HOSTNAME Found in your /etc/hosts, Removing now...";
+            echo "'$HOSTNAME' found in /etc/hosts, removing.";
             sudo sed -i".bak" "/$HOSTNAME/d" /etc/hosts
         else
-            echo "$HOSTNAME was not found in your /etc/hosts";
+            echo "'$HOSTNAME' was not found in /etc/hosts";
         fi
     else
         echo "Error: missing required parameters."
