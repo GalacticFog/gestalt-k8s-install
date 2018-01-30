@@ -138,6 +138,16 @@ postgresql:
   persistence:
     size: $INTERNAL_DATABASE_PV_STORAGE_SIZE
     storageClass: "$INTERNAL_DATABASE_PV_STORAGE_CLASS"
+EOF
+
+if [ ! -z ${POSTGRES_PERSISTENCE_SUBPATH+x} ]; then
+
+cat - << EOF
+    subPath: "$POSTGRES_PERSISTENCE_SUBPATH"
+EOF
+
+fi
+cat - << EOF
   resources:
     limits:
       memory: 256Mi
@@ -197,10 +207,15 @@ process_kubeconfig() {
   if [ -z "$KUBECONFIG_DATA" ]; then
     echo "Obtaining kubeconfig from kubectl"
     data=$(kubectl config view --raw --flatten=true --minify=true)
-    echo "Converting any instance of 'https://localhost:6443' to 'https://kubernetes.default.svc.cluster.local'"
-    data=$(echo "$data" | sed 's/https:\/\/localhost:6443/https:\/\/kubernetes.default.svc.cluster.local/g')
-    echo "Converting any instance of 'https://localhost' to 'https://kubernetes.default.svc.cluster.local'"
-    data=$(echo "$data" | sed 's/https:\/\/localhost/https:\/\/kubernetes.default.svc.cluster.local/g')
+    kubeurl='https://kubernetes.default'
+    echo "Converting server URL to '$kubeurl'"
+    
+    # for 'http'
+    data=$(echo "$data" | sed "s;server: http://.*;server: $kubeurl;g")
+
+    # for 'https'
+    data=$(echo "$data" | sed "s;server: https://.*;server: $kubeurl;g")
+
     exit_on_error "Could not process kube config, aborting."
 
     if [ "$os" == "Darwin" ]; then
