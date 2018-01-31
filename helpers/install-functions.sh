@@ -44,13 +44,13 @@ check_for_required_tools() {
 check_kubeconfig() {
   # echo "Checking Kubernetes config..."
 
-  kubectl config view --raw --flatten=true --minify=true > /dev/null
+  kubectl config view --raw --flatten --minify > /dev/null
   exit_on_error "'kubectl config view' command didn't succeed, aborting."
   echo "OK - kubeconfig appears to be valid."
 }
 
 check_for_kube() {
-  # echo "Checking for Kubernetes..."
+  echo "Checking for Kubernetes..."
 
   kube_cluster_info=$(kubectl cluster-info)
   exit_on_error "Kubernetes cluster not accessible, aborting."
@@ -129,7 +129,7 @@ check_for_prior_install() {
 
 prompt_to_continue() {
   do_prompt_to_continue \
-    "Gestalt Platform is ready to be installed to Kubernetes cluster '`kubectl config current-context`'." \
+    "Gestalt Platform is ready to be installed to Kubernetes context '`kubectl config current-context`'." \
     "Proceed with Gestalt Platform installation?"
 }
 
@@ -269,7 +269,7 @@ display_summary() {
   echo ""
   echo "  - You may view a log of the installation with the following:"
   echo ""
-  echo "     ./view-installer-logs     (Ctrl-C to stop)"
+  echo "     ./view-installer-logs"
   echo ""
   echo "Done."
 }
