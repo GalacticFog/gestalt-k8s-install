@@ -205,7 +205,7 @@ process_kubeconfig() {
   os=`uname`
 
   if [ -z "$KUBECONFIG_DATA" ]; then
-    echo "Obtaining kubeconfig from kubectl"
+    echo "Obtaining kubeconfig from kubectl context '`kubectl config current-context`'"
     data=$(kubectl config view --raw --flatten=true --minify=true)
     kubeurl='https://kubernetes.default'
     echo "Converting server URL to '$kubeurl'"

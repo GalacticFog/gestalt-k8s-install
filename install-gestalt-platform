@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . helpers/install-functions.sh
+. gestalt.conf
 
 configfile=$1
 if [ -z "$configfile" ]; then
