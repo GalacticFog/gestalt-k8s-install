@@ -148,14 +148,19 @@ do_prompt_to_continue() {
 }
 
 summarize_config() {
+
+  # Set defalt URLs.  Post-install scripts can override these
+  GESTALT_LOGIN_URL=$GESTALT_UI_INGRESS_PROTOCOL://$GESTALT_UI_INGRESS_HOST
+  GESTALT_GATEWAY_URL=$EXTERNAL_GATEWAY_PROTOCOL://$EXTERNAL_GATEWAY_HOST
+
   echo
   echo "Configuration Summary:"
   echo " - Kubernetes cluster: `kubectl config current-context`"
   echo " - Kubernetes namespace: $INSTALL_NAMESPACE"
   echo " - Gestalt Admin: $GESTALT_ADMIN_USERNAME"
   # TODO: Only output if not using dynamic LBs.
-  echo " - Gestalt User Interface: $GESTALT_UI_INGRESS_PROTOCOL://$GESTALT_UI_INGRESS_HOST"
-  echo " - Gestalt API Gateway: $EXTERNAL_GATEWAY_PROTOCOL://$EXTERNAL_GATEWAY_HOST"
+  echo " - Gestalt User Interface: $GESTALT_LOGIN_URL"
+  echo " - Gestalt API Gateway: $GESTALT_GATEWAY_URL"
   case $PROVISION_INTERNAL_DATABASE in
     [YyTt1]*)
       echo " - Database: Provisioning an internal database"
@@ -204,6 +209,15 @@ run_pre_install() {
     echo "Running pre-install: $PRE_INSTALL_SCRIPT ..."
     . ./helpers/$PRE_INSTALL_SCRIPT
     exit_on_error "Pre-install script failed, aborting."
+  fi
+  echo
+}
+
+run_post_deploy() {
+  if [ ! -z "$POST_DEPLOY_SCRIPT" ]; then
+    echo ""
+    echo "Running post-install: $POST_DEPLOY_SCRIPT ..."
+    . ./helpers/$POST_DEPLOY_SCRIPT
   fi
   echo
 }
@@ -262,6 +276,8 @@ display_summary() {
   echo "         URL:       $GESTALT_LOGIN_URL"
   echo "         User:      $GESTALT_ADMIN_USERNAME"
   echo "         Password:  $GESTALT_ADMIN_PASSWORD"
+  echo ""
+  echo "         API Gateway:  $GESTALT_GATEWAY_URL"
   echo ""
   echo "  - You may access the Gestalt platform documentation at"
   echo ""

@@ -47,6 +47,7 @@ run_pre_install
 # Perform Gestalt installation
 create_namespace
 run_helm_install          gestalt-config.yaml
-run_post_install
+run_post_deploy
 wait_for_install_completion
+run_post_install
 display_summary
