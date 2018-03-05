@@ -4,7 +4,7 @@
 
 prompt_to_continue(){
   echo ""
-  echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`' and namespace '$INSTALL_NAMESPACE' will be deleted."
+  echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`' and namespace '$install_namespace' will be deleted."
   echo "This cannot be undone."
   echo ""
 
@@ -18,24 +18,24 @@ prompt_to_continue(){
 }
 
 remove_gestalt_platform() {
-  name=$INSTALL_PREFIX
+  name=$install_prefix
   helm status $name >/dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "Nothing to do - Helm deployment '$name' not found."
   else
     echo "OK - Helm deployment '$name' found."
 
-    echo "Removing Helm deployment '$INSTALL_PREFIX' ..."
+    echo "Removing Helm deployment '$install_prefix' ..."
 
-    helm delete --purge $INSTALL_PREFIX
+    helm delete --purge $install_prefix
   fi
 
-  kubectl get namespace $INSTALL_NAMESPACE > /dev/null 2>&1
+  kubectl get namespace $install_namespace > /dev/null 2>&1
   if [ $? -ne 0 ]; then
-    echo "Nothing to do - Kubernetes namespace '$INSTALL_NAMESPACE' isn't present."
+    echo "Nothing to do - Kubernetes namespace '$install_namespace' isn't present."
   else
-    echo "Deleting namespace '$INSTALL_NAMESPACE'..."
-    kubectl delete namespace $INSTALL_NAMESPACE
+    echo "Deleting namespace '$install_namespace'..."
+    kubectl delete namespace $install_namespace
   fi
 }
 
@@ -64,16 +64,16 @@ do_delete_namespaces() {
   echo "Done deleting namespaces."
 }
 
-INSTALL_PREFIX=$1
-INSTALL_NAMESPACE=$2
+install_prefix=$1
+install_namespace=$2
 
-if [ -z "$INSTALL_PREFIX" ]; then
-  # exit_with_error "Must specify INSTALL_PREFIX"
-  INSTALL_PREFIX=gestalt
+if [ -z "$install_prefix" ]; then
+  # exit_with_error "Must specify install_prefix"
+  install_prefix=gestalt
 fi
 
-if [ -z "$INSTALL_NAMESPACE" ]; then
-  INSTALL_NAMESPACE=${INSTALL_PREFIX}-system
+if [ -z "$install_namespace" ]; then
+  install_namespace=${install_prefix}-system
 fi
 
 

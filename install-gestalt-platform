@@ -22,8 +22,8 @@ check_for_required_tools
 # Include configuration
 . $configfile
 
-INSTALL_PREFIX=${INSTALL_PREFIX-gestalt}
-INSTALL_NAMESPACE="${INSTALL_PREFIX}-system"
+install_prefix=${install_prefix-gestalt}
+install_namespace="${install_prefix}-system"
 
 # Environment checks
 check_kubeconfig

@@ -23,15 +23,15 @@ echo
 echo "Adding /etc/host entries for Gestalt (requires sudo, you may be asked for your password)..."
 sudo true
 if [ $? -eq 0 ]; then
-  sudo ./helpers/remove-etc-hosts-entry.sh $GESTALT_UI_INGRESS_HOST >/dev/null
-  sudo ./helpers/remove-etc-hosts-entry.sh $EXTERNAL_GATEWAY_HOST >/dev/null
-  sudo ./helpers/add-etc-hosts-entry.sh $minikube_ip $GESTALT_UI_INGRESS_HOST >/dev/null
-  sudo ./helpers/add-etc-hosts-entry.sh $minikube_ip $EXTERNAL_GATEWAY_HOST >/dev/null
+  sudo ./helpers/remove-etc-hosts-entry.sh $gestalt_ui_ingress_host >/dev/null
+  sudo ./helpers/remove-etc-hosts-entry.sh $external_gateway_host >/dev/null
+  sudo ./helpers/add-etc-hosts-entry.sh $minikube_ip $gestalt_ui_ingress_host >/dev/null
+  sudo ./helpers/add-etc-hosts-entry.sh $minikube_ip $external_gateway_host >/dev/null
   echo "Added Gestalt entries to /etc/hosts."
-  GESTALT_LOGIN_URL="$GESTALT_UI_INGRESS_PROTOCOL://$GESTALT_UI_INGRESS_HOST"
+  gestalt_login_url="$gestalt_ui_ingress_protocol://$gestalt_ui_ingress_host"
 else
   echo "Warning: failed to add entries to /etc/hosts.  These should be added manually:"
-  echo "  $minikube_ip $GESTALT_UI_INGRESS_HOST"
-  echo "  $minikube_ip $EXTERNAL_GATEWAY_HOST"
-  GESTALT_LOGIN_URL="$GESTALT_UI_INGRESS_PROTOCOL://$minikube_ip"
+  echo "  $minikube_ip $gestalt_ui_ingress_host"
+  echo "  $minikube_ip $external_gateway_host"
+  gestalt_login_url="$gestalt_ui_ingress_protocol://$minikube_ip"
 fi

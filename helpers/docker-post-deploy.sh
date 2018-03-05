@@ -22,20 +22,20 @@ echo
 echo "Adding /etc/host entries for Gestalt (requires sudo, you may be asked for your password)..."
 sudo true
 if [ $? -eq 0 ]; then
-  sudo ./helpers/remove-etc-hosts-entry.sh $GESTALT_UI_INGRESS_HOST >/dev/null
-  sudo ./helpers/remove-etc-hosts-entry.sh $EXTERNAL_GATEWAY_HOST >/dev/null
-  sudo ./helpers/add-etc-hosts-entry.sh 127.0.0.1 $GESTALT_UI_INGRESS_HOST >/dev/null
-  sudo ./helpers/add-etc-hosts-entry.sh 127.0.0.1 $EXTERNAL_GATEWAY_HOST >/dev/null
+  sudo ./helpers/remove-etc-hosts-entry.sh $gestalt_ui_ingress_host >/dev/null
+  sudo ./helpers/remove-etc-hosts-entry.sh $external_gateway_host >/dev/null
+  sudo ./helpers/add-etc-hosts-entry.sh 127.0.0.1 $gestalt_ui_ingress_host >/dev/null
+  sudo ./helpers/add-etc-hosts-entry.sh 127.0.0.1 $external_gateway_host >/dev/null
   echo "Added Gestalt entries to /etc/hosts."
-  GESTALT_LOGIN_URL="$GESTALT_UI_INGRESS_PROTOCOL://$GESTALT_UI_INGRESS_HOST:$kube_port"
+  gestalt_login_url="$gestalt_ui_ingress_protocol://$gestalt_ui_ingress_host:$kube_port"
 else
   echo "Warning: failed to add entries to /etc/hosts.  These should be added manually:"
-  echo "  127.0.0.1 $GESTALT_UI_INGRESS_HOST"
-  echo "  127.0.0.1 $EXTERNAL_GATEWAY_HOST"
-  GESTALT_LOGIN_URL="$GESTALT_UI_INGRESS_PROTOCOL://localhost:$kube_port"
+  echo "  127.0.0.1 $gestalt_ui_ingress_host"
+  echo "  127.0.0.1 $external_gateway_host"
+  gestalt_login_url="$gestalt_ui_ingress_protocol://localhost:$kube_port"
 fi
 
 # Form the Gateway URL
 kong_namespace=$(kubectl get svc --all-namespaces -ojsonpath='{.items[?(@.metadata.name=="default-kong")].metadata.namespace}')
 kong_port=$(kubectl get svc -n $kong_namespace default-kong -ojsonpath='{.spec.ports[?(@.name=="public-url")].nodePort}')
-GESTALT_GATEWAY_URL=$EXTERNAL_GATEWAY_PROTOCOL://$EXTERNAL_GATEWAY_HOST:$kong_port
+gestalt_api_gateway_url=$external_gateway_protocol://$external_gateway_host:$kong_port
