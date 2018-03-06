@@ -25,7 +25,9 @@ fi
 
 # Defaults
 gestalt_ui_ingress_protocol=http    # Must be HTTP unless ingress supports https
-external_gateway_protocol=${external_gateway_protocol-http}
+[ -z $external_gateway_protocol ]      && external_gateway_protocol=http
+[ -z $gestalt_ui_service_nodeport ]    && gestalt_ui_service_nodeport=31111
+[ -z $gestalt_kong_service_nodeport ]  && gestalt_kong_service_nodeport=31112
 
 # if [ ! -z "$PV_STORAGE_CLASS" ]; then
 #   PV_STORAGE_ANNOTATION="storageClassName: $PV_STORAGE_CLASS"
@@ -107,10 +109,12 @@ gatewayManager:
 kong:
   image: $gestalt_kong_image
   databaseName: kong-db
+  nodePort: $gestalt_kong_service_nodeport
 
 ui:
   image: $gestalt_ui_image
   exposedServiceType: $exposed_service_type
+  nodePort: $gestalt_ui_service_nodeport
   ingress:
     host: $gestalt_ui_ingress_host
 

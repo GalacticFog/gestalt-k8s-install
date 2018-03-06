@@ -5,7 +5,7 @@ metadata:
   labels:
     gestalt-app: security
 spec:
-  type: {{ .Values.security.exposedServiceType }}
+  # type: {{ .Values.security.exposedServiceType }}
   selector:
     gestalt-app: security
   ports:

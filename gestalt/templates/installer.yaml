@@ -32,7 +32,7 @@ spec:
       value: "{{ .Values.installer.externalGateway.kongServiceName }}"
       #TODO
     - name: KONG_SERVICE_NODEPORT
-      value: "31112"
+      value: "{{ .Values.kong.nodePort }}"
 
     # Database settings
     - name: DATABASE_HOSTNAME

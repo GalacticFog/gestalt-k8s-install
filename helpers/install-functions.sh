@@ -150,8 +150,8 @@ do_prompt_to_continue() {
 summarize_config() {
 
   # Set defalt URLs.  Post-install scripts can override these
-  gestalt_login_url=$gestalt_ui_ingress_protocol://$gestalt_ui_ingress_host
-  gestalt_api_gateway_url=$external_gateway_protocol://$external_gateway_host
+  gestalt_login_url=$gestalt_ui_ingress_protocol://$gestalt_ui_ingress_host:$gestalt_ui_service_nodeport
+  gestalt_api_gateway_url=$external_gateway_protocol://$external_gateway_host:$gestalt_kong_service_nodeport
 
   echo
   echo "Configuration Summary:"
@@ -198,7 +198,8 @@ run_helm_install() {
   cmd="helm install --namespace $install_namespace ./gestalt -n $install_prefix -f $1"
   echo "Installing Gestalt Platform to Kubernetes using Helm..."
   echo "Command: $cmd"
-  $cmd > /dev/null 2>&1
+  # $cmd > /dev/null 2>&1
+  $cmd
 
   exit_on_error "Installation failed!"
 }
