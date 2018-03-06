@@ -198,8 +198,8 @@ run_helm_install() {
   cmd="helm install --namespace $install_namespace ./gestalt -n $install_prefix -f $1"
   echo "Installing Gestalt Platform to Kubernetes using Helm..."
   echo "Command: $cmd"
-  # $cmd > /dev/null 2>&1
-  $cmd
+  $cmd > /dev/null 2>&1
+  # $cmd
 
   exit_on_error "Installation failed!"
 }
