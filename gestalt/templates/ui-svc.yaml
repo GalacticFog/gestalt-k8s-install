@@ -11,3 +11,4 @@ spec:
   ports:
     - name: http
       port: 80
+      nodePort: {{ .Values.ui.nodePort }}

@@ -8,24 +8,26 @@ randompw() {
 }
 
 # Set a random password if not set by user
-if [ -z "$GESTALT_ADMIN_USERNAME" ]; then
-  GESTALT_ADMIN_USERNAME=gestalt-admin
-  echo "Defaulting GESTALT_ADMIN_USERNAME to '$GESTALT_ADMIN_USERNAME'"
+if [ -z "$gestalt_admin_username" ]; then
+  gestalt_admin_username=gestalt-admin
+  echo "Defaulting gestalt_admin_username to '$gestalt_admin_username'"
 fi
 
-if [ -z "$GESTALT_ADMIN_PASSWORD" ]; then
-  GESTALT_ADMIN_PASSWORD=`randompw`
-  echo "Defaulting GESTALT_ADMIN_PASSWORD to random password"
+if [ -z "$gestalt_admin_password" ]; then
+  gestalt_admin_password=`randompw`
+  echo "Defaulting gestalt_admin_password to random password"
 fi
 
-if [ -z "$DATABASE_NAME" ]; then
-  DATABASE_NAME=postgres
-  echo "Defaulting DATABASE_NAME to '$DATABASE_NAME'"
+if [ -z "$database_name" ]; then
+  database_name=postgres
+  echo "Defaulting database_name to '$database_name'"
 fi
 
 # Defaults
-GESTALT_UI_INGRESS_PROTOCOL=http    # Must be HTTP unless ingress supports https
-EXTERNAL_GATEWAY_PROTOCOL=${EXTERNAL_GATEWAY_PROTOCOL-http}
+gestalt_ui_ingress_protocol=http    # Must be HTTP unless ingress supports https
+[ -z $external_gateway_protocol ]      && external_gateway_protocol=http
+[ -z $gestalt_ui_service_nodeport ]    && gestalt_ui_service_nodeport=31111
+[ -z $gestalt_kong_service_nodeport ]  && gestalt_kong_service_nodeport=31112
 
 # if [ ! -z "$PV_STORAGE_CLASS" ]; then
 #   PV_STORAGE_ANNOTATION="storageClassName: $PV_STORAGE_CLASS"
@@ -38,22 +40,22 @@ EXTERNAL_GATEWAY_PROTOCOL=${EXTERNAL_GATEWAY_PROTOCOL-http}
 # By default, the service type will be NodePort, however if
 # Dynamic LB is enabled, use the 'LoadBalancer' type for which
 # Kubernetes attempts to dynamically provision a load balancer.
-case $USE_DYNAMIC_LOADBALANCERS in
+case $use_dynamic_loadbalancers in
   [YyTt1]*)
-    USE_DYNAMIC_LOADBALANCERS=Yes
-    EXPOSED_KUBE_SERVICE_TYPE=LoadBalancer
+    use_dynamic_loadbalancers=Yes
+    exposed_service_type=LoadBalancer
     ;;
   *)
-    USE_DYNAMIC_LOADBALANCERS=No
-    EXPOSED_KUBE_SERVICE_TYPE=NodePort
+    use_dynamic_loadbalancers=No
+    exposed_service_type=NodePort
     ;;
 esac
 
 # Generate the configuration file and echos to stdout
 generate_gestalt_config() {
 
-if [ -z "$KUBECONFIG_DATA" ]; then
-  exit_with_error "KUBECONFIG_DATA not provided"
+if [ -z "$kubeconfig_data" ]; then
+  exit_with_error "kubeconfig_data not provided"
 fi
 
 # other configuration
@@ -63,68 +65,70 @@ common:
   imagePullPolicy: Always
 
 security:
-  image: $GESTALT_SECURITY_IMG
-  exposedServiceType: $EXPOSED_KUBE_SERVICE_TYPE
-  hostname: gestalt-security.$INSTALL_NAMESPACE
+  image: $gestalt_security_image
+  exposedServiceType: $exposed_service_type
+  hostname: gestalt-security.$install_namespace
   port: 9455
   protocol: http
-  adminUser: "$GESTALT_ADMIN_USERNAME"
-  adminPassword: "$GESTALT_ADMIN_PASSWORD"
+  adminUser: "$gestalt_admin_username"
+  adminPassword: "$gestalt_admin_password"
   databaseName: gestalt-security
 
 rabbit:
-  image: $GESTALT_RABBIT_IMG
-  hostname: gestalt-rabbit.$INSTALL_NAMESPACE
+  image: $gestalt_rabbit_image
+  hostname: gestalt-rabbit.$install_namespace
   port: 5672
   httpPort: 15672
 
 meta:
-  image: $GESTALT_META_IMG
-  exposedServiceType: $EXPOSED_KUBE_SERVICE_TYPE
-  hostname: gestalt-meta.$INSTALL_NAMESPACE
+  image: $gestalt_meta_image
+  exposedServiceType: $exposed_service_type
+  hostname: gestalt-meta.$install_namespace
   port: 10131
   protocol: http
   databaseName: gestalt-meta
 
 laser:
-  image: $GESTALT_LASER_IMG
+  image: $gestalt_laser_image
   databaseName: laser-db
-  cpu: ${GESTALT_LASER_CPU-0.25}
-  memory: ${GESTALT_LASER_MEMORY-1024}
+  cpu: ${gestalt_laser_cpu-0.25}
+  memory: ${gestalt_laser_memory-1024}
   executorImages:
-    dotNet: $GESTALT_LASER_EXECUTOR_DOTNET_IMG
-    golang: $GESTALT_LASER_EXECUTOR_GOLANG_IMG
-    js: $GESTALT_LASER_EXECUTOR_JS_IMG
-    nodejs: $GESTALT_LASER_EXECUTOR_NODEJS_IMG
-    jvm: $GESTALT_LASER_EXECUTOR_JVM_IMG
-    python: $GESTALT_LASER_EXECUTOR_PYTHON_IMG
-    ruby: $GESTALT_LASER_EXECUTOR_RUBY_IMG
+    dotNet: $gestalt_laser_executor_dotnet_image
+    golang: $gestalt_laser_executor_golang_image
+    js: $gestalt_laser_executor_js_image
+    nodejs: $gestalt_laser_executor_nodejs_image
+    jvm: $gestalt_laser_executor_jvm_image
+    python: $gestalt_laser_executor_python_image
+    ruby: $gestalt_laser_executor_ruby_image
 
 gatewayManager:
-  image: $GESTALT_GATEWAY_MGR_IMG
+  image: $gestalt_gateway_manager_image
   databaseName: gateway-db
 
 kong:
-  image: $GESTALT_KONG_IMG
+  image: $gestalt_kong_image
   databaseName: kong-db
+  nodePort: $gestalt_kong_service_nodeport
 
 ui:
-  image: $GESTALT_UI_IMG
-  exposedServiceType: $EXPOSED_KUBE_SERVICE_TYPE
+  image: $gestalt_ui_image
+  exposedServiceType: $exposed_service_type
+  nodePort: $gestalt_ui_service_nodeport
   ingress:
-    host: $GESTALT_UI_INGRESS_HOST
+    host: $gestalt_ui_ingress_host
 
 policy:
-  image: $GESTALT_POLICY_IMG
+  image: $gestalt_policy_image
 
 # Database configuration:
 EOF
 
-case $PROVISION_INTERNAL_DATABASE in
+case $provision_internal_database in
   [YyTt1]*)
 
 # Only used if provioning an internal database
-INTERNAL_DATABASE_INITIAL_PASSWORD=`randompw`
+initial_db_password=`randompw`
 
 cat - << EOF
 # Provision an internal database
@@ -133,17 +137,17 @@ cat - << EOF
 
 postgresql:
   postgresUser: postgres
-  postgresPassword: "$INTERNAL_DATABASE_INITIAL_PASSWORD"
-  postgresDatabase: $DATABASE_NAME
+  postgresPassword: "$initial_db_password"
+  postgresDatabase: $database_name
   persistence:
-    size: $INTERNAL_DATABASE_PV_STORAGE_SIZE
-    storageClass: "$INTERNAL_DATABASE_PV_STORAGE_CLASS"
+    size: $internal_database_pv_storage_size
+    storageClass: "$internal_database_pv_storage_class"
 EOF
 
-if [ ! -z ${POSTGRES_PERSISTENCE_SUBPATH+x} ]; then
+if [ ! -z ${postgres_persistence_subpath+x} ]; then
 
 cat - << EOF
-    subPath: "$POSTGRES_PERSISTENCE_SUBPATH"
+    subPath: "$postgres_persistence_subpath"
 EOF
 
 fi
@@ -159,11 +163,11 @@ cat - << EOF
 # Internal DB settings
 db:
   # Hostname must be fully qualified for Kong service
-  hostname: gestalt-postgresql.$INSTALL_NAMESPACE.svc.cluster.local
+  hostname: gestalt-postgresql.$install_namespace.svc.cluster.local
   port: 5432
   username: postgres
-  password: "$INTERNAL_DATABASE_INITIAL_PASSWORD"
-  databaseName: $DATABASE_NAME
+  password: "$initial_db_password"
+  databaseName: $database_name
 EOF
 
     ;;
@@ -175,11 +179,11 @@ EOF
 # External DB settings:
 db:
   # Hostname must be fully qualified for Kong service
-  hostname: $DATABASE_HOSTNAME
-  port: $DATABASE_PORT
-  username: $DATABASE_USER
-  password: $DATABASE_PASSWORD
-  databaseName: $DATABASE_NAME
+  hostname: $database_hostname
+  port: $database_port
+  username: $database_user
+  password: $database_password
+  databaseName: $database_name
 EOF
     ;;
 esac
@@ -187,14 +191,14 @@ esac
 cat - << EOF
 
 installer:
-  image: $GESTALT_INSTALLER_IMG
-  mode: $GESTALT_INSTALL_MODE
-  useDynamicLoadBalancers: $USE_DYNAMIC_LOADBALANCERS
+  image: $gestalt_installer_image
+  mode: $gestalt_install_mode
+  useDynamicLoadBalancers: $use_dynamic_loadbalancers
   externalGateway:
-    dnsName: $EXTERNAL_GATEWAY_HOST
-    protocol: $EXTERNAL_GATEWAY_PROTOCOL
-    kongServiceName: $KONG_INGRESS_SERVICE_NAME
-  kubeconfig: $KUBECONFIG_DATA
+    dnsName: $external_gateway_host
+    protocol: $external_gateway_protocol
+    kongServiceName: $kong_ingress_service_name
+  kubeconfig: $kubeconfig_data
 EOF
 
 }
@@ -204,12 +208,12 @@ process_kubeconfig() {
 
   os=`uname`
 
-  if [ -z "$KUBECONFIG_DATA" ]; then
+  if [ -z "$kubeconfig_data" ]; then
     echo "Obtaining kubeconfig from kubectl context '`kubectl config current-context`'"
     data=$(kubectl config view --raw --flatten=true --minify=true)
     kubeurl='https://kubernetes.default'
     echo "Converting server URL to '$kubeurl'"
-    
+
     # for 'http'
     data=$(echo "$data" | sed "s;server: http://.*;server: $kubeurl;g")
 
@@ -219,12 +223,12 @@ process_kubeconfig() {
     exit_on_error "Could not process kube config, aborting."
 
     if [ "$os" == "Darwin" ]; then
-      KUBECONFIG_DATA=`echo "$data" | base64`
+      kubeconfig_data=`echo "$data" | base64`
     elif [ "$os" == "Linux" ]; then
-      KUBECONFIG_DATA=`echo "$data" | base64 | tr -d '\n'`
+      kubeconfig_data=`echo "$data" | base64 | tr -d '\n'`
     else
       echo "Warning: unknown OS type '$os', treating as Linux"
-      KUBECONFIG_DATA=`echo "$data" | base64 | tr -d '\n'`
+      kubeconfig_data=`echo "$data" | base64 | tr -d '\n'`
     fi
   fi
 }

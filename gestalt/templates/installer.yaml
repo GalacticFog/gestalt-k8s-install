@@ -30,6 +30,9 @@ spec:
       value: "{{ .Values.installer.externalGateway.protocol }}"
     - name: KONG_INGRESS_SERVICE_NAME
       value: "{{ .Values.installer.externalGateway.kongServiceName }}"
+      #TODO
+    - name: KONG_SERVICE_NODEPORT
+      value: "{{ .Values.kong.nodePort }}"
 
     # Database settings
     - name: DATABASE_HOSTNAME
@@ -96,6 +99,17 @@ spec:
       value: "{{ .Values.laser.cpu }}"
     - name: LASER_MEMORY
       value: "{{ .Values.laser.memory }}"
+    - name: LASER_MAX_COOL_CONNECTION_TIME
+      value: "30"
+    - name: LASER_EXECUTOR_HEARTBEAT_PERIOD
+      value: "1000"
+    - name: LASER_EXECUTOR_HEARTBEAT_TIMEOUT
+      value: "10000"
+    - name: LASER_SCALE_DOWN_TIME_SECONDS
+      value: "15"
+    - name: LASER_MIN_COOL_EXECUTORS
+      value: "1"
+
     # Laser Executor Images
     - name: LASER_EXECUTOR_DOTNET_IMAGE
       value: "{{ .Values.laser.executorImages.dotNet }}"
