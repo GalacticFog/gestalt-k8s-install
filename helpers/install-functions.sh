@@ -132,19 +132,19 @@ check_for_prior_install() {
 
 prompt_to_continue() {
   do_prompt_to_continue \
-    "Gestalt Platform is ready to be installed to Kubernetes context '`kubectl config current-context`'." \
-    "Proceed with Gestalt Platform installation?"
+    "Gestalt Platform is ready to be installed to Kubernetes context '`kubectl config current-context`'.\n\nYou must accept the Gestalt Enterprise End User License Agreement (http://www.galacticfog.com/gestalt-eula.html) to continue." \
+    "Accept EULA and proceed with Gestalt Platform installation?"
 }
 
 do_prompt_to_continue() {
   echo ""
-  echo $1
+  echo -e $1
   echo ""
 
   while true; do
       read -p "$2 [y/n]: " yn
       case $yn in
-          [Yy]*) return 0  ;;
+          [Yy]*) echo "EULA Accepted, proceeding with install." ; return 0  ;;
           [Nn]*) echo "Aborted" ; exit  1 ;;
       esac
   done
