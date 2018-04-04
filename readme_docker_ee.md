@@ -13,6 +13,12 @@ Workstation running the Installer:
 * kubectl configured for the cluster
 * Helm installed
 
+## Obtain the Installer from GitHub
+```
+git clone https://github.com/GalacticFog/gestalt-k8s-install.git
+cd gestalt-k8s-install/
+git checkout docker-ee-1.5
+```
 
 ## General Gestalt Install Procedure for Kubernetes
 1\. Verify your cluster is available:
