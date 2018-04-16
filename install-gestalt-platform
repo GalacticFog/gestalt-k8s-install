@@ -29,7 +29,8 @@ install_namespace="${install_prefix}-system"
 check_kubeconfig
 check_for_kube
 check_for_helm
-check_for_existing_namespace
+# check_for_existing_namespace
+check_for_required_namespace
 check_for_prior_install
 
 # Build Helm config
@@ -45,7 +46,7 @@ prompt_or_wait_to_continue
 run_pre_install
 
 # Perform Gestalt installation
-create_namespace
+# create_namespace
 run_helm_install          gestalt-config.yaml
 run_post_deploy
 wait_for_install_completion

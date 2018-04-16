@@ -86,6 +86,23 @@ check_for_existing_namespace() {
   echo "OK - Kubernetes namespace '$install_namespace' does not exist."
 }
 
+check_for_required_namespace() {
+  # echo "Checking for existing Kubernetes namespace '$install_namespace'..."
+  kubectl get namespace $install_namespace > /dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "Kubernetes namespace '$install_namespace' doesn't exist, aborting.  To create the namespace, run the following command:"
+    echo ""
+    echo "  kubectl create namespace $install_namespace"
+    echo ""
+    echo "Then ensure that 'Full Control' grants are provided for the '$install_namespace/default' service account."
+    echo ""
+    exit_with_error "Kubernetes namespace '$install_namespace' doesn't exists, aborting."
+  fi
+  echo "OK - Kubernetes namespace '$install_namespace' is present."
+}
+
+
 # check_for_existing_namespace_ask() {
 #   echo "Checking for existing Kubernetes namespace '$install_namespace'..."
 #   kubectl get namespace $install_namespace > /dev/null 2>&1
