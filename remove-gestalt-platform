@@ -33,9 +33,9 @@ remove_gestalt_platform() {
   kubectl get namespace $install_namespace > /dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "Nothing to do - Kubernetes namespace '$install_namespace' isn't present."
-  else
-    echo "Deleting namespace '$install_namespace'..."
-    kubectl delete namespace $install_namespace
+  # else
+    # echo "Deleting namespace '$install_namespace'..."
+    # kubectl delete namespace $install_namespace
   fi
 }
 
