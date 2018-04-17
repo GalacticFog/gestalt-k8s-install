@@ -1,4 +1,6 @@
+fog
 tmp
 *.log
+*.zip
 gestalt-config.yaml
-
+my.*

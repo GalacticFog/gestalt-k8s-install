@@ -4,7 +4,7 @@
 
 prompt_to_continue(){
   echo ""
-  echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`' and namespace '$install_namespace' will be deleted."
+  echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`'." # " and namespace '$install_namespace' will be deleted."
   echo "This cannot be undone."
   echo ""
 

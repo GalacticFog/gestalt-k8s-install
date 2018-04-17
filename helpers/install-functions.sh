@@ -267,7 +267,7 @@ prompt_or_wait_to_continue() {
 
 wait_for_install_completion() {
   echo "Waiting for Gestalt Platform installation to complete"
-  for i in `seq 1 50`; do
+  for i in `seq 1 60`; do
     echo -n "."
 
     line=$(kubectl logs -n gestalt-system gestalt-installer --tail 10 2> /dev/null)
@@ -313,4 +313,38 @@ display_summary() {
   echo "     ./view-installer-logs"
   echo ""
   echo "Done."
+}
+
+download_fog_cli() {
+    local os=`uname`
+
+    if [ "$os" == "Darwin" ]; then
+        local url="https://github.com/GalacticFog/gestalt-fog-cli/releases/download/${gestalt_cli_version}/gestalt-fog-cli-macos-${gestalt_cli_version}.zip"
+    elif [ "$os" == "Linux" ]; then
+        local url="https://github.com/GalacticFog/gestalt-fog-cli/releases/download/${gestalt_cli_version}/gestalt-fog-cli-linux-${gestalt_cli_version}.zip"
+    else
+        echo
+        echo "Warning: unknown OS type '$os', treating as Linux"
+    fi
+
+    if [ ! -z "$url" ]; then
+        echo
+        echo "Downloading Gestalt fog CLI $gestalt_cli_version..."
+
+        curl -L $url -o fog.zip
+
+        echo
+        echo "Unzipping..."
+
+        unzip fog.zip
+        rm fog.zip
+
+        echo
+        echo "Running './fog --version'..."
+
+        ./fog --version
+
+        echo
+        echo "Done."
+    fi
 }

@@ -1,0 +1,14 @@
+fog="./fog"
+# fog=fog
+
+$fog login $gestalt_login_url -u $gestalt_admin_username -p $gestalt_admin_password
+exit_on_error "Login failed, aborting."
+
+$fog create org --name 'example' --description 'Example Organization' --org root
+exit_on_error "Org creation failed, aborting."
+
+$fog create workspace --org 'example' --name 'example' -d 'Example Workspace'
+exit_on_error "Workspace creation failed, aborting."
+
+$fog create environment --org 'example' --workspace 'example' --name 'dev' --description 'Development' --type development
+exit_on_error "Environment creation failed, aborting."
