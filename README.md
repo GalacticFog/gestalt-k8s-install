@@ -26,7 +26,12 @@ brew install helm
 helm init
 ```
 
-3\. Run the installer using one of the provided configuration files:
+3\. Create Gestalt System namespace:
+```sh
+kubectl create namespace gestalt-system
+```
+
+4\. Run the installer using one of the provided configuration files:
 ```sh
 ./install-gestalt-platform [environment-specific configuration file]
 ```
