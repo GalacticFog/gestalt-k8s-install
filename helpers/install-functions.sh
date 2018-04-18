@@ -41,6 +41,7 @@ check_for_required_tools() {
   which read      >/dev/null 2>&1 ; exit_on_error "'read' not found, aborting."
   which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
   which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' not found, aborting."
+  which curl      >/dev/null 2>&1 ; exit_on_error "'curl' not found, aborting."
   echo "OK - Required tools found."
 }
 
@@ -151,6 +152,7 @@ prompt_to_continue() {
   do_prompt_to_continue \
     "Gestalt Platform is ready to be installed to Kubernetes context '`kubectl config current-context`'.\n\nYou must accept the Gestalt Enterprise End User License Agreement (http://www.galacticfog.com/gestalt-eula.html) to continue." \
     "Accept EULA and proceed with Gestalt Platform installation?"
+  accept_eula
 }
 
 do_prompt_to_continue() {
@@ -161,9 +163,67 @@ do_prompt_to_continue() {
   while true; do
       read -p "$2 [y/n]: " yn
       case $yn in
-          [Yy]*) echo "EULA Accepted, proceeding with install." ; return 0  ;;
+          # [Yy]*) echo "EULA Accepted, proceeding with install." ; return 0  ;;
+          [Yy]*) echo ; return 0  ;;
           [Nn]*) echo "Aborted" ; exit  1 ;;
       esac
+  done
+}
+
+accept_eula() {
+
+  while true; do
+
+    local company
+    local name
+    local email
+    local yn
+
+    echo "Please provide the following to accept the EULA (press Ctrl-C to abort)"
+
+    while [ -z "$name" ];    do read -p "  Your Name: " name ; done
+    while [ -z "$company" ]; do read -p "  Your Company name: " company ; done
+    while [ -z "$email" ];   do read -p "  Your Email: " email ; done
+
+    echo
+    echo "Please verify your information:"
+    echo "  Name:    $name"
+    echo "  Company: $company"
+    echo "  Email:   $email"
+    echo
+    read -p "Is your information correct? [y/n] " yn
+
+    case $yn in
+        [Yy]*)
+
+        local payload="{\
+                \"eventName\": \"gestalt-k8s-installer-eula-accepted\",\
+                \"payload\": {\
+                    \"name\": \"$name\",\
+                    \"company\": \"$company\",\
+                    \"email\": \"$email\",\
+                    \"message\": \"EULA Accepted during Gestalt Platform install on Kubernetes\",\
+                    \"slackMessage\": \"\
+                        \n        EULA Accepted during Gestalt Platform install on Kubernetes. \
+                        \n\n          name: $name\
+                        \n\n          company: $company\
+                        \n\n          email: $email\"\
+                }\
+            }"
+
+            curl -H "Content-Type: application/json" -X POST -d "$payload" https://gtw1.demo.galacticfog.com/gfsales/message > /dev/null 2>&1
+
+            echo "EULA Accepted, proceeding with Gestalt Platform installation." ;
+            return 0
+            ;;
+        [Nn]*)
+            unset name
+            unset email
+            unset company
+            echo
+            ;;
+    esac
+
   done
 }
 
