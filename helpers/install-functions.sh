@@ -227,6 +227,39 @@ accept_eula() {
   done
 }
 
+prompt_for_executor_config() {
+
+    echo
+    echo "Gestalt Platform's FaaS engine (Gestalt Laser) provides a number of out-of-box language runtimes for executing lambda functions.  The 'js' runtime is enabled by default."
+    echo
+
+    do_prompt_for_executor_config 'nodejs'
+    do_prompt_for_executor_config 'dotnet'
+    do_prompt_for_executor_config 'golang'
+    do_prompt_for_executor_config 'jvm'
+    do_prompt_for_executor_config 'python'
+    do_prompt_for_executor_config 'ruby'
+
+    echo
+}
+
+do_prompt_for_executor_config() {
+
+  # If executor image variable is already unset, don't prompt for additional variables
+  local ee="gestalt_laser_executor_${1}_image"
+  if [ -z "${!ee}" ]; then
+      return 0
+  fi
+
+  while true; do
+      read -p "  Enable the '$1' runtime? [y/n]: " yn
+      case $yn in
+          [Yy]*) return 0 ;;
+          [Nn]*) unset gestalt_laser_executor_${1}_image ; return 0 ;;
+      esac
+  done
+}
+
 summarize_config() {
 
   # Set defalt URLs.  Post-install scripts can override these
@@ -234,7 +267,9 @@ summarize_config() {
   gestalt_api_gateway_url=$external_gateway_protocol://$external_gateway_host:$gestalt_kong_service_nodeport
 
   echo
-  echo "Configuration Summary:"
+  echo "=============================================="
+  echo "  Configuration Summary"
+  echo "=============================================="
   echo " - Kubernetes cluster: `kubectl config current-context`"
   echo " - Kubernetes namespace: $install_namespace"
   echo " - Gestalt Admin: $gestalt_admin_username"
@@ -253,6 +288,19 @@ summarize_config() {
       echo "    User: $database_user"
       ;;
   esac
+
+  # Summarize executors
+  echo
+  echo "Enabled executor runtimes:"
+  for e in 'js' 'nodejs' 'dotnet' 'golang' 'jvm' 'python' 'ruby'; do
+      local ee="gestalt_laser_executor_${e}_image"
+      if [ ! -z "${!ee}" ]; then
+        echo " - $e"
+      # else
+      #   echo " - $e (not enabled)"
+      fi
+  done
+  echo ""
 }
 
 create_namespace() {
