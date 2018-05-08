@@ -17,13 +17,13 @@ A workstation for running the installer:
 
 Refer to the installation instructions appropriate for your environment:
 
-- ** [Installation for Docker CE for Desktop](./readme_docker_ce_for_desktop.md) **
+- [Installation for Docker CE for Desktop](./readme_docker_ce_for_desktop.md)
 
-- ** [Installation for Docker EE Kubernetes](./readme_docker_ee.md) **
+- [Installation for Docker EE Kubernetes](./readme_docker_ee.md)
 
-- ** [Installation for Minikube](./readme_minikube.md) **
+- [Installation for Minikube](./readme_minikube.md)
 
-- ** [General Installation Instructions](./readme_general.md) **
+- [General Installation Instructions](./readme_general.md)
 
 ## Additional resources
 
