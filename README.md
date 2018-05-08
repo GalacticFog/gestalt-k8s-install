@@ -4,87 +4,29 @@ Installer repository: https://github.com/GalacticFog/gestalt-k8s-install
 
 ## Prerequisites
 
-Target Kubernetes Cluster:
+A target Kubernetes cluster:
 * Kubernetes 1.7+ with Helm installed
-* PV support on the underlying infrastructure, either dynamic (e.g. Kubernetes configured with Cloud Provider and Default Storage Provisioner) or static (e.g. Canonical Kubernetes using Ceph storage / RBD volumes)
+* PV support on the underlying infrastructure
 
-Workstation running the Installer:
+A workstation for running the installer:
 * Mac OS or Linux
-* kubectl configured for the cluster
+* kubectl configured for the target cluster
 * Helm installed
 
+## Installation instructions
 
-## General Gestalt Install Procedure for Kubernetes
-1\. Verify your cluster is available:
-```sh
-kubectl cluster-info
-```
+Refer to the installation instructions appropriate for your environment:
 
-2\. Install helm on your workstation and the kubernetes cluster:
-```sh
-brew install helm
-helm init
-```
+- ** [Installation for Docker CE for Desktop](./readme_docker_ce_for_desktop.md) **
 
-3\. Create Gestalt System namespace:
-```sh
-kubectl create namespace gestalt-system
-```
+- ** [Installation for Docker EE Kubernetes](./readme_docker_ee.md) **
 
-4\. Run the installer using one of the provided configuration files:
-```sh
-./install-gestalt-platform [environment-specific configuration file]
-```
+- ** [Installation for Minikube](./readme_minikube.md) **
 
-## Quick Start for Kubernetes on Docker for Desktop (on MacOS)
-```sh
-./install-gestalt-platform docker-for-desktop.conf
-```
+- ** [General Installation Instructions](./readme_general.md) **
 
+## Additional resources
 
-## Quick Start for Minikube (on MacOS)
+ - [Gestalt Platform Documentation](http://docs.galacticfog.com)
 
-Recommend 4 CPUs and 8GB memory for the minikube cluster.
-
-### Option 1 - Install Minikube with virtual-box VM driver
-```sh
-brew cask install minikube
-
-minikube start --memory 8192 --cpus 4 --vm-driver virtualbox
-
-```
-
-
-### Option 2 - Install Minikube with xhyve VM driver
-
-```sh
-brew cask install minikube
-
-brew install docker-machine-driver-xhyve
-
-# docker-machine-driver-xhyve need root owner and uid
-sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-
-minikube start --memory 8192 --cpus 4 --vm-driver xhyve
-```
-
-### Install Gestalt Platform on a Running Minikube Cluster
-
-```sh
-# Ensure kubectl is pointing to minikube
-kubectl config current-context   # should report 'minikube'
-
-# Check that kubernetes is up
-minikube dashboard
-
-# Enable ingress
-minikube addons enable ingress
-
-# Install helm on the cluster
-helm init
-
-# Run the Gestalt Platform installer
-./install-gestalt-platform minikube.conf
-
-```
+ - [Galactic Fog Website](http://www.galacticfog.com)

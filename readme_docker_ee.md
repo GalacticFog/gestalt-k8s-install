@@ -17,7 +17,6 @@ Workstation running the Installer:
 ```
 git clone https://github.com/GalacticFog/gestalt-k8s-install.git
 cd gestalt-k8s-install/
-git checkout docker-ee-1.5
 ```
 
 ## General Gestalt Install Procedure for Kubernetes

@@ -233,14 +233,28 @@ prompt_for_executor_config() {
     echo "Gestalt Platform's FaaS engine (Gestalt Laser) provides a number of out-of-box language runtimes for executing lambda functions.  The 'js' runtime is enabled by default."
     echo
 
-    do_prompt_for_executor_config 'nodejs'
-    do_prompt_for_executor_config 'dotnet'
-    do_prompt_for_executor_config 'golang'
-    do_prompt_for_executor_config 'jvm'
-    do_prompt_for_executor_config 'python'
-    do_prompt_for_executor_config 'ruby'
+    if do_prompt_to_enable_all_executors; then
+        echo
+    else
+        do_prompt_for_executor_config 'nodejs'
+        do_prompt_for_executor_config 'dotnet'
+        do_prompt_for_executor_config 'golang'
+        do_prompt_for_executor_config 'jvm'
+        do_prompt_for_executor_config 'python'
+        do_prompt_for_executor_config 'ruby'
+    fi
 
     echo
+}
+
+do_prompt_to_enable_all_executors() {
+    while true; do
+        read -p "  Do you want to enable all lambda runtimes? [y/n]: " yn
+        case $yn in
+            [Yy]*) return 0 ;;
+            [Nn]*) return 1 ;;
+        esac
+    done
 }
 
 do_prompt_for_executor_config() {
