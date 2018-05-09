@@ -5,11 +5,28 @@
 kubectl cluster-info
 ```
 
-2\. Install helm on your workstation and the kubernetes cluster:
+2\. Install Helm
+
+Download your desired version (e.g.  https://github.com/kubernetes/helm/releases/tag/v2.8.2) and install to a location in your system PATH:
+
 ```sh
-brew install helm
+# Example for MacOS
+
+curl -O https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-darwin-amd64.tar.gz
+
+tar xfzv helm-v2.8.2-darwin-amd64.tar.gz
+
+cp darwin-amd64/helm /usr/local/bin/helm
+
 helm init
 ```
+
+Verify Helm is working (there should be no errors with the following commands):
+```
+helm version
+helm list
+```
+
 
 3\. Create Gestalt System namespace:
 ```sh
