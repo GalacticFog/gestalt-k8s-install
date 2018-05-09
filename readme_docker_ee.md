@@ -74,10 +74,6 @@ spec:
 EOF
 ```
 
-## Infrastructure Configuration
-
-1\. Configure Load Balancer for
-
 ## Install Gestalt Platform
 
 1\. Obtain the Installer from GitHub
