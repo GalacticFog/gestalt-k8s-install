@@ -32,11 +32,13 @@ Next, login to Docker EE, and configure the following:
 Download your desired version (e.g.  https://github.com/kubernetes/helm/releases/tag/v2.8.2) and install to a location in your system PATH:
 
 ```sh
-tar -zxvf helm-v2.8.2-linux-amd64.tgz
+# Example for MacOS
 
-mv linux-amd64/helm /usr/local/bin/helm
+curl -O https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-darwin-amd64.tar.gz
 
-helm version # Should be version 2.8.2 or higher
+tar xfzv helm-v2.8.2-darwin-amd64.tar.gz
+
+cp darwin-amd64/helm /usr/local/bin/helm
 
 helm init
 ```
