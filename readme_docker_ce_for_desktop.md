@@ -36,8 +36,10 @@ helm list
 ```
 
 
-Finally run the command to install the platform:
+Finally run the following to install the platform:
 ```
+kubectl create namespace gestalt-system
+
 ./install-gestalt-platform docker-for-desktop.conf
 ```
 The installer will tell you where it is running at, typically: http://gestalt.local:31112 or http://localhost:31112 for Docker CE for Desktop.
