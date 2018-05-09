@@ -2,12 +2,9 @@
 
 Gestalt uses a templated helm chart to install our platform onto Kubernetes.  The installation requires that Kubernetes is enabled in your target Docker EE or CE environment (Note you currently need the edge build of Docker CE for Desktop to enable Kubernetes).
 
+```
 git clone https://github.com/GalacticFog/gestalt-k8s-install
 cd gestalt-k8s-install
-There are different install configurations for Docker EE (docker-ee.conf) and Docker CE (docker-for-desktop.conf). Please edit the appropriate one like this:
-
-```
-vi docker-for-desktop.conf
 ```
 
 Once that is done verify your Kubernetes cluster is working:
@@ -37,7 +34,6 @@ Verify Helm is working (there should be no errors with the following commands):
 helm version
 helm list
 ```
-
 
 
 Finally run the command to install the platform:
