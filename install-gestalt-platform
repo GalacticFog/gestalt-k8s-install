@@ -33,6 +33,8 @@ check_for_helm
 check_for_required_namespace
 check_for_prior_install
 
+download_fog_cli
+
 # Build Helm config
 . helpers/build-gestalt-config.sh
 process_kubeconfig
@@ -43,8 +45,6 @@ echo "Helm chart configuration generated."
 # Prompt to continue
 summarize_config
 prompt_or_wait_to_continue
-
-download_fog_cli
 
 run_pre_install
 

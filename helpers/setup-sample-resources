@@ -1,6 +1,9 @@
 fog="./fog"
 # fog=fog
 
+echo "Creating sample Gestalt resources..."
+echo
+
 $fog login $gestalt_login_url -u $gestalt_admin_username -p $gestalt_admin_password
 exit_on_error "Login failed, aborting."
 
@@ -17,6 +20,15 @@ exit_on_error "Environment creation failed, aborting."
 
 $fog create environment --org 'sandbox' --workspace 'admin-sandbox' --name 'test' --description 'Test' --type 'test'
 exit_on_error "Environment creation failed, aborting."
+
+# $fog create api --name 'admin-sandbox-test' --description 'Admin Sandbox DEV API' \
+#     --org 'sandbox' --workspace 'admin-sandbox' --environment 'dev' --provider 'default-kong'
+# exit_on_error "API creation failed, aborting."
+#
+# $fog create api --name 'admin-sandbox-test' --description 'Admin Sandbox TEST API' \
+#     --org 'sandbox' --workspace 'admin-sandbox' --environment 'test' --provider 'default-kong'
+# exit_on_error "API creation failed, aborting."
+
 
 ## Developer Sandbox and envrionments
 
