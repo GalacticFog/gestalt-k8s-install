@@ -49,7 +49,9 @@ helm version
 helm list
 ```
 
-### 3\. Create Persistent Volume for Gestalt Database
+### 3\. Persistent Volume for Gestalt Database
+
+**Note: The installer performs this step automatically by default.**  The behavior can be altered by modifying the `docker-ee.conf` configuration file.
 
 Gestalt Platform requires a Postgres database instance, which can be hosted in Kubernetes, or externally.  If hosting on Kubernetes, the database needs a persistent volume.  
 
@@ -115,4 +117,25 @@ kubectl cluster-info
 3\. Run the installer
 ```sh
 ./install-gestalt-platform docker-ee.conf
+```
+
+## Removing Gestalt Platform from Docker EE
+
+Remove Gestalt Platform:
+```sh
+./remove-gestalt-platform
+```
+
+Remove the Gestalt database persistent volume:
+```sh
+kubectl get pv
+
+(shows list of volumes)
+
+kubectl delete pv <name of volume>
+```
+
+Finally, remove the `gestalt-system` namespace:
+```sh
+kubectl delete namespace gestalt-system
 ```
