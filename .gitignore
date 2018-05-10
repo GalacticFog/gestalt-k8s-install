@@ -2,5 +2,7 @@ fog
 tmp
 *.log
 *.zip
+*.json
 gestalt-config.yaml
 my.*
+test

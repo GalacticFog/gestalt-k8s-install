@@ -42,6 +42,7 @@ check_for_required_tools() {
   which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
   which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' not found, aborting."
   which curl      >/dev/null 2>&1 ; exit_on_error "'curl' not found, aborting."
+  which unzip     >/dev/null 2>&1 ; exit_on_error "'unzip' not found, aborting."
   echo "OK - Required tools found."
 }
 
@@ -122,6 +123,11 @@ check_for_required_namespace() {
 check_for_prior_install() {
   # echo "Checking for prior installation..."
 
+  helm status gestalt >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
+      exit_with_error "Gestalt helm deployment found, aborting."
+  fi
+
   kubectl get services --all-namespaces | grep default-kong > /dev/null
   if [ $? -eq 0 ]; then
     exit_with_error "'default-kong' service already present, aborting."
@@ -144,7 +150,7 @@ check_for_prior_install() {
       sleep 5
     fi
   else
-    echo "OK - No prior installation found."
+    echo "OK - No prior Gestalt installation found."
   fi
 }
 
@@ -163,7 +169,6 @@ do_prompt_to_continue() {
   while true; do
       read -p "$2 [y/n]: " yn
       case $yn in
-          # [Yy]*) echo "EULA Accepted, proceeding with install." ; return 0  ;;
           [Yy]*) echo ; return 0  ;;
           [Nn]*) echo "Aborted" ; exit  1 ;;
       esac
@@ -227,6 +232,53 @@ accept_eula() {
   done
 }
 
+prompt_for_executor_config() {
+
+    echo
+    echo "Gestalt Platform's FaaS engine (Gestalt Laser) provides a number of out-of-box language runtimes for executing lambda functions.  The 'js' runtime is enabled by default."
+    echo
+
+    if do_prompt_to_enable_all_executors; then
+        echo
+    else
+        do_prompt_for_executor_config 'nodejs'
+        do_prompt_for_executor_config 'dotnet'
+        do_prompt_for_executor_config 'golang'
+        do_prompt_for_executor_config 'jvm'
+        do_prompt_for_executor_config 'python'
+        do_prompt_for_executor_config 'ruby'
+    fi
+
+    echo
+}
+
+do_prompt_to_enable_all_executors() {
+    while true; do
+        read -p "  Do you want to enable all lambda runtimes? [y/n]: " yn
+        case $yn in
+            [Yy]*) return 0 ;;
+            [Nn]*) return 1 ;;
+        esac
+    done
+}
+
+do_prompt_for_executor_config() {
+
+  # If executor image variable is already unset, don't prompt for additional variables
+  local ee="gestalt_laser_executor_${1}_image"
+  if [ -z "${!ee}" ]; then
+      return 0
+  fi
+
+  while true; do
+      read -p "  Enable the '$1' runtime? [y/n]: " yn
+      case $yn in
+          [Yy]*) return 0 ;;
+          [Nn]*) unset gestalt_laser_executor_${1}_image ; return 0 ;;
+      esac
+  done
+}
+
 summarize_config() {
 
   # Set defalt URLs.  Post-install scripts can override these
@@ -234,7 +286,9 @@ summarize_config() {
   gestalt_api_gateway_url=$external_gateway_protocol://$external_gateway_host:$gestalt_kong_service_nodeport
 
   echo
-  echo "Configuration Summary:"
+  echo "=============================================="
+  echo "  Configuration Summary"
+  echo "=============================================="
   echo " - Kubernetes cluster: `kubectl config current-context`"
   echo " - Kubernetes namespace: $install_namespace"
   echo " - Gestalt Admin: $gestalt_admin_username"
@@ -253,6 +307,19 @@ summarize_config() {
       echo "    User: $database_user"
       ;;
   esac
+
+  # Summarize executors
+  echo
+  echo "Enabled executor runtimes:"
+  for e in 'js' 'nodejs' 'dotnet' 'golang' 'jvm' 'python' 'ruby'; do
+      local ee="gestalt_laser_executor_${e}_image"
+      if [ ! -z "${!ee}" ]; then
+        echo " - $e"
+      # else
+      #   echo " - $e (not enabled)"
+      fi
+  done
+  echo ""
 }
 
 create_namespace() {
@@ -279,10 +346,16 @@ run_helm_install() {
   echo "Installing Gestalt Platform to Kubernetes using Helm..."
   echo "Command: $cmd"
   # $cmd > /dev/null 2>&1
-  local status=$( $cmd )
+  local status=$( $cmd 2>&1)
   if [ $? -ne 0 ]; then
       echo "$status"
-      exit_with_error "Installation failed!"
+      exit_with_error "Error running helm (error code returned), installation failed."
+  fi
+
+  # Check for error in case helm error'd but didn't return an error code
+  if echo $status | grep -i error; then
+      echo "$status"
+      exit_with_error "Error running helm (error detected), installation failed."
   fi
 
   # exit_on_error "Installation failed!"
@@ -355,6 +428,8 @@ wait_for_install_completion() {
 }
 
 display_summary() {
+  echo
+  echo "Gestalt Platform installation complete!"
   echo ""
   echo "  - Login credentials:"
   echo ""
@@ -376,35 +451,38 @@ display_summary() {
 }
 
 download_fog_cli() {
-    local os=`uname`
+    echo "Checking for 'fog' CLI..."
+    if [ ! -f './fog' ]; then
+        local os=`uname`
 
-    if [ "$os" == "Darwin" ]; then
-        local url="https://github.com/GalacticFog/gestalt-fog-cli/releases/download/${gestalt_cli_version}/gestalt-fog-cli-macos-${gestalt_cli_version}.zip"
-    elif [ "$os" == "Linux" ]; then
-        local url="https://github.com/GalacticFog/gestalt-fog-cli/releases/download/${gestalt_cli_version}/gestalt-fog-cli-linux-${gestalt_cli_version}.zip"
-    else
-        echo
-        echo "Warning: unknown OS type '$os', treating as Linux"
+        if [ "$os" == "Darwin" ]; then
+            local url="https://github.com/GalacticFog/gestalt-fog-cli/releases/download/${gestalt_cli_version}/gestalt-fog-cli-macos-${gestalt_cli_version}.zip"
+        elif [ "$os" == "Linux" ]; then
+            local url="https://github.com/GalacticFog/gestalt-fog-cli/releases/download/${gestalt_cli_version}/gestalt-fog-cli-linux-${gestalt_cli_version}.zip"
+        else
+            echo
+            echo "Warning: unknown OS type '$os', treating as Linux"
+        fi
+
+        if [ ! -z "$url" ]; then
+            echo
+            echo "Downloading Gestalt fog CLI $gestalt_cli_version..."
+
+            curl -L $url -o fog.zip
+            exit_on_error "Failed to download 'fog' CLI, aborting."
+
+            echo
+            echo "Unzipping..."
+
+            unzip -o fog.zip
+            exit_on_error "Failed to unzip 'fog' CLI package, aborting."
+
+            rm fog.zip
+        fi
     fi
 
-    if [ ! -z "$url" ]; then
-        echo
-        echo "Downloading Gestalt fog CLI $gestalt_cli_version..."
+    local version=$(./fog --version)
+    exit_on_error "Error running 'fog' CLI, aborting."
 
-        curl -L $url -o fog.zip
-
-        echo
-        echo "Unzipping..."
-
-        unzip fog.zip
-        rm fog.zip
-
-        echo
-        echo "Running './fog --version'..."
-
-        ./fog --version
-
-        echo
-        echo "Done."
-    fi
+    echo "OK - fog CLI $version present."
 }

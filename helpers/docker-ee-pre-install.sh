@@ -14,24 +14,26 @@ echo "==========================================="
 # echo 'Done.'
 # echo
 
+pvname="hostpath-volume-`random [:lower:] 8`"
+
 # Next, create a PV using that volume
-echo "Creating PV for /mnt/gestalt-postgresql-volume"
+echo "Creating PV for /mnt/$pvname"
 kubectl apply -f - <<EOF
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: gestalt-postgresql-volume
+  name: $pvname
 spec:
   accessModes:
   - ReadWriteOnce
   capacity:
     storage: 100Mi
   hostPath:
-    path: /mnt/gestalt-postgresql-volume
+    path: /mnt/$pvname
     type: ""
   persistentVolumeReclaimPolicy: Delete
   storageClassName: hostpath
 EOF
-exit_on_error "Could not create Kubernetes PV"
+exit_on_error "Could not create Kubernetes PV '$pvname'"
 echo 'Done.'
 echo

@@ -1,14 +1,47 @@
 fog="./fog"
 # fog=fog
 
+echo "Creating sample Gestalt resources..."
+echo
+
 $fog login $gestalt_login_url -u $gestalt_admin_username -p $gestalt_admin_password
 exit_on_error "Login failed, aborting."
 
-$fog create org --name 'example' --description 'Example Organization' --org root
+$fog create org --name 'sandbox' --description 'Sandboxes' --org root
 exit_on_error "Org creation failed, aborting."
 
-$fog create workspace --org 'example' --name 'example' -d 'Example Workspace'
+## Admin Sandbox and environments
+
+$fog create workspace --org 'sandbox' --name 'admin-sandbox' -d 'Admin Sandbox'
 exit_on_error "Workspace creation failed, aborting."
 
-$fog create environment --org 'example' --workspace 'example' --name 'dev' --description 'Development' --type development
+$fog create environment --org 'sandbox' --workspace 'admin-sandbox' --name 'dev' --description 'Development' --type 'development'
 exit_on_error "Environment creation failed, aborting."
+
+$fog create environment --org 'sandbox' --workspace 'admin-sandbox' --name 'test' --description 'Test' --type 'test'
+exit_on_error "Environment creation failed, aborting."
+
+# $fog create api --name 'admin-sandbox-test' --description 'Admin Sandbox DEV API' \
+#     --org 'sandbox' --workspace 'admin-sandbox' --environment 'dev' --provider 'default-kong'
+# exit_on_error "API creation failed, aborting."
+#
+# $fog create api --name 'admin-sandbox-test' --description 'Admin Sandbox TEST API' \
+#     --org 'sandbox' --workspace 'admin-sandbox' --environment 'test' --provider 'default-kong'
+# exit_on_error "API creation failed, aborting."
+
+
+## Developer Sandbox and envrionments
+
+$fog create workspace --org 'sandbox' --name 'dev-sandbox' -d 'Developer Sandbox'
+exit_on_error "Workspace creation failed, aborting."
+
+$fog create environment --org 'sandbox' --workspace 'dev-sandbox' --name 'dev' --description 'Development' --type 'development'
+exit_on_error "Environment creation failed, aborting."
+
+$fog create environment --org 'sandbox' --workspace 'dev-sandbox' --name 'test' --description 'Test' --type 'test'
+exit_on_error "Environment creation failed, aborting."
+
+# ## Download and Import Sample Resources
+#
+# $fog import -f ./tmp/sample-resources --org 'sandbox' --workspace 'dev-sandbox' --environment 'dev'
+# exit_on_error "Resource import failed, aborting."
