@@ -102,8 +102,9 @@ Specifically, note the following configuration parameters:
 * `gestalt_ui_service_nodeport` - The nodeport to serve the Gestalt UI on (default 31112).
 * `gestalt_kong_service_nodeport` - The nodeport to serve the Kong API Gateway on (default 31113).
 
-The Gestalt UI will be accessible from ${external_gateway_protocol}://${external_gateway_host}:${gestalt_ui_service_nodeport}.
-The Kong API Gateway will be accessible from ${external_gateway_protocol}://${external_gateway_host}:${gestalt_kong_service_nodeport}.
+The Gestalt UI will be accessible from `${external_gateway_protocol}://${external_gateway_host}:${gestalt_ui_service_nodeport}`.
+
+The Kong API Gateway will be accessible from `${external_gateway_protocol}://${external_gateway_host}:${gestalt_kong_service_nodeport}`.
 
 
 2\. Verify your cluster is available:
