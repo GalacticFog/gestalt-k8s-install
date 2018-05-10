@@ -74,6 +74,14 @@ spec:
 EOF
 ```
 
+## Infrastructure Setup
+
+### Load balancer for Kubernetes Worker(s).
+
+A load balancer should be set up fronting the Kubernetes worker node(s), with two listeners configured:
+ * One listener for Gestalt UI (default port 31112)
+ * One listener for API Gateway (default port 31113)
+
 ## Install Gestalt Platform
 
 1\. Obtain the Installer from GitHub
@@ -86,6 +94,17 @@ Modify the docker-ee.conf config file for your environment:
 ```
 vi docker-ee.conf
 ```
+
+Specifically, note the following configuration parameters:
+
+* `external_gateway_host` - This should be set to a DNS name for the external load balancer fronting the Kubernetes worker(s).
+* `external_gateway_protocol` - Set to 'http' or 'https' depending on the load balancer listener configuration.
+* `gestalt_ui_service_nodeport` - The nodeport to serve the Gestalt UI on (default 31112).
+* `gestalt_kong_service_nodeport` - The nodeport to serve the Kong API Gateway on (default 31113).
+
+The Gestalt UI will be accessible from ${external_gateway_protocol}://${external_gateway_host}:${gestalt_ui_service_nodeport}.
+The Kong API Gateway will be accessible from ${external_gateway_protocol}://${external_gateway_host}:${gestalt_kong_service_nodeport}.
+
 
 2\. Verify your cluster is available:
 ```sh
