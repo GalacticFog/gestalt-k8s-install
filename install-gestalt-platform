@@ -54,6 +54,9 @@ run_helm_install          gestalt-config.yaml
 run_post_deploy
 
 wait_for_install_completion
+
+cleanup
+
 run_post_install
 
 . helpers/setup-sample-resources

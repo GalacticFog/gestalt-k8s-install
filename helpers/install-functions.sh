@@ -445,7 +445,7 @@ display_summary() {
   echo ""
   echo "  - You may view a log of the installation with the following:"
   echo ""
-  echo "     ./view-installer-logs"
+  echo "         less gestalt-installer.log"
   echo ""
   echo "Done."
 }
@@ -485,4 +485,13 @@ download_fog_cli() {
     exit_on_error "Error running 'fog' CLI, aborting."
 
     echo "OK - fog CLI $version present."
+}
+
+cleanup() {
+    local file=gestalt-installer.log
+    echo "Capturing installer logs to '$file'"
+    kubectl logs -n gestalt-system gestalt-installer >> $file
+
+    echo "Deleting 'gestalt-installer' pod..."
+    kubectl delete pod -n gestalt-system gestalt-installer
 }

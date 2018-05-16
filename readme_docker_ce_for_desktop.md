@@ -2,6 +2,8 @@
 
 Gestalt uses a templated helm chart to install our platform onto Kubernetes.  The installation requires that Kubernetes is enabled in your target Docker EE or CE environment (Note you currently need the edge build of Docker CE for Desktop to enable Kubernetes).
 
+**Note: It's recommended that Docker is configured with at least 4 GB of memory.**
+
 ```
 git clone https://github.com/GalacticFog/gestalt-k8s-install
 cd gestalt-k8s-install
