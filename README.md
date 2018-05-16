@@ -1,6 +1,6 @@
 # Installing Gestalt Platform on Kubernetes
 
-Installer repository: https://github.com/GalacticFog/gestalt-k8s-install
+Installer repository: [https://github.com/GalacticFog/gestalt-k8s-install](https://github.com/GalacticFog/gestalt-k8s-install)
 
 ## Prerequisites
 
@@ -17,13 +17,13 @@ A workstation for running the installer:
 
 Refer to the installation instructions appropriate for your environment:
 
-- [General Installation Instructions](./readme_general.md)
+- [General Installation Instructions](./docs/readme_general.md)
 
-- [Installation for Docker EE Kubernetes](./readme_docker_ee.md)
+- [Installation for Docker EE Kubernetes](./docs/readme_docker_ee.md)
 
-- [Installation for Docker CE for Desktop](./readme_docker_ce_for_desktop.md)
+- [Installation for Docker CE for Desktop](./docs/readme_docker_ce_for_desktop.md)
 
-- [Installation for Minikube](./readme_minikube.md)
+- [Installation for Minikube](./docs/readme_minikube.md)
 
 
 ## Additional resources
