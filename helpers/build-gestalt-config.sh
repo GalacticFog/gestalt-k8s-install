@@ -26,8 +26,8 @@ fi
 # Defaults
 gestalt_ui_ingress_protocol=http    # Must be HTTP unless ingress supports https
 [ -z $external_gateway_protocol ]      && external_gateway_protocol=http
-[ -z $gestalt_ui_service_nodeport ]    && gestalt_ui_service_nodeport=31111
-[ -z $gestalt_kong_service_nodeport ]  && gestalt_kong_service_nodeport=31112
+[ -z $gestalt_ui_service_nodeport ]    && gestalt_ui_service_nodeport=33000
+[ -z $gestalt_kong_service_nodeport ]  && gestalt_kong_service_nodeport=33001
 
 # if [ ! -z "$PV_STORAGE_CLASS" ]; then
 #   PV_STORAGE_ANNOTATION="storageClassName: $PV_STORAGE_CLASS"
