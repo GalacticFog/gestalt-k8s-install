@@ -39,6 +39,7 @@ download_fog_cli
 . helpers/build-gestalt-config.sh
 process_kubeconfig
 prompt_for_executor_config
+build_cli_config
 generate_gestalt_config > gestalt-config.yaml
 echo "Helm chart configuration generated."
 
