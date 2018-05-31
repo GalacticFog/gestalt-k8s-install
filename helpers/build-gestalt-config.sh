@@ -51,11 +51,16 @@ case $use_dynamic_loadbalancers in
     ;;
 esac
 
-# Generate the configuration file and echos to stdout
+# Generate the configuration file and echos to stdout.  The Configuration
+# generated here is used by the Helm chart templates.
 generate_gestalt_config() {
 
 if [ -z "$kubeconfig_data" ]; then
   exit_with_error "kubeconfig_data not provided"
+fi
+
+if [ -z "$gestaltcli_data" ]; then
+  exit_with_error "gestaltcli_data not provided"
 fi
 
 # other configuration
@@ -89,27 +94,7 @@ meta:
   protocol: http
   databaseName: gestalt-meta
 
-laser:
-  image: $gestalt_laser_image
-  databaseName: laser-db
-  cpu: ${gestalt_laser_cpu-0.25}
-  memory: ${gestalt_laser_memory-1024}
-  executorImages:
-    dotNet: $gestalt_laser_executor_dotnet_image
-    golang: $gestalt_laser_executor_golang_image
-    js: $gestalt_laser_executor_js_image
-    nodejs: $gestalt_laser_executor_nodejs_image
-    jvm: $gestalt_laser_executor_jvm_image
-    python: $gestalt_laser_executor_python_image
-    ruby: $gestalt_laser_executor_ruby_image
-
-gatewayManager:
-  image: $gestalt_gateway_manager_image
-  databaseName: gateway-db
-
 kong:
-  image: $gestalt_kong_image
-  databaseName: kong-db
   nodePort: $gestalt_kong_service_nodeport
 
 ui:
@@ -118,9 +103,6 @@ ui:
   nodePort: $gestalt_ui_service_nodeport
   ingress:
     host: $gestalt_ui_ingress_host
-
-policy:
-  image: $gestalt_policy_image
 
 # Database configuration:
 EOF
@@ -199,7 +181,7 @@ installer:
     dnsName: $external_gateway_host
     protocol: $external_gateway_protocol
     kongServiceName: $kong_ingress_service_name
-  kubeconfig: $kubeconfig_data
+  gestaltCliData: $gestaltcli_data
 EOF
 
 }
@@ -232,4 +214,21 @@ process_kubeconfig() {
       kubeconfig_data=`echo "$data" | base64 | tr -d '\n'`
     fi
   fi
+}
+
+# Configuration generated here is used by the Gestalt-CLI in the installer
+build_cli_config() {
+    local os=`uname`
+    local data=$(. helpers/build-gestalt-cli-config.sh)
+
+    echo "$data"
+
+    if [ "$os" == "Darwin" ]; then
+      gestaltcli_data=`echo "$data" | base64`
+    elif [ "$os" == "Linux" ]; then
+      gestaltcli_data=`echo "$data" | base64 | tr -d '\n'`
+    else
+      echo "Warning: unknown OS type '$os', treating as Linux"
+      gestaltcli_data=`echo "$data" | base64 | tr -d '\n'`
+    fi
 }

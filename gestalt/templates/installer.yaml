@@ -10,6 +10,7 @@ spec:
   containers:
   - name: gestalt-installer
     image: "{{ .Values.installer.image }}"
+    # imagePullPolicy: Always
     imagePullPolicy: {{ .Values.common.imagePullPolicy }}
     # 'deploy' arg signals deployment of gestalt platform
     # 'debug' arg signals debug output
@@ -20,8 +21,6 @@ spec:
     # TODO: Not used
     # - name: ENSEMBLE_RELEASE_TAG
     #   value: "{{ .Values.common.releaseTag }}"
-    - name: KUBECONFIG_DATA
-      value: "{{ .Values.installer.kubeconfig }}"
     - name: USE_DYNAMIC_LOADBALANCERS
       value: "{{ .Values.installer.useDynamicLoadBalancers }}"
     - name: EXTERNAL_GATEWAY_HOST
@@ -80,64 +79,8 @@ spec:
     - name: META_PROTOCOL
       value: "{{ .Values.meta.protocol }}"
 
-    # Rabbit settings
-    - name: RABBIT_HOSTNAME
-      value: "{{ .Values.rabbit.hostname }}"
-    - name: RABBIT_PORT
-      value: "{{ .Values.rabbit.port }}"
-
     #
     # -- Installer-provisioned services --
     #
-
-    # Laser settings
-    - name: LASER_IMAGE
-      value: "{{ .Values.laser.image }}"
-    - name: LASER_DB_NAME
-      value: "{{ .Values.laser.databaseName }}"
-    - name: LASER_CPU
-      value: "{{ .Values.laser.cpu }}"
-    - name: LASER_MEMORY
-      value: "{{ .Values.laser.memory }}"
-    - name: LASER_MAX_COOL_CONNECTION_TIME
-      value: "30"
-    - name: LASER_EXECUTOR_HEARTBEAT_PERIOD
-      value: "1000"
-    - name: LASER_EXECUTOR_HEARTBEAT_TIMEOUT
-      value: "10000"
-    - name: LASER_SCALE_DOWN_TIME_SECONDS
-      value: "15"
-    - name: LASER_MIN_COOL_EXECUTORS
-      value: "1"
-
-    # Laser Executor Images
-    - name: LASER_EXECUTOR_DOTNET_IMAGE
-      value: "{{ .Values.laser.executorImages.dotNet }}"
-    - name: LASER_EXECUTOR_GOLANG_IMAGE
-      value: "{{ .Values.laser.executorImages.golang }}"
-    - name: LASER_EXECUTOR_JS_IMAGE
-      value: "{{ .Values.laser.executorImages.js }}"
-    - name: LASER_EXECUTOR_NODEJS_IMAGE
-      value: "{{ .Values.laser.executorImages.nodejs }}"
-    - name: LASER_EXECUTOR_JVM_IMAGE
-      value: "{{ .Values.laser.executorImages.jvm }}"
-    - name: LASER_EXECUTOR_PYTHON_IMAGE
-      value: "{{ .Values.laser.executorImages.python }}"
-    - name: LASER_EXECUTOR_RUBY_IMAGE
-      value: "{{ .Values.laser.executorImages.ruby }}"
-
-    # Policy Settings
-    - name: POLICY_IMAGE
-      value: "{{ .Values.policy.image }}"
-
-    # Gateway Manager settings
-    - name: GATEWAY_MGR_IMAGE
-      value: "{{ .Values.gatewayManager.image }}"
-    - name: GATEWAY_MGR_DB_NAME
-      value: "{{ .Values.gatewayManager.databaseName }}"
-
-    # Kong settings
-    - name: KONG_IMAGE
-      value: "{{ .Values.kong.image }}"
-    - name: KONG_DB_NAME
-      value: "{{ .Values.kong.databaseName }}"
+    - name: GESTALT_CLI_DATA
+      value: "{{ .Values.installer.gestaltCliData }}"
