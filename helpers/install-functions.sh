@@ -158,7 +158,9 @@ prompt_to_continue() {
   do_prompt_to_continue \
     "Gestalt Platform is ready to be installed to Kubernetes context '`kubectl config current-context`'.\n\nYou must accept the Gestalt Enterprise End User License Agreement (http://www.galacticfog.com/gestalt-eula.html) to continue." \
     "Accept EULA and proceed with Gestalt Platform installation?"
-  accept_eula
+  if [ ! -f __skip_eula ]; then
+      accept_eula
+  fi
 }
 
 do_prompt_to_continue() {
