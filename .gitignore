@@ -6,3 +6,4 @@ tmp
 gestalt-config.yaml
 my.*
 test
+__*

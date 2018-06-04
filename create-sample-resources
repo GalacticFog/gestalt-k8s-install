@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# fog set-context --org sandbox --workspace dev-sandbox --environment dev
+
+fog create container -f examples/nginx-container.json \
+    --provider default-kubernetes --org sandbox --workspace dev-sandbox --environment dev
+
+
+for f in examples/*-lambda.json; do
+  echo "Creating $f..."
+  fog create lambda -f $f --provider default-laser --org sandbox --workspace dev-sandbox --environment dev
+done
