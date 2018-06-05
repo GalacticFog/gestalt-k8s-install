@@ -1,0 +1,26 @@
+{
+    "name": "/hello-dotnet-1",
+    "description": "",
+    "properties": {
+        "resource": "/hello-dotnet-1",
+        "methods": [
+            "GET"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
+            }
+        },
+        "synchronous": true
+    }
+}

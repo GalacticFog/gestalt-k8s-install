@@ -1,12 +1,39 @@
 #!/bin/bash
 
-# fog set-context --org sandbox --workspace dev-sandbox --environment dev
+# Set context
+fog set-context --org 'sandbox' --workspace 'dev-sandbox' --environment 'dev'
 
+# Create API
+fog create api --name 'dev-sandbox' --description 'Developer Sandbox API' --provider 'default-kong'
+
+# Create Containers
 fog create container -f examples/nginx-container.json \
-    --provider default-kubernetes --org sandbox --workspace dev-sandbox --environment dev
+    --provider 'default-kubernetes'
 
-
+# Create Lambdas
 for f in examples/*-lambda.json; do
-  echo "Creating $f..."
-  fog create lambda -f $f --provider default-laser --org sandbox --workspace dev-sandbox --environment dev
+  fog create lambda -f $f --provider 'default-laser'
 done
+
+
+## Hello lambda API endpoints
+
+fog create api --name 'test-api' --description 'Test API' --provider 'default-kong'
+
+fog create api-endpoint -f examples/dotnet-hello-api-endpoint.json --api 'test-api' --lambda 'dotnet-hello'
+
+fog create api-endpoint -f examples/nashorn-hello-api-endpoint.json --api 'test-api' --lambda 'nashorn-hello'
+
+fog create api-endpoint -f examples/hello-lodash-api-endpoint.json --api 'test-api' --lambda 'hello-lodash'
+
+fog create api-endpoint -f examples/python2-hello-api-endpoint.json --api 'test-api' --lambda 'python2-hello'
+
+fog create api-endpoint -f examples/python3-hello-api-endpoint.json --api 'test-api' --lambda 'python3-hello'
+
+
+## Kafka
+
+fog create api-endpoint -f examples/kafka-consumer-api-endpoint.json --api 'test-api' --lambda 'kafkaConsumer'
+
+fog create api-endpoint -f examples/kafka-producer-api-endpoint.json --api 'test-api' --lambda 'kafkaProducer'
+

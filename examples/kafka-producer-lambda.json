@@ -1,0 +1,25 @@
+{
+  "name": "kafkaProducer",
+  "description": "",
+  "properties": {
+    "apiendpoints": [],
+    "package_url": "https://s3.amazonaws.com/gfi.lambdas/kafka-producer-assembly-0.1.jar",
+    "public": true,
+    "compressed": false,
+    "cpus": 0.1,
+    "code_type": "package",
+    "headers": {
+      "Accept": "text/plain"
+    },
+    "periodic_info": {},
+    "timeout": 30,
+    "handler": "com.galacticfog.Producer;produce",
+    "runtime": "java;scala",
+    "env": {
+      "KAFKA_TOPIC": "avro-output",
+      "KAFKA_BROKERS": "REPLACE ME:9092",
+      "META_ASSET_BASE": "https://meta.test.galacticfog.com"
+    },
+    "memory": 256
+  }
+}

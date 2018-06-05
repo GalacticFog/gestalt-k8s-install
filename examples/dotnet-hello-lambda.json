@@ -1,0 +1,19 @@
+{
+  "name": "dotnet-hello",
+  "properties": {
+    "package_url": "https://s3.amazonaws.com/gfi.lambdas/hello_world_dotnet.zip",
+    "public": true,
+    "compressed": true,
+    "cpus": 0.1,
+    "code_type": "package",
+    "headers": {
+      "Accept": "text/plain"
+    },
+    "periodic_info": {},
+    "timeout": 30,
+    "handler": "publish/Hello",
+    "runtime": "csharp;dotnet",
+    "env": {},
+    "memory": 512
+  }
+}
