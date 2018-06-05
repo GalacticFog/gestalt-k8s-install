@@ -1,0 +1,38 @@
+{
+    "name": "kafka",
+    "description": "Example Kafka container",
+    "properties": {
+      "network": "BRIDGE",
+      "num_instances": 0,
+      "secrets": [],
+      "disk": 0,
+      "image": "ches/kafka:0.10.2.1",
+      "health_checks": [],
+      "force_pull": false,
+      "volumes": [],
+      "container_type": "DOCKER",
+      "labels": {},
+      "constraints": [],
+      "cpus": 1,
+      "port_mappings": [
+        {
+          "protocol": "tcp",
+          "container_port": 9092,
+          "service_port": 0,
+          "name": "service-api",
+          "expose_endpoint": true,
+          "service_address": {
+            "port": 0,
+            "protocol": "tcp"
+          }
+        }
+      ],
+      "env": {
+        "KAFKA_ADVERTISED_HOST_NAME": "REPLACE ME",
+        "ZOOKEEPER_IP": "REPLACE ME",
+        "ZOOKEEPER_CHROOT": "/chroot"
+      },
+      "memory": 2048
+    }
+  }
+  

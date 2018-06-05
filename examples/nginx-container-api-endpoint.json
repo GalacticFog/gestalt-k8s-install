@@ -1,0 +1,28 @@
+{
+    "name": "/nginx-example2",
+    "properties": {
+        "resource": "/nginx-example2",
+        "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [],
+                "groups": []
+            }
+        },
+        "synchronous": true,
+        "implementation_id": "##PARAMETER##",
+        "implementation_type": "##PARAMETER##",
+        "container_port_name": "web"
+    }
+}
