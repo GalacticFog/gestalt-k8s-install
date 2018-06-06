@@ -134,11 +134,23 @@ cat - << EOF
 EOF
 
 fi
+
+# Postgres resourcing defaults
+
+if [ -z "$postgres_memory_request" ]; then
+  postgres_memory_request=256Mi
+fi
+
+if [ -z "$postgres_cpu_request" ]; then
+  postgres_cpu_request=200m
+fi
+
+
 cat - << EOF
   resources:
-    limits:
-      memory: 256Mi
-      cpu: 100m
+    requests:
+      memory: $postgres_memory_request
+      cpu: $postgres_cpu_request
   service:
     port: 5432
     type: ClusterIP
