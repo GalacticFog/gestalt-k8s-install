@@ -1,5 +1,6 @@
 {
   "name": "peek-kafka",
+  "description": "Peek Kafka Lambda",
   "properties": {
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/peek-kafka-assembly-0.1.jar",
     "public": true,

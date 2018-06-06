@@ -1,6 +1,6 @@
 {
     "name": "/hello-lodash",
-    "description": "",
+    "description": "Lodash Hello Endpoint",
     "properties": {
         "resource": "/hello-lodash",
         "methods": [

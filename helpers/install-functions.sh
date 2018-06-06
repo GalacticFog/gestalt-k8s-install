@@ -454,6 +454,19 @@ display_summary() {
 
 download_fog_cli() {
     echo "Checking for 'fog' CLI..."
+
+    if [ -f './fog' ]; then
+        local version=$(./fog --version)
+        if [ "$gestalt_cli_version" == "$version" ]; then
+            echo "OK - fog version $version found."
+        else
+            echo "fog version $version does not match required version $gestalt_cli_version, removing."
+            rm ./fog
+        fi
+    else 
+        echo "'fog' CLI not present."
+    fi
+
     if [ ! -f './fog' ]; then
         local os=`uname`
 

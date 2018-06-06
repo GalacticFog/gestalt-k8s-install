@@ -1,5 +1,6 @@
 {
   "name": "dotnet-hello",
+  "description": ".NET Hello Lambda",
   "properties": {
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/hello_world_dotnet.zip",
     "public": true,

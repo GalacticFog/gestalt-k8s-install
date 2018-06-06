@@ -64,14 +64,8 @@ if [ ! -z "$gestalt_laser_executor_js_image" ]; then
 				"metaType" : "Nashorn",
         "extraEnv": {
           "MIN_COOL": "0",
-          "SIZES_0_CPU": "0.1",
-          "SIZES_0_MEM": "128",
-          "SIZES_1_CPU": "0.2",
-          "SIZES_1_MEM": "256",
-          "SIZES_2_CPU": "0.5",
-          "SIZES_2_MEM": "512",
-          "SIZES_3_CPU": "1.0",
-          "SIZES_3_MEM": "1024"
+          "SIZES_0_CPU": "0.5",
+          "SIZES_0_MEM": "512"
         }
 			}
 EOF
@@ -89,14 +83,8 @@ if [ ! -z "$gestalt_laser_executor_nodejs_image" ]; then
 				"metaType" : "NodeJS",
         "extraEnv": {
           "MIN_COOL": "0",
-          "SIZES_0_CPU": "0.1",
-          "SIZES_0_MEM": "128",
-          "SIZES_1_CPU": "0.2",
-          "SIZES_1_MEM": "256",
-          "SIZES_2_CPU": "0.5",
-          "SIZES_2_MEM": "512",
-          "SIZES_3_CPU": "1.0",
-          "SIZES_3_MEM": "1024"
+          "SIZES_0_CPU": "0.5",
+          "SIZES_0_MEM": "512"
         }
 			}
 EOF
@@ -114,14 +102,8 @@ if [ ! -z "$gestalt_laser_executor_jvm_image" ]; then
 				"metaType" : "Java",
         "extraEnv": {
           "MIN_COOL": "0",
-          "SIZES_0_CPU": "0.1",
-          "SIZES_0_MEM": "128",
-          "SIZES_1_CPU": "0.2",
-          "SIZES_1_MEM": "256",
-          "SIZES_2_CPU": "0.5",
-          "SIZES_2_MEM": "512",
-          "SIZES_3_CPU": "1.0",
-          "SIZES_3_MEM": "1024"
+          "SIZES_0_CPU": "0.5",
+          "SIZES_0_MEM": "512"
         }
 			}
 EOF
@@ -139,14 +121,8 @@ if [ ! -z "$gestalt_laser_executor_dotnet_image" ]; then
 				"metaType" : "CSharp",
         "extraEnv": {
           "MIN_COOL": "0",
-          "SIZES_0_CPU": "0.1",
-          "SIZES_0_MEM": "128",
-          "SIZES_1_CPU": "0.2",
-          "SIZES_1_MEM": "256",
-          "SIZES_2_CPU": "0.5",
-          "SIZES_2_MEM": "512",
-          "SIZES_3_CPU": "1.0",
-          "SIZES_3_MEM": "1024"
+          "SIZES_0_CPU": "0.5",
+          "SIZES_0_MEM": "512"
         }
 			}
 EOF
@@ -164,14 +140,8 @@ if [ ! -z "$gestalt_laser_executor_python_image" ]; then
 				"metaType" : "Python",
         "extraEnv": {
           "MIN_COOL": "0",
-          "SIZES_0_CPU": "0.1",
-          "SIZES_0_MEM": "128",
-          "SIZES_1_CPU": "0.2",
-          "SIZES_1_MEM": "256",
-          "SIZES_2_CPU": "0.5",
-          "SIZES_2_MEM": "512",
-          "SIZES_3_CPU": "1.0",
-          "SIZES_3_MEM": "1024"
+          "SIZES_0_CPU": "0.5",
+          "SIZES_0_MEM": "512"
         }
 			}
 EOF
@@ -189,14 +159,8 @@ if [ ! -z "$gestalt_laser_executor_ruby_image" ]; then
 				"metaType" : "Ruby",
         "extraEnv": {
           "MIN_COOL": "0",
-          "SIZES_0_CPU": "0.1",
-          "SIZES_0_MEM": "128",
-          "SIZES_1_CPU": "0.2",
-          "SIZES_1_MEM": "256",
-          "SIZES_2_CPU": "0.5",
-          "SIZES_2_MEM": "512",
-          "SIZES_3_CPU": "1.0",
-          "SIZES_3_MEM": "1024"
+          "SIZES_0_CPU": "0.5",
+          "SIZES_0_MEM": "512"
         }
 			}
 EOF
@@ -214,14 +178,8 @@ if [ ! -z "$gestalt_laser_executor_golang_image" ]; then
 				"metaType" : "GoLang",
         "extraEnv": {
           "MIN_COOL": "0",
-          "SIZES_0_CPU": "0.1",
-          "SIZES_0_MEM": "128",
-          "SIZES_1_CPU": "0.2",
-          "SIZES_1_MEM": "256",
-          "SIZES_2_CPU": "0.5",
-          "SIZES_2_MEM": "512",
-          "SIZES_3_CPU": "1.0",
-          "SIZES_3_MEM": "1024"
+          "SIZES_0_CPU": "0.5",
+          "SIZES_0_MEM": "512"
         }
 			}
 EOF

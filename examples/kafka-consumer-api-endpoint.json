@@ -1,6 +1,6 @@
 {
     "name": "/kafka-consumer",
-    "description": "",
+    "description": "Kafka Consumer Lambda Endpoint",
     "properties": {
         "resource": "/kafka-consumer",
         "methods": [

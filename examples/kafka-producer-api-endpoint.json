@@ -1,6 +1,6 @@
 {
     "name": "/kafka-producer",
-    "description": "",
+    "description": "Kafka Producer Endpoint",
     "properties": {
         "resource": "/kafka-producer",
         "methods": [

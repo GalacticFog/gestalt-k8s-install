@@ -1,6 +1,6 @@
 {
     "name": "/hello-dotnet",
-    "description": "",
+    "description": "Hello .NET Endpoint",
     "properties": {
         "resource": "/hello-dotnet",
         "methods": [

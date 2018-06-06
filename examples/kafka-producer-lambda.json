@@ -1,6 +1,6 @@
 {
   "name": "kafkaProducer",
-  "description": "",
+  "description": "Kafka Producer Lambda",
   "properties": {
     "apiendpoints": [],
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/kafka-producer-assembly-0.1.jar",

@@ -1,7 +1,8 @@
 {
-    "name": "/nginx-example2",
+    "name": "/nginx-example",
+    "description": "Nginx Example Endpoint",
     "properties": {
-        "resource": "/nginx-example2",
+        "resource": "/nginx-example",
         "methods": [
             "GET",
             "POST",
@@ -21,8 +22,8 @@
             }
         },
         "synchronous": true,
-        "implementation_id": "##PARAMETER##",
-        "implementation_type": "##PARAMETER##",
+        "implementation_id": "## This gets replaced ##",
+        "implementation_type": "## This gets replaced ##",
         "container_port_name": "web"
     }
 }
