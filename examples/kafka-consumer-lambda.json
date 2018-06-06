@@ -1,6 +1,6 @@
 {
     "name": "kafkaConsumer",
-    "description": "Kafka Consumer Lambda",
+    "description": "https://github.com/GalacticFog/lambda-examples/tree/master/scala_lambda/kafka_consumer",
     "properties": {
         "apiendpoints": [],
         "package_url": "https://s3.amazonaws.com/gfi.lambdas/kafka-consumer-assembly-0.1.jar",

@@ -1,6 +1,6 @@
 {
   "name": "python2-hello",
-  "description": "Python v2 Hello Lambda",
+  "description": "https://github.com/GalacticFog/lambda-examples/blob/master/python_lambda/hello.py",
   "properties": {
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/hello.py",
     "public": true,

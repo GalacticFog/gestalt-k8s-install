@@ -1,6 +1,6 @@
 #!/bin/bash
 
-exit_with_error() {
+ exit_with_error() {
   echo "[Error] $@"
   exit 1
 }
@@ -23,14 +23,31 @@ $fog create api --name 'dev-sandbox' --description 'Developer Sandbox API' --pro
 exit_on_error "Failed to create API resource, aborting."
 
 # Create Containers
-$fog create container -f examples/nginx-container.json \
-    --provider 'default-kubernetes'
+$fog create container -f examples/nginx-container.json --provider 'default-kubernetes'
+
+
+## Kafka
+
+$fog ext create-sample-resources --dir ./examples --provider 'default-kubernetes' --laser-provider 'default-laser'
+# $fog create container -f examples/kafka-container.json --provider 'default-kubernetes'
+# $fog create lambda -f examples/kafka-consumer-lambda.json --provider default-laser
+# $fog create lambda -f examples/kafka-producer-lambda.json --provider default-laser
+$fog create api-endpoint -f examples/kafka-consumer-api-endpoint.json --api 'dev-sandbox' --lambda 'kafkaConsumer'
+$fog create api-endpoint -f examples/kafka-producer-api-endpoint.json --api 'dev-sandbox' --lambda 'kafkaProducer'
+
 
 # Create Lambdas
 
-for f in examples/*-lambda.json; do
-  $fog create lambda -f $f --provider 'default-laser'
-done
+$fog create lambda -f examples/dotnet-hello-lambda.json --provider default-laser
+$fog create lambda -f examples/factorial-lambda.json --provider default-laser
+$fog create lambda -f examples/hello-lodash-lambda.json --provider default-laser
+$fog create lambda -f examples/nashorn-hello-lambda.json --provider default-laser
+$fog create lambda -f examples/periodic-lambda.json --provider default-laser
+$fog create lambda -f examples/python2-hello-lambda.json --provider default-laser
+$fog create lambda -f examples/python3-hello-lambda.json --provider default-laser
+$fog create lambda -f examples/sales-lambda.json --provider default-laser
+$fog create lambda -f examples/slack-sales-lambda.json --provider default-laser
+$fog create lambda -f examples/sms-hello-lambda.json --provider default-laser
 
 ## Hello lambda API endpoints
 
@@ -46,9 +63,3 @@ $fog create api-endpoint -f examples/factorial-api-endpoint.json --api 'dev-sand
 $fog create api-endpoint -f examples/sales-api-endpoint.json --api 'dev-sandbox' --lambda 'sales'
 $fog create api-endpoint -f examples/slack-sales-api-endpoint.json --api 'dev-sandbox' --lambda 'slack-sales'
 $fog create api-endpoint -f examples/sms-hello-api-endpoint.json --api 'dev-sandbox' --lambda 'sms-hello'
-
-## Kafka
-
-$fog create api-endpoint -f examples/kafka-consumer-api-endpoint.json --api 'dev-sandbox' --lambda 'kafkaConsumer'
-$fog create api-endpoint -f examples/kafka-producer-api-endpoint.json --api 'dev-sandbox' --lambda 'kafkaProducer'
-

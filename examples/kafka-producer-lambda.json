@@ -1,6 +1,6 @@
 {
   "name": "kafkaProducer",
-  "description": "Kafka Producer Lambda",
+  "description": "https://github.com/GalacticFog/lambda-examples/tree/master/scala_lambda/kafka_producer",
   "properties": {
     "apiendpoints": [],
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/kafka-producer-assembly-0.1.jar",
@@ -17,8 +17,7 @@
     "runtime": "java;scala",
     "env": {
       "KAFKA_TOPIC": "avro-output",
-      "KAFKA_BROKERS": "REPLACE ME:9092",
-      "META_ASSET_BASE": "https://meta.test.galacticfog.com"
+      "KAFKA_BROKERS": "REPLACE ME:9092"
     },
     "memory": 256
   }

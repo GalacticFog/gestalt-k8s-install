@@ -1,6 +1,6 @@
 {
   "name": "factorial",
-  "description": "Factorial Lambda",
+  "description": "https://github.com/GalacticFog/lambda-examples/blob/master/js_lambda/lambda-factorial.js",
   "properties": {
     "provider": {
     },
