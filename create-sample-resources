@@ -19,7 +19,7 @@ for f in examples/*-lambda.json; do
   $fog create lambda -f $f --provider 'default-laser'
 done
 
-fog create api --name 'test-api' --description 'Test API' --provider 'default-kong'
+$fog create api --name 'test-api' --description 'Test API' --provider 'default-kong'
 
 ## Hello lambda API endpoints
 
