@@ -53,9 +53,9 @@ helm list
 
 **Note: The installer performs this step automatically by default.**  The behavior can be altered by modifying the `docker-ee.conf` configuration file.
 
-Gestalt Platform requires a Postgres database instance, which can be hosted in Kubernetes, or externally.  If hosting on Kubernetes, the database needs a persistent volume.  
+Gestalt Platform requires a Postgres database instance, which can be hosted in Kubernetes, or externally.  If hosting on Kubernetes, the database needs a persistent volume.
 
-**Hostpath PV Example:**  
+**Hostpath PV Example:**
 This example uses a hostpath volume to a local directory on a worker node.  Alternatively, NFS or another supported PV type may be used.
 ```
 kubectl apply -f - <<EOF
@@ -69,7 +69,7 @@ spec:
   capacity:
     storage: 100Mi
   hostPath:
-    path: /mnt/hostpath-volume-01
+    path: /tmp/hostpath-volume-01
     type: ""
   persistentVolumeReclaimPolicy: Delete
   storageClassName: hostpath
@@ -81,8 +81,8 @@ EOF
 ### Load balancer for Kubernetes Worker(s).
 
 A load balancer should be set up fronting the Kubernetes worker node(s), with two listeners configured:
- * One listener for Gestalt UI (default port 31112)
- * One listener for API Gateway (default port 31113)
+ * One listener for Gestalt UI (default port 33000)
+ * One listener for API Gateway (default port 33001)
 
 ## Install Gestalt Platform
 
@@ -101,8 +101,8 @@ Specifically, note the following configuration parameters:
 
 * `external_gateway_host` - This should be set to a DNS name for the external load balancer fronting the Kubernetes worker(s).
 * `external_gateway_protocol` - Set to 'http' or 'https' depending on the load balancer listener configuration.
-* `gestalt_ui_service_nodeport` - The nodeport to serve the Gestalt UI on (default 31112).
-* `gestalt_kong_service_nodeport` - The nodeport to serve the Kong API Gateway on (default 31113).
+* `gestalt_ui_service_nodeport` - The nodeport to serve the Gestalt UI on (default 33000).
+* `gestalt_kong_service_nodeport` - The nodeport to serve the Kong API Gateway on (default 33001).
 
 The Gestalt UI will be accessible from `${external_gateway_protocol}://${external_gateway_host}:${gestalt_ui_service_nodeport}`.
 
