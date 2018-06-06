@@ -1,8 +1,8 @@
 {
-    "name": "/hello-python2",
-    "description": "Python v2 Hello Endpoint",
+    "name": "/slack-sales",
+    "description": "Slack Sales Example Endpoint",
     "properties": {
-        "resource": "/hello-python2",
+        "resource": "/slack-sales",
         "methods": [
             "GET"
         ],

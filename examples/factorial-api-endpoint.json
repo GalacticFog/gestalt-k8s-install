@@ -1,8 +1,8 @@
 {
-    "name": "/hello-python2",
-    "description": "Python v2 Hello Endpoint",
+    "name": "/factorial-example",
+    "description": "Factorial Example Endpoint",
     "properties": {
-        "resource": "/hello-python2",
+        "resource": "/factorial-example",
         "methods": [
             "GET"
         ],

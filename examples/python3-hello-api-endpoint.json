@@ -1,6 +1,6 @@
 {
     "name": "/hello-python3",
-    "description": "",
+    "description": "Python v3 Hello Endpoint",
     "properties": {
         "resource": "/hello-python3",
         "methods": [

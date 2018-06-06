@@ -1,8 +1,8 @@
 {
-    "name": "/hello-dotnet-1",
-    "description": "",
+    "name": "/sms-hello",
+    "description": "SMS Hello Example Endpoint",
     "properties": {
-        "resource": "/hello-dotnet-1",
+        "resource": "/sms-hello",
         "methods": [
             "GET"
         ],

@@ -1,6 +1,6 @@
 {
   "name": "periodic-test",
-  "description": "",
+  "description": "Example Periodic Lambda",
   "properties": {
     "public": true,
     "code": "ZnVuY3Rpb24gcGVyaW9kaWMoIGV2ZW50LCBjb250ZXh0ICkgewogIAogIGxvYWQoJ2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9HYWxhY3RpY0ZvZy9sYW1iZGEtZXhhbXBsZXMvMS4yLjAvanNfbGFtYmRhL2dlc3RhbHQtc2RrLmpzJyk7CiAgCiAgbG9nKCAiZXZlbnQgOiAiICsgZXZlbnQgKTsKICBsb2coICJjb250ZXh0IDogIiArIGNvbnRleHQgKTsKICAKICByZXR1cm4gImRvbmUiOwp9",

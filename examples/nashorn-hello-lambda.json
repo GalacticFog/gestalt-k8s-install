@@ -1,5 +1,6 @@
 {
   "name": "nashorn-hello",
+  "description": "Nashorn Hello Lambda",
   "properties": {
     "public": true,
     "code": "ZnVuY3Rpb24gaGVsbG8oKSB7CiAgcmV0dXJuICJOYXNob3JuIGhlbGxvIjsKfQ==",

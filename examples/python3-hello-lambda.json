@@ -1,5 +1,6 @@
 {
   "name": "python3-hello",
+  "description": "Python v3 Hello Lambda",
   "properties": {
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/hello3.py",
     "public": true,

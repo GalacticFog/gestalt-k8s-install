@@ -1,6 +1,6 @@
 {
     "name": "kafkaConsumer",
-    "description": "Kafka consumer lambda",
+    "description": "Kafka Consumer Lambda",
     "properties": {
         "apiendpoints": [],
         "package_url": "https://s3.amazonaws.com/gfi.lambdas/kafka-consumer-assembly-0.1.jar",

@@ -1,6 +1,6 @@
 {
     "name": "kafka",
-    "description": "Example Kafka container",
+    "description": "Example Kafka Container",
     "properties": {
       "network": "BRIDGE",
       "num_instances": 0,

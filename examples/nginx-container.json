@@ -1,6 +1,6 @@
 {
-    "name": "nginx-example2",
-    "description": "",
+    "name": "nginx-example",
+    "description": "Example Nginx Container",
     "properties": {
         "env": {},
         "labels": {},

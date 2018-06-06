@@ -1,6 +1,6 @@
 {
     "name": "/hello-nashorn",
-    "description": "",
+    "description": "Hello Nashorn Endpoint",
     "properties": {
         "resource": "/hello-nashorn",
         "methods": [
