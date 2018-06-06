@@ -1,6 +1,6 @@
 {
   "name": "sms-hello",
-  "description": "SMS Hello Lambda",
+  "description": "https://github.com/GalacticFog/lambda-examples/blob/master/js_lambda/sms.js",
   "properties": {
     "apiendpoints": [],
     "provider": {

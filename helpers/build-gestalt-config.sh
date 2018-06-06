@@ -67,8 +67,8 @@ fi
 cat - << EOF
 
 common:
-  # imagePullPolicy: Always
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
+  # imagePullPolicy: IfNotPresent
 
 security:
   image: $gestalt_security_image

@@ -1,6 +1,6 @@
 {
   "name": "slack-sales",
-  "description": "Sales Slack Lambda",
+  "description": "https://github.com/GalacticFog/lambda-examples/tree/master/nodejs_lambda/sales_slack_notification",
   "properties": {
     "provider": {
     },
