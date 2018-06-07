@@ -1,0 +1,702 @@
+02:19:38.514 [application-akka.actor.default-dispatcher-4] INFO  akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+02:19:40.470 [main] INFO  application - attempting to determine GestaltSecurityConfig for framework authentication mode
+02:19:40.488 [main] INFO  application - > checking environment for Gestalt security config
+02:19:40.674 [main] DEBUG application - initDB()
+02:19:40.675 [main] DEBUG application - checking for database : laser-db
+02:19:40.676 [main] DEBUG application - initializing connection pool against : jdbc:postgresql://gestalt-postgresql.gestalt-system.svc.cluster.local:5432/postgres
+02:19:40.831 [main] DEBUG application - ConnectionPool.isInitialized : true
+02:19:41.563 [main] DEBUG application - database : laser-db already exists.
+02:19:41.674 [main] DEBUG application - migrate()
+02:19:41.830 [main] DEBUG application - url: jdbc:postgresql://gestalt-postgresql.gestalt-system.svc.cluster.local:5432/laser-db
+02:19:41.836 [main] INFO  o.f.c.internal.util.VersionPrinter - Flyway 3.2.1 by Boxfuse
+02:19:41.957 [main] INFO  o.f.c.i.dbsupport.DbSupportFactory - Database: jdbc:postgresql://gestalt-postgresql.gestalt-system.svc.cluster.local:5432/laser-db (PostgreSQL 9.6)
+02:19:42.140 [main] INFO  o.f.core.internal.command.DbValidate - Validated 8 migrations (execution time 00:00.125s)
+02:19:42.378 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 8
+02:19:42.389 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+02:19:42.402 [main] DEBUG c.g.gestalt.lambda.LambdaFramework$ - CONFIGURING LOGGING...
+02:19:42.406 [main] DEBUG c.g.gestalt.lambda.LambdaFramework - Rabbit Connection : 
+	 host     : gestalt-rabbit.gestalt-system
+	 port     : 5672
+
+Loaded file:/opt/docker/plugins/gestalt-lambda-gfi-plugin-assembly-0.20.11-SNAPSHOT.jar dynamically...
+runtimeClass : com.galacticfog.gestalt.lambda.plugin.LambdaAdapter
+02:19:42.862 [main] DEBUG c.g.g.lambda.impl.GFILambdaAdapter - Rabbit Connection : 
+	 host     : gestalt-rabbit.gestalt-system
+	 port     : 5672
+
+02:19:43.251 [main] DEBUG c.g.gestalt.lambda.LambdaFramework$ - getExistingSeedNodes
+02:19:43.313 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Rabbit Connection : 
+	 host     : gestalt-rabbit.gestalt-system
+	 port     : 5672
+
+02:19:43.326 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Rabbit Connection : 
+	 host     : gestalt-rabbit.gestalt-system
+	 port     : 5672
+
+02:19:43.328 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-9] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Rabbit Connection : 
+	 host     : gestalt-rabbit.gestalt-system
+	 port     : 5672
+
+02:19:43.329 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-7] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Rabbit Connection : 
+	 host     : gestalt-rabbit.gestalt-system
+	 port     : 5672
+
+02:19:43.342 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Rabbit Connection : 
+	 host     : gestalt-rabbit.gestalt-system
+	 port     : 5672
+
+02:19:43.623 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-9] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Configuring RESPONSE queue : (default-listen-exchange, default-response-topic.1.#)
+02:19:43.631 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Configuring RESPONSE queue : (default-listen-exchange, default-response-topic.0.#)
+02:19:43.631 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Configuring RESPONSE queue : (default-listen-exchange, default-response-topic.4.#)
+02:19:43.676 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executors...
+02:19:43.680 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading custom executor...
+02:19:43.681 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	image     : galacticfog/gestalt-laser-executor-js:release-2.1.0-rc1
+02:19:43.702 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-9] DEBUG c.g.g.lambda.impl.actor.IntakeActor - RESPONSE QUEUE : amq.gen-Pr8ZlR_6mohhAGa9eglR5w
+02:19:43.703 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] DEBUG c.g.g.lambda.impl.actor.IntakeActor - RESPONSE QUEUE : amq.gen-Y0FRLPgRcMPgmHNsRpHDuw
+02:19:43.703 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.lambda.impl.actor.IntakeActor - RESPONSE QUEUE : amq.gen-bx_PkRyLG7jQKjC5zU7l6A
+02:19:43.707 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-7] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Configuring RESPONSE queue : (default-listen-exchange, default-response-topic.2.#)
+02:19:43.707 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.IntakeActor - Configuring RESPONSE queue : (default-listen-exchange, default-response-topic.3.#)
+02:19:43.743 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cmd       : bin/gestalt-laser-executor-js
+02:19:43.744 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	name      : js
+02:19:43.745 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime   : nashorn
+02:19:43.758 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id        : 6dc0b930-de9c-4a26-b3ca-491981dbc8c6
+02:19:43.763 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool   : 0
+02:19:43.775 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (nashorn) -> id(6dc0b930-de9c-4a26-b3ca-491981dbc8c6)
+02:19:43.777 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading sizes for nashorn...
+02:19:43.806 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-7] DEBUG c.g.g.lambda.impl.actor.IntakeActor - RESPONSE QUEUE : amq.gen-ehcFeWL1BWqwFSerhVN2fQ
+02:19:43.818 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.837 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.1 -> 0.1)
+02:19:43.839 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.843 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (Some(1) -> Some(1))
+02:19:43.845 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 26e14f15-3fdf-40d9-ac37-f651f07867ea
+02:19:43.854 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nashorn): 
+02:19:43.857 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.863 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.891 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.2 -> 0.2)
+02:19:43.892 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.893 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.905 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 934d0b4c-fb75-4dda-ba51-1447a9a34688
+02:19:43.905 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nashorn): 
+02:19:43.907 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.908 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.910 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.911 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.4 -> 0.4)
+02:19:43.911 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.912 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.914 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 475a990b-7259-44c0-9492-d45f181de232
+02:19:43.914 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nashorn): 
+02:19:43.915 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.915 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.915 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.917 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.918 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:43.923 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.924 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.924 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 7f86189d-08e0-48eb-8e2b-c53a60196bd1
+02:19:43.924 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nashorn): 
+02:19:43.925 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.928 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.929 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.929 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:43.930 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.931 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:43.931 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:43.934 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.934 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : d5472a2f-8e49-4d1c-8682-266f83a375cb
+02:19:43.934 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nashorn): 
+02:19:43.935 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.935 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.935 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.936 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:43.936 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:43.937 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.938 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (1.0 -> 1.0)
+02:19:43.938 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:43.939 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.939 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 833d2ba7-ff10-4c75-ad9b-8683d40ebeb8
+02:19:43.939 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nashorn): 
+02:19:43.941 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.941 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.941 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.941 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:43.942 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:43.943 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 1.0, 1024, None )
+02:19:43.950 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.IntakeActor - RESPONSE QUEUE : amq.gen-m3oiOns5kYNQ4Drxb7291g
+02:19:43.954 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading custom executor...
+02:19:43.955 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	image     : galacticfog/gestalt-laser-executor-nodejs:release-2.1.0-rc1
+02:19:43.955 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cmd       : bin/gestalt-laser-executor-nodejs
+02:19:43.955 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	name      : nodejs
+02:19:43.955 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime   : nodejs
+02:19:43.955 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id        : 0b83ec79-a61c-4d2b-98f1-9e7bc19eaa89
+02:19:43.956 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool   : 0
+02:19:43.956 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (nodejs) -> id(0b83ec79-a61c-4d2b-98f1-9e7bc19eaa89)
+02:19:43.957 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading sizes for nodejs...
+02:19:43.958 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.958 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.1 -> 0.1)
+02:19:43.958 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.958 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (Some(1) -> Some(1))
+02:19:43.958 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 413dc0b9-fbea-4043-abe6-630e429a0b9e
+02:19:43.959 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nodejs): 
+02:19:43.959 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.2 -> 0.2)
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 800c058b-f001-4e15-9220-7af8b2e5d2c7
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nodejs): 
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.960 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.961 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.964 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.4 -> 0.4)
+02:19:43.965 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.965 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.966 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : a755ff7e-1dfd-4e6f-a33f-e9b3c3fdd536
+02:19:43.966 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nodejs): 
+02:19:43.967 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.967 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.967 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.987 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.987 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:43.988 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:43.988 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.988 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : bca27b1e-7b59-4c63-bdde-8bdda24bb50a
+02:19:43.988 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nodejs): 
+02:19:43.988 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.988 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.989 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.989 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:43.990 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.990 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:43.990 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:43.990 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.990 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 1a4a71ad-3229-419f-a3ba-8e70ba700605
+02:19:43.990 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nodejs): 
+02:19:43.990 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.991 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.991 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.991 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:43.991 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:43.992 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:43.992 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (1.0 -> 1.0)
+02:19:43.992 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:43.992 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:43.992 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 27ad63c1-5851-4215-8004-3540a4faa03a
+02:19:43.992 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (nodejs): 
+02:19:43.993 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:43.993 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:43.993 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:43.993 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:43.993 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:43.993 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 1.0, 1024, None )
+02:19:44.001 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading custom executor...
+02:19:44.001 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	image     : galacticfog/gestalt-laser-executor-jvm:release-2.1.0-rc1
+02:19:44.001 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cmd       : bin/gestalt-laser-executor-jvm
+02:19:44.001 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	name      : jvm
+02:19:44.001 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime   : java;scala
+02:19:44.001 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id        : 21a359d8-ec4f-46d4-a2cf-196ee3d4a8ec
+02:19:44.001 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool   : 0
+02:19:44.002 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (java) -> id(21a359d8-ec4f-46d4-a2cf-196ee3d4a8ec)
+02:19:44.002 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (scala) -> id(21a359d8-ec4f-46d4-a2cf-196ee3d4a8ec)
+02:19:44.002 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading sizes for java;scala...
+02:19:44.003 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.004 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.1 -> 0.1)
+02:19:44.004 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.004 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (Some(1) -> Some(1))
+02:19:44.016 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 61bf402d-cdbf-41a6-89fd-8a9c5ff81536
+02:19:44.016 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (java;scala): 
+02:19:44.016 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.017 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.017 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.2 -> 0.2)
+02:19:44.017 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.017 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.017 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : bbc43606-fd4c-403e-b215-72016027f4a6
+02:19:44.017 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (java;scala): 
+02:19:44.018 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.018 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.019 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.019 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.4 -> 0.4)
+02:19:44.019 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.019 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.019 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 3dc1ab71-810c-45e5-8828-cbaeaee07d8a
+02:19:44.020 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (java;scala): 
+02:19:44.020 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.020 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.020 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.021 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.021 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.021 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.021 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.022 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 84a2b084-5f94-48f7-9923-20bfcb9585a2
+02:19:44.022 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (java;scala): 
+02:19:44.022 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.022 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.022 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.023 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.023 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.023 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.023 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.024 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.024 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 563f62e0-3a58-4f1d-b63b-c8395c837f9c
+02:19:44.024 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (java;scala): 
+02:19:44.024 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.024 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.024 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.024 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.025 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.026 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.026 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (1.0 -> 1.0)
+02:19:44.026 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.026 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.026 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 6c641209-0c48-497e-8381-5ae606c533da
+02:19:44.026 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (java;scala): 
+02:19:44.026 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.027 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.027 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.027 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.027 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.027 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 1.0, 1024, None )
+02:19:44.031 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading custom executor...
+02:19:44.031 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	image     : galacticfog/gestalt-laser-executor-dotnet:release-2.1.0-rc1
+02:19:44.031 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cmd       : bin/gestalt-laser-executor-dotnet
+02:19:44.031 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	name      : dotnet
+02:19:44.031 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime   : csharp;dotnet
+02:19:44.031 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id        : caaaf9d8-d13b-40f2-84b0-e72916d2e5ee
+02:19:44.031 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool   : 0
+02:19:44.032 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (csharp) -> id(caaaf9d8-d13b-40f2-84b0-e72916d2e5ee)
+02:19:44.032 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (dotnet) -> id(caaaf9d8-d13b-40f2-84b0-e72916d2e5ee)
+02:19:44.032 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading sizes for csharp;dotnet...
+02:19:44.035 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.037 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.1 -> 0.1)
+02:19:44.038 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.039 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (Some(1) -> Some(1))
+02:19:44.039 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : b2c22c14-0e5f-47d9-a63c-999813956acf
+02:19:44.039 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (csharp;dotnet): 
+02:19:44.041 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.050 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.051 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.2 -> 0.2)
+02:19:44.052 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.052 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.053 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 628a625d-7bf7-4786-8978-1152f9fe9814
+02:19:44.054 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (csharp;dotnet): 
+02:19:44.054 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.054 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.055 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.055 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.4 -> 0.4)
+02:19:44.056 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.056 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.056 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 261470f9-279e-44a7-8b2d-dc2facb7538a
+02:19:44.057 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (csharp;dotnet): 
+02:19:44.059 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.059 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.059 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.061 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.061 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.061 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.061 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.061 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 4d74779b-19a8-4ab0-b8de-a7f31689fc3f
+02:19:44.062 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (csharp;dotnet): 
+02:19:44.062 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.062 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.062 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.062 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.064 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.064 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.066 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.066 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.066 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 583dab2d-e7bb-41a2-8a87-3423d1f88db6
+02:19:44.067 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (csharp;dotnet): 
+02:19:44.067 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.067 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.067 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.068 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.068 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.069 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.069 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (1.0 -> 1.0)
+02:19:44.069 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.070 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.071 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : b3333f23-88fb-41ea-8e61-47419a257e19
+02:19:44.071 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (csharp;dotnet): 
+02:19:44.071 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.071 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.072 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.072 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.072 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.072 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 1.0, 1024, None )
+02:19:44.079 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading custom executor...
+02:19:44.079 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	image     : galacticfog/gestalt-laser-executor-python:release-2.1.0-rc1
+02:19:44.079 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cmd       : bin/gestalt-laser-executor-python
+02:19:44.079 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	name      : python
+02:19:44.079 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime   : python
+02:19:44.079 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id        : 49ff7c73-82b4-4793-946d-3e45052cdf7d
+02:19:44.080 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool   : 0
+02:19:44.080 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (python) -> id(49ff7c73-82b4-4793-946d-3e45052cdf7d)
+02:19:44.081 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading sizes for python...
+02:19:44.082 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.082 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.1 -> 0.1)
+02:19:44.082 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.083 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (Some(1) -> Some(1))
+02:19:44.083 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 6e3a78fd-3201-41c4-b4b4-d86ebe17cfcb
+02:19:44.084 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (python): 
+02:19:44.084 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.086 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.086 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.2 -> 0.2)
+02:19:44.086 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.086 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.087 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : f7d0bd58-b98b-4004-b718-967633d8e693
+02:19:44.088 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (python): 
+02:19:44.088 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.088 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.091 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.091 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.4 -> 0.4)
+02:19:44.091 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.092 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.092 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : c424e607-4418-4b98-8c51-f43ed619f292
+02:19:44.093 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (python): 
+02:19:44.093 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.094 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.094 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.096 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.096 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.096 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.097 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.098 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 37811be0-e9ae-4218-bd3e-2292f80c89b0
+02:19:44.098 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (python): 
+02:19:44.099 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.099 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.099 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.099 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.100 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.100 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.100 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.100 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.100 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 14323395-4bb8-4426-a448-17e337180b8c
+02:19:44.100 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (python): 
+02:19:44.101 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.101 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.101 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.101 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.101 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.102 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.102 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (1.0 -> 1.0)
+02:19:44.102 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.103 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.103 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 71aa2308-9c47-4495-a35f-03dda6f9ea48
+02:19:44.103 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (python): 
+02:19:44.103 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.103 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.104 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.104 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.104 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.104 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 1.0, 1024, None )
+02:19:44.108 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading custom executor...
+02:19:44.108 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	image     : galacticfog/gestalt-laser-executor-ruby:release-2.1.0-rc1
+02:19:44.108 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cmd       : bin/gestalt-laser-executor-ruby
+02:19:44.108 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	name      : ruby
+02:19:44.108 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime   : ruby
+02:19:44.108 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id        : b4c8718c-9536-492c-87a6-1a7d6ed320d2
+02:19:44.109 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool   : 0
+02:19:44.109 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (ruby) -> id(b4c8718c-9536-492c-87a6-1a7d6ed320d2)
+02:19:44.109 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading sizes for ruby...
+02:19:44.109 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.110 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.1 -> 0.1)
+02:19:44.110 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.110 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (Some(1) -> Some(1))
+02:19:44.110 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 134e5746-8471-45ec-8bf5-dfdf0db6607e
+02:19:44.111 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (ruby): 
+02:19:44.111 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.112 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.112 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.2 -> 0.2)
+02:19:44.112 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.112 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.113 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : dabf447f-6d3f-4082-8363-74c610ce6fd0
+02:19:44.113 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (ruby): 
+02:19:44.113 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.113 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.114 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.114 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.4 -> 0.4)
+02:19:44.114 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.114 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.115 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : e09aba09-951b-463b-84b1-022592825b51
+02:19:44.115 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (ruby): 
+02:19:44.115 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.116 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.116 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.117 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.118 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.118 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.118 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.118 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 3a5c652e-f953-41de-8657-bcad7f8e8518
+02:19:44.119 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (ruby): 
+02:19:44.119 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.119 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.119 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.119 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.120 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.120 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.121 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.121 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.121 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : ec41bddc-de40-41e5-b369-550bf62487a2
+02:19:44.122 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (ruby): 
+02:19:44.122 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.122 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.122 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.122 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.123 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.123 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.123 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (1.0 -> 1.0)
+02:19:44.123 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.123 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.123 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 70900f0b-838d-45eb-8d7b-08ab218842ce
+02:19:44.124 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (ruby): 
+02:19:44.124 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.124 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.124 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.124 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.124 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.124 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 1.0, 1024, None )
+02:19:44.129 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading custom executor...
+02:19:44.130 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	image     : galacticfog/gestalt-laser-executor-golang:release-2.1.0-rc1
+02:19:44.130 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cmd       : bin/gestalt-laser-executor-golang
+02:19:44.130 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	name      : golang
+02:19:44.130 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime   : golang
+02:19:44.131 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id        : f3d81132-f49f-41fd-8ee2-02fa8d6d1019
+02:19:44.131 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool   : 0
+02:19:44.132 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	runtime (golang) -> id(f3d81132-f49f-41fd-8ee2-02fa8d6d1019)
+02:19:44.132 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading sizes for golang...
+02:19:44.133 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.134 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.1 -> 0.1)
+02:19:44.134 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.134 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (Some(1) -> Some(1))
+02:19:44.135 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : aaef3ae3-fd75-4caf-8917-9a0a3e935b28
+02:19:44.135 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (golang): 
+02:19:44.135 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.147 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.152 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.2 -> 0.2)
+02:19:44.155 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.156 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.157 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 5429fa20-b804-40d3-840d-504f055104da
+02:19:44.157 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (golang): 
+02:19:44.157 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.158 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.160 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.164 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.4 -> 0.4)
+02:19:44.165 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.166 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.166 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : d9e811dd-dcbc-485e-9ec1-800e9fc8e255
+02:19:44.166 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (golang): 
+02:19:44.166 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.167 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.167 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.169 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.169 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.169 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (512 -> 512)
+02:19:44.169 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.170 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 57569bce-4a3b-4bb6-acc4-5378b8a9ca1d
+02:19:44.170 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (golang): 
+02:19:44.170 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.171 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.171 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.171 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.176 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.177 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (0.5 -> 0.5)
+02:19:44.177 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.177 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.177 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 430f560d-e188-4d39-89ae-7b8d95267a1d
+02:19:44.177 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (golang): 
+02:19:44.178 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.178 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.178 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.178 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.179 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.180 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Loading executor size rounded to next cliff...
+02:19:44.180 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	cpu     : (1.0 -> 1.0)
+02:19:44.180 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	mem     : (1024 -> 1024)
+02:19:44.180 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	minCool : (None -> None)
+02:19:44.181 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	id      : 10dd09ce-3be1-4150-8dd9-0139bca66e24
+02:19:44.181 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 executorSizes - postAdd - (golang): 
+02:19:44.181 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.1, 512, Some(1) )
+02:19:44.181 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.2, 512, None )
+02:19:44.182 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.4, 512, None )
+02:19:44.182 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 512, None )
+02:19:44.182 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 0.5, 1024, None )
+02:19:44.182 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - 	 - size ( 1.0, 1024, None )
+02:19:44.293 [main] DEBUG c.g.gestalt.lambda.LambdaFramework$ - seed nodes = [ "akka.tcp://ClusterSystem@10.1.2.219:23456" ]
+02:19:44.462 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (golang,0.1,512, 1) - CheckExecutorPool
+02:19:44.507 [main] DEBUG c.g.g.l.a.ClusterSupervisionConfigurator - Creating Cluster Supervision Strategy
+02:19:44.507 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (java;scala,0.1,512, 1) - CheckExecutorPool
+02:19:44.514 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (nashorn,0.1,512, 1) - CheckExecutorPool
+02:19:44.529 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (csharp;dotnet,0.1,512, 1) - CheckExecutorPool
+02:19:44.570 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (ruby,0.1,512, 1) - CheckExecutorPool
+02:19:44.571 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (python,0.1,512, 1) - CheckExecutorPool
+02:19:44.572 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (nodejs,0.1,512, 1) - CheckExecutorPool
+[INFO] [06/07/2018 02:19:44.749] [main] [akka.remote.Remoting] Starting remoting
+[INFO] [06/07/2018 02:19:45.596] [main] [akka.remote.Remoting] Remoting started; listening on addresses :[akka.tcp://ClusterSystem@10.1.2.219:23456]
+[INFO] [06/07/2018 02:19:45.616] [main] [akka.remote.Remoting] Remoting now listens on addresses: [akka.tcp://ClusterSystem@10.1.2.219:23456]
+[INFO] [06/07/2018 02:19:45.675] [main] [akka.cluster.Cluster(akka://ClusterSystem)] Cluster Node [akka.tcp://ClusterSystem@10.1.2.219:23456] - Starting up...
+[INFO] [06/07/2018 02:19:46.053] [main] [akka.cluster.Cluster(akka://ClusterSystem)] Cluster Node [akka.tcp://ClusterSystem@10.1.2.219:23456] - Registered cluster JMX MBean [akka:type=Cluster]
+[INFO] [06/07/2018 02:19:46.053] [main] [akka.cluster.Cluster(akka://ClusterSystem)] Cluster Node [akka.tcp://ClusterSystem@10.1.2.219:23456] - Started up successfully
+02:19:46.252 [main] INFO  play.api.Play - Application started (Prod)
+[INFO] [06/07/2018 02:19:46.415] [ClusterSystem-akka.actor.default-dispatcher-6] [akka.cluster.Cluster(akka://ClusterSystem)] Cluster Node [akka.tcp://ClusterSystem@10.1.2.219:23456] - Node [akka.tcp://ClusterSystem@10.1.2.219:23456] is JOINING, roles [controller, dc-default]
+02:19:46.491 [ClusterSystem-akka.actor.default-dispatcher-16] DEBUG c.g.g.lambda.actor.HyperScaleActor - HyperScaleActor : preStart
+[INFO] [06/07/2018 02:19:46.539] [ClusterSystem-akka.actor.default-dispatcher-6] [akka.cluster.Cluster(akka://ClusterSystem)] Cluster Node [akka.tcp://ClusterSystem@10.1.2.219:23456] - Leader is moving node [akka.tcp://ClusterSystem@10.1.2.219:23456] to [Up]
+02:19:46.718 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - CurrentClusterState : 
+02:19:46.719 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	leader : akka.tcp://ClusterSystem@10.1.2.219:23456
+02:19:46.720 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	unreachable : 
+02:19:46.721 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - CurrentClusterState : 
+02:19:46.721 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	leader : akka.tcp://ClusterSystem@10.1.2.219:23456
+02:19:46.722 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	unreachable : 
+02:19:46.722 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - CurrentClusterState : 
+02:19:46.723 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	leader : akka.tcp://ClusterSystem@10.1.2.219:23456
+02:19:46.723 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	unreachable : 
+02:19:46.723 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - CurrentClusterState : 
+02:19:46.724 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	leader : akka.tcp://ClusterSystem@10.1.2.219:23456
+02:19:46.725 [ClusterSystem-akka.actor.default-dispatcher-3] DEBUG c.g.g.lambda.actor.HyperScaleActor - 	unreachable : 
+02:19:46.820 [main] INFO  play.core.server.NettyServer - Listening for HTTP on /0.0.0.0:9000
+02:19:46.987 [GFILambdaAdapterSystem-executor-context-16] INFO  c.g.g.lambda.impl.actor.ParentActor - Bound to /0.0.0.0:9001
+02:19:49.698 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-13] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:19:50.357 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-7] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:19:50.730 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-2] DEBUG c.g.g.l.impl.actor.ConnectionActor - container bea32483-b4ac-4b5c-a953-ca1fee84ec4e is connected...
+02:19:50.732 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-7] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( bea32483-b4ac-4b5c-a953-ca1fee84ec4e )
+02:19:50.972 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/30187d91-be72-455a-abf3-2ceb93eb0b8b
+02:19:53.226 [LambdaActorSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.actor.PeriodicActor - loading periodic lambdas ...
+02:19:54.202 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/f44abb6f-0d0f-4a34-a683-e58c4f86ba54
+02:19:58.235 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/e89f47ac-2b42-47b9-90bc-a0c69a859888
+02:20:01.218 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:20:01.227 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-10] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:20:02.658 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-10] DEBUG c.g.g.l.impl.actor.ConnectionActor - container 30187d91-be72-455a-abf3-2ceb93eb0b8b is connected...
+02:20:02.658 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( 30187d91-be72-455a-abf3-2ceb93eb0b8b )
+02:20:04.013 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:20:04.020 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-13] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:20:05.308 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/a297b2c3-a490-4896-b334-6ac3d231c41c
+02:20:05.353 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.l.impl.actor.ConnectionActor - container f44abb6f-0d0f-4a34-a683-e58c4f86ba54 is connected...
+02:20:05.353 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( f44abb6f-0d0f-4a34-a683-e58c4f86ba54 )
+02:20:07.695 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/931e0415-d167-48e2-bba1-aca1349981c0
+02:20:09.632 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/5f9c0125-e0d4-4edb-82fb-bccaf75682fc
+02:20:11.280 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/dea7aa8a-7793-4f7f-bdac-2bb73bc3c877
+02:20:11.284 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - cleaning old containers...
+02:20:11.296 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor -  deleting old container 03007c49-368e-417f-a50c-ab747ddff1ef 
+02:20:11.297 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor -  deleting old container f6889541-2f92-42ca-b1c3-767ce563e8c2 
+02:20:11.297 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor -  deleting old container e972f482-3134-4fde-a37d-e808cf366346 
+02:20:11.298 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor -  deleting old container bea32483-b4ac-4b5c-a953-ca1fee84ec4e 
+02:20:12.689 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:20:13.858 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:20:15.663 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+[INFO] [06/07/2018 02:20:16.782] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] [akka://GFILambdaAdapterSystem/system/IO-TCP/selectors/$a/1] Message [akka.io.Tcp$Write] from Actor[akka://GFILambdaAdapterSystem/system/StreamSupervisor-1/$$b#1170441775] to Actor[akka://GFILambdaAdapterSystem/system/IO-TCP/selectors/$a/1#651930353] was not delivered. [1] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+02:20:16.814 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-9] ERROR c.g.g.lambda.impl.actor.ParentActor - DEAD LETTER from(Actor[akka://GFILambdaAdapterSystem/system/StreamSupervisor-1/$$b#1170441775]) -> to(Actor[akka://GFILambdaAdapterSystem/system/IO-TCP/selectors/$a/1#651930353]) : 
+	 Write(ByteString(-127, 49, 123, 34, 116, 121, 112, 101, 34, 58, 34, 104, 101, 97, 114, 116, 98, 101, 97, 116, 34, 44, 34, 100, 97, 116, 97, 34, 58, 34, 123, 92, 34, 98, 101, 97, 116, 92, 34, 58, 92, 34, 98, 101, 97, 116, 92, 34, 125, 34, 125),WriteAck)
+02:20:16.939 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-6] ERROR c.g.g.lambda.impl.actor.ParentActor - DEAD LETTER from(Actor[akka://GFILambdaAdapterSystem/user/$b#-1684873769]) -> to(Actor[akka://GFILambdaAdapterSystem/user/$b#-1684873769]) : 
+	 ProcessHeartbeat
+[INFO] [06/07/2018 02:20:16.942] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-13] [akka://GFILambdaAdapterSystem/user/$b] Message [com.galacticfog.lambda.executor.data.ProcessHeartbeat$] from Actor[akka://GFILambdaAdapterSystem/user/$b#-1684873769] to Actor[akka://GFILambdaAdapterSystem/user/$b#-1684873769] was not delivered. [2] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+02:20:17.128 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:20:30.166 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-9] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:20:30.195 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-17] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:20:31.591 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-17] DEBUG c.g.g.l.impl.actor.ConnectionActor - container dea7aa8a-7793-4f7f-bdac-2bb73bc3c877 is connected...
+02:20:31.597 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-12] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( dea7aa8a-7793-4f7f-bdac-2bb73bc3c877 )
+02:20:32.600 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-9] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:20:32.611 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-12] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:20:34.065 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.l.impl.actor.ConnectionActor - container a297b2c3-a490-4896-b334-6ac3d231c41c is connected...
+02:20:34.066 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-17] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( a297b2c3-a490-4896-b334-6ac3d231c41c )
+02:20:44.567 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] ERROR c.g.g.lambda.impl.actor.ScaleActor - cool executor (e89f47ac-2b42-47b9-90bc-a0c69a859888) has not connected for 60 seconds, shutting down...
+02:20:44.572 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Sending shutdown to connection actor for port e89f47ac-2b42-47b9-90bc-a0c69a859888
+02:20:44.587 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-18] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:20:44.608 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-17] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:20:44.631 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.lambda.impl.actor.ScaleActor - shutdown complete (e89f47ac-2b42-47b9-90bc-a0c69a859888)
+02:20:44.783 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] ERROR c.g.g.lambda.impl.actor.ScaleActor - cool executor (5f9c0125-e0d4-4edb-82fb-bccaf75682fc) has not connected for 60 seconds, shutting down...
+02:20:44.793 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] ERROR c.g.g.lambda.impl.actor.ScaleActor - cool executor (931e0415-d167-48e2-bba1-aca1349981c0) has not connected for 60 seconds, shutting down...
+02:20:44.793 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (nashorn,0.1,512, 1) - CheckExecutorPool
+02:20:44.795 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Sending shutdown to connection actor for port 5f9c0125-e0d4-4edb-82fb-bccaf75682fc
+02:20:44.796 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ScaleActor - shutdown complete (5f9c0125-e0d4-4edb-82fb-bccaf75682fc)
+02:20:44.796 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Sending shutdown to connection actor for port 931e0415-d167-48e2-bba1-aca1349981c0
+02:20:44.800 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ScaleActor - shutdown complete (931e0415-d167-48e2-bba1-aca1349981c0)
+02:20:45.014 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (ruby,0.1,512, 1) - CheckExecutorPool
+02:20:45.016 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (python,0.1,512, 1) - CheckExecutorPool
+02:20:45.354 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.l.impl.actor.ConnectionActor - container e89f47ac-2b42-47b9-90bc-a0c69a859888 is connected...
+02:20:45.355 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( e89f47ac-2b42-47b9-90bc-a0c69a859888 )
+02:20:46.473 [ClusterSystem-akka.actor.default-dispatcher-16] DEBUG c.g.g.lambda.actor.HyperScaleActor - Reconciling Hyper Executors...
+02:20:47.135 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] ERROR c.g.g.lambda.impl.actor.ParentActor - DEAD LETTER from(Actor[akka://GFILambdaAdapterSystem/user/$g#1430220260]) -> to(Actor[akka://GFILambdaAdapterSystem/user/$g#1430220260]) : 
+	 ProcessHeartbeat
+[INFO] [06/07/2018 02:20:47.138] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-19] [akka://GFILambdaAdapterSystem/user/$g] Message [com.galacticfog.lambda.executor.data.ProcessHeartbeat$] from Actor[akka://GFILambdaAdapterSystem/user/$g#1430220260] to Actor[akka://GFILambdaAdapterSystem/user/$g#1430220260] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+02:20:47.245 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:20:51.170 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-2] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:20:51.176 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-9] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:20:52.465 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] DEBUG c.g.g.l.impl.actor.ConnectionActor - container 931e0415-d167-48e2-bba1-aca1349981c0 is connected...
+02:20:52.465 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( 931e0415-d167-48e2-bba1-aca1349981c0 )
+02:20:53.020 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+02:20:55.069 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:20:56.982 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-6] ERROR c.g.g.lambda.impl.actor.ParentActor - DEAD LETTER from(Actor[akka://GFILambdaAdapterSystem/user/$h#1299635126]) -> to(Actor[akka://GFILambdaAdapterSystem/user/$h#1299635126]) : 
+	 ProcessHeartbeat
+[INFO] [06/07/2018 02:20:56.983] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] [akka://GFILambdaAdapterSystem/user/$h] Message [com.galacticfog.lambda.executor.data.ProcessHeartbeat$] from Actor[akka://GFILambdaAdapterSystem/user/$h#1299635126] to Actor[akka://GFILambdaAdapterSystem/user/$h#1299635126] was not delivered. [4] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+02:20:57.038 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:21:00.594 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/03e2d62c-cb0d-48cc-83ed-69eadf8b09ab
+02:21:09.468 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-7] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:21:09.480 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-25] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:21:09.720 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/6ba2b91b-869d-4a31-9c78-5c7c0895de97
+02:21:10.377 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-26] DEBUG c.g.g.l.impl.actor.ConnectionActor - container ad3973df-3ab4-4fd9-bc8b-1673ca45d962 is connected...
+02:21:10.377 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-10] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( ad3973df-3ab4-4fd9-bc8b-1673ca45d962 )
+02:21:12.252 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:21:12.258 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:21:13.069 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.l.impl.actor.ConnectionActor - container 03e2d62c-cb0d-48cc-83ed-69eadf8b09ab is connected...
+02:21:13.070 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( 03e2d62c-cb0d-48cc-83ed-69eadf8b09ab )
+02:21:45.200 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] ERROR c.g.g.lambda.impl.actor.ScaleActor - cool executor (6ba2b91b-869d-4a31-9c78-5c7c0895de97) has not connected for 60 seconds, shutting down...
+02:21:45.201 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Sending shutdown to connection actor for port 6ba2b91b-869d-4a31-9c78-5c7c0895de97
+02:21:45.201 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.lambda.impl.actor.ScaleActor - shutdown complete (6ba2b91b-869d-4a31-9c78-5c7c0895de97)
+02:21:45.421 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-5] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (python,0.1,512, 1) - CheckExecutorPool
+02:21:46.451 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:21:48.453 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/f312354c-4e9b-4be8-be86-508d0e3224bf
+02:22:39.571 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-26] DEBUG c.g.g.l.impl.actor.ConnectionActor - heartbeat timed out (ad3973df-3ab4-4fd9-bc8b-1673ca45d962) : 1037
+02:22:39.637 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-21] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Sending shutdown to connection actor for port ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+02:22:39.641 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-21] DEBUG c.g.g.lambda.impl.actor.ScaleActor - shutdown complete (ad3973df-3ab4-4fd9-bc8b-1673ca45d962)
+02:22:39.647 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-26] DEBUG c.g.g.l.impl.actor.ConnectionActor - heartbeat timed out (ad3973df-3ab4-4fd9-bc8b-1673ca45d962) : 1113
+02:22:39.652 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-26] DEBUG c.g.g.l.impl.actor.ConnectionActor - heartbeat timed out (ad3973df-3ab4-4fd9-bc8b-1673ca45d962) : 1118
+02:22:39.659 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-26] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor (ad3973df-3ab4-4fd9-bc8b-1673ca45d962) : ShutdownEvent
+02:22:39.661 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-26] ERROR c.g.g.lambda.impl.actor.ParentActor - DEAD LETTER from(Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772]) -> to(Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772]) : 
+	 ProcessHeartbeat
+[INFO] [06/07/2018 02:22:39.670] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-18] [akka://GFILambdaAdapterSystem/user/$i] Message [com.galacticfog.lambda.executor.data.ProcessHeartbeat$] from Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772] to Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772] was not delivered. [5] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+com.galacticfog.gestalt.lambda.impl.actor.MinorException: No hot or cool executor tracked for port ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+	at com.galacticfog.gestalt.lambda.impl.actor.ScaleActor.killPair(ScaleActor.scala:365)
+	at com.galacticfog.gestalt.lambda.impl.actor.ScaleActor$$anonfun$3.applyOrElse(ScaleActor.scala:915)
+	at akka.actor.Actor$class.aroundReceive(Actor.scala:517)
+	at com.galacticfog.gestalt.lambda.impl.actor.ScaleActor.aroundReceive(ScaleActor.scala:29)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:588)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:557)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:258)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:225)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:235)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+02:22:39.745 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-22] ERROR c.g.g.lambda.impl.actor.ParentActor - MINOR EXCEPTION : No hot or cool executor tracked for port ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+com.galacticfog.gestalt.lambda.impl.actor.MinorException: No hot or cool executor tracked for port ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+	at com.galacticfog.gestalt.lambda.impl.actor.ScaleActor.killPair(ScaleActor.scala:365)
+	at com.galacticfog.gestalt.lambda.impl.actor.ScaleActor$$anonfun$3.applyOrElse(ScaleActor.scala:915)
+	at akka.actor.Actor$class.aroundReceive(Actor.scala:517)
+	at com.galacticfog.gestalt.lambda.impl.actor.ScaleActor.aroundReceive(ScaleActor.scala:29)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:588)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:557)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:258)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:225)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:235)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+02:22:39.759 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] ERROR c.g.g.lambda.impl.actor.ParentActor - MINOR EXCEPTION : No hot or cool executor tracked for port ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+[WARN] [06/07/2018 02:22:39.748] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-22] [akka://GFILambdaAdapterSystem/user/$a/scale-actor] No hot or cool executor tracked for port ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+[WARN] [06/07/2018 02:22:39.760] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-14] [akka://GFILambdaAdapterSystem/user/$a/scale-actor] No hot or cool executor tracked for port ad3973df-3ab4-4fd9-bc8b-1673ca45d962
+02:22:39.770 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-8] ERROR c.g.g.lambda.impl.actor.ParentActor - DEAD LETTER from(Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772]) -> to(Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772]) : 
+	 ProcessHeartbeat
+[INFO] [06/07/2018 02:22:39.770] [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] [akka://GFILambdaAdapterSystem/user/$i] Message [com.galacticfog.lambda.executor.data.ProcessHeartbeat$] from Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772] to Actor[akka://GFILambdaAdapterSystem/user/$i#1586763772] was not delivered. [6] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+02:22:39.791 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-11] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (nashorn,0.1,512, 1) - CheckExecutorPool
+02:22:40.924 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-21] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:22:43.940 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-21] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/6e44e209-c6d0-4072-a6c0-4f72b945b70c
+02:22:45.514 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-23] ERROR c.g.g.lambda.impl.actor.ScaleActor - cool executor (f312354c-4e9b-4be8-be86-508d0e3224bf) has not connected for 60 seconds, shutting down...
+02:22:45.517 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-23] DEBUG c.g.g.lambda.impl.actor.ScaleActor - Sending shutdown to connection actor for port f312354c-4e9b-4be8-be86-508d0e3224bf
+02:22:45.517 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-23] DEBUG c.g.g.lambda.impl.actor.ScaleActor - shutdown complete (f312354c-4e9b-4be8-be86-508d0e3224bf)
+02:22:45.731 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-21] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : CreatePair - (python,0.1,512, 1) - CheckExecutorPool
+02:22:46.928 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-23] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - response : AhcWSResponse(204, No Content)
+02:22:49.641 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-23] DEBUG c.g.g.l.i.a.s.GestaltSchedulerActor - container href : /root/environments/d5b576ea-06b6-41c1-abfc-f42c39574bd2/containers/e51ed241-57db-4552-ad8d-d9120237f5e1
+02:22:57.506 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-20] DEBUG c.g.g.lambda.impl.actor.ParentActor - *** handling new executor connection ***
+02:22:57.521 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-2] DEBUG c.g.g.l.impl.actor.ConnectionActor - ConnectionActor :: Connected
+02:22:58.087 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-18] DEBUG c.g.g.l.impl.actor.ConnectionActor - container 6e44e209-c6d0-4072-a6c0-4f72b945b70c is connected...
+02:22:58.087 [GFILambdaAdapterSystem-akka.actor.default-dispatcher-4] DEBUG c.g.g.lambda.impl.actor.ScaleActor - ScaleActor : Ready( 6e44e209-c6d0-4072-a6c0-4f72b945b70c )

@@ -29,8 +29,7 @@ install_namespace="${install_prefix}-system"
 check_kubeconfig
 check_for_kube
 check_for_helm
-# check_for_existing_namespace
-check_for_required_namespace
+create_or_check_for_required_namespace
 check_for_prior_install
 
 download_fog_cli

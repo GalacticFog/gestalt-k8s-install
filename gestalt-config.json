@@ -1,0 +1,235 @@
+{
+  "database": {
+    "username": "$DATABASE_USERNAME",
+    "password": "$DATABASE_PASSWORD",
+    "host": "$DATABASE_HOSTNAME",
+    "port": $DATABASE_PORT,
+    "protocol": "http"
+  },
+  "security": {
+    "protocol": "$SECURITY_PROTOCOL",
+    "host": "$SECURITY_HOSTNAME",
+    "port": $SECURITY_PORT,
+    "key": "$SECURITY_KEY",
+    "secret": "$SECURITY_SECRET"
+  },
+  "caas": {
+    "url" : null,
+    "username" : null,
+    "password" : null,
+    "kubeconfig": "YXBpVmVyc2lvbjogdjEKY2x1c3RlcnM6Ci0gY2x1c3RlcjoKICAgIGluc2VjdXJlLXNraXAtdGxzLXZlcmlmeTogdHJ1ZQogICAgc2VydmVyOiBodHRwczovL2t1YmVybmV0ZXMuZGVmYXVsdAogIG5hbWU6IGRvY2tlci1mb3ItZGVza3RvcC1jbHVzdGVyCmNvbnRleHRzOgotIGNvbnRleHQ6CiAgICBjbHVzdGVyOiBkb2NrZXItZm9yLWRlc2t0b3AtY2x1c3RlcgogICAgdXNlcjogZG9ja2VyLWZvci1kZXNrdG9wCiAgbmFtZTogZG9ja2VyLWZvci1kZXNrdG9wCmN1cnJlbnQtY29udGV4dDogZG9ja2VyLWZvci1kZXNrdG9wCmtpbmQ6IENvbmZpZwpwcmVmZXJlbmNlczoge30KdXNlcnM6Ci0gbmFtZTogZG9ja2VyLWZvci1kZXNrdG9wCiAgdXNlcjoKICAgIGNsaWVudC1jZXJ0aWZpY2F0ZS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNNVJFTkRRV1I1WjBGM1NVSkJaMGxKV1ZGYWFGVlhNRkZ0UjBsM1JGRlpTa3R2V2tsb2RtTk9RVkZGVEVKUlFYZEdWRVZVVFVKRlIwRXhWVVVLUVhoTlMyRXpWbWxhV0VwMVdsaFNiR042UVdWR2R6QjRUMFJCTVUxRWEzaFBWRUV5VFdwT1lVWjNNSGhQVkVFeVRVUmpkMDFFVFhwT1JFWmhUVVJaZUFwR2VrRldRbWRPVmtKQmIxUkViazQxWXpOU2JHSlVjSFJaV0U0d1dsaEtlazFTYzNkSFVWbEVWbEZSUkVWNFNtdGlNazV5V2xoSmRGcHRPWGxNVjFKc0NtTXlkREJpTTBGM1oyZEZhVTFCTUVkRFUzRkhVMGxpTTBSUlJVSkJVVlZCUVRSSlFrUjNRWGRuWjBWTFFXOUpRa0ZSUTJrNWVGSTVjRVI2THpJMmJEZ0taRW8xUjJKeFV6bEpTek5pYzBaRFFrZHRSMUJQZFdoMVowZFVXVFJ2T1VWU1QwbEZORzFZWmxaT1dUaElZV0prY0hkTFJIWXZhVVY1VUVKSWFWbG1RUXBOV1dSbE1WUTNaelJ3TUdsNVkyazBkazVDY0daM1EwcHNPRU4wUW5oUVZHUTJVRVJ1VW5JNWVIRmtTa2xUWm1FclpITk9keXRZZHpaQ1ZXaEZXa3RPQ2s4clptdEJRbWRwZVUxT2FTczRZM2NyV0RSc1JGaE9NMW8wTUVwelNsQnZTWEZyUVZwa04yZDJPRU5pZG5sbmVuY3dSRkp5T0RFcmNtaHlXV1prU0ZBS1NGZDFPRTE0ZDFRM01XZERZa0YyWjBsS1IzTTFhMVl2UzBONFUzY3dMMjAxVjNCdU1VNUpMMDFOVkVnNE9VNU1PVlZyWVRWSFZVUmhRMDUwVUVSUFlRcHdObkJVZG10cWIzcExWVE5wV1dsQ09WaFllVUZYU0RWUWRsQnpiRlo1YkRsaFp6WlpPWEEyZFZBcmJVSTJPRkZ3U2taUmNHaFVNa05hZWt4TmIydEhDbEZVWTJJclpucFNRV2ROUWtGQlIycEtla0ZzVFVFMFIwRXhWV1JFZDBWQ0wzZFJSVUYzU1VadlJFRlVRbWRPVmtoVFZVVkVSRUZMUW1kbmNrSm5SVVlLUWxGalJFRnFRVTVDWjJ0eGFHdHBSemwzTUVKQlVYTkdRVUZQUTBGUlJVRkNVQ3R3YzNSTGJFbEpka2R1TjJ4T1JXY3pSMFZ1UTNObGJFcGxZM0psUmdwS2NTOUdRbmh2WWs5bGVFNTFOVFYyVFU1MVVVbGpTbW96WW1saFZFeFljRVpOYld0aWQzZFdVWGd5YlhKUVEwSTRSWEJLWW5WdlRYZ3JXV2QzVDJKSENtVkxRMEl6VlV4SmVtbHVWRmh5UWxwdVVuWTFTM0ZGUlN0M2VGVk5ZazlPY2tsUFlVNW5hMEpwUTJ4UE1WRk1iRk5OYVRNMlNHOURWMjFPVXpSUmQxQUtXWGRZTlRaS2RuSk1UMEZrWVRkbmMzcFZTR1p5YnpSWFJpdERjRWxTUldFMlNTdDBTakpaZUVSd1VrdERNWGRRVG00eE9UTTVja2N6U1dwRU1IaEhUd3BMYVU5SmRtaFhZbTlGUzAxNVJHWmhPVE4xVDJka2NsbHBkM2hHTUN0dVZYUnVSakZGYWtScVRXTTJNMEV3VjJ4dE0xbERVbnBqTnl0M05ETnpTazFvQ21adVJFbGhaMDlUV1dZMlRFNVJOMVpoVnpsdU0xUlVaMU5HWjBaSU4wSkliSGwwVTNkMFNuZGpVVzkwTXpkWU9WcFpMeTlCZHowOUNpMHRMUzB0UlU1RUlFTkZVbFJKUmtsRFFWUkZMUzB0TFMwSwogICAgY2xpZW50LWtleS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJTVTBFZ1VGSkpWa0ZVUlNCTFJWa3RMUzB0TFFwTlNVbEZiM2RKUWtGQlMwTkJVVVZCYjNaalZXWmhVVGd2T1hWd1praFRaVkp0Tm10MlUwTjBNamRDVVdkU2NHaHFlbkp2WW05Q2F6SlBTMUJTUlZScENrSlBTbXd6TVZSWFVFSXliVE5oWTBObk55ODBhRTFxZDFJMGJVaDNSRWRJV0hSVkt6UlBTMlJKYzI1SmRVeDZVV0ZZT0VGcFdtWkJjbEZqVkRBelpXb0tkelV3WVM5allXNVRVMFZ1TW5adVlrUmpVR3c0VDJkV1NWSkhVMnBVZG00MVFVRlpTWE5xUkZsMmRraE5VR3dyU2xFeGVtUXlaVTVEWWtOVU5rTkxjQXBCUjFobE5Fd3ZRVzAzT0c5Tk9FNUJNR0V2VG1aeE5HRXlTRE5TZW5neGNuWkVUV05GS3psWlFXMTNURFJEUTFKeVQxcEdabmxuYzFWelRsQTFkVlp4Q2xvNVZGTlFla1JGZUM5UVZGTXZWa3BIZFZKc1FUSm5hbUpVZDNwdGNXVnhWVGMxU1RaTmVXeE9ORzFKWjJaV01UaG5SbWdyVkRkNk4wcFdZM0JtVjI4S1QyMVFZV1Z5YWk5d1oyVjJSVXRUVWxWTFdWVTVaMjFqZVhwTFNrSnJSVE5ITDI0NE1GRkpSRUZSUVVKQmIwbENRVkZEWXpWS1IyMXpTazVHY0V3MVZRcHZjRmR4Y1RKVlVUZEZRbFp5UkdGc1VreGxLMUpJUmpONVZXSlBRVGRxTkdWbVV6ZDZVbVJWTTNkR2RWZFJTRWxxWW5ndlExUm5RelZ6TVd4dlowOHJDbmhxUWxVellYRjFjVm95Y3pJeVdGTmlXREpqZHpObVNpOHZObmN4YjNGQk5HTk5XbFpqZVdodVJIQTNlbXczYm1zdmMxRkZjRlI1ZWxFeGFXazVPWGtLT1RoVE1raHNNR1ZTTDJwTUswTm9ObVozYVhsT1dGQXZPV2RMZWpKMlIwaFVja00yVjBaUFoySmpTbnBITlU5SlNGVk9UMk4wYkZSemIyNUlSalF2ZFFvck5XSktjbEZHU1RkWk9EazRWVlEwT0dsQ1QxbFBlRUZ2ZVdWUU5rUmhkSGN5ZWpSalYzbHdaVWhpYlhodmNteDNlVTlWVXpBMlJXYzJaM1l2ZEdwTkNsSmhabXBHTnpWWlpGSnNhVFV2TjFSRWJWRjNhVEJsTm5OVlJGUkxLMXBVUW5sblpVWkZURGw1THpjeVEwaEZOM1ZXUW1SQmJERXZWQ3M0U2trdlRrMEtXR2N5ZEdWWVMxSkJiMGRDUVUxSVlUQk5ZbWRsZUc0clJuTktNRU5GUVdzMFkxbzNVMjEwY0RaTloxSXZRV2RSYVVwTFpWQkxlRkJLYkVGUWEwWlpNZ3B5ZURJcmJFUTNWekpyV21oeVNIVkhieTlrVUUxWk0zbGFOVXBXTmt4c01qaERia2xpTkdGdWNuZEpha0o2VW0xaUszQkZUVVlyYkhsQlluUkxSM0JQQ2xkeldtaEJaVWxhUkZBNFVtWk9XbTVXYTJGRmMwaGFlVlUzZEd0NFltdzVRazB5Y2xVMlIwWjNja0pOZUZKd05tZG1hREpOYjFwV1FXOUhRa0ZPWXpFS1QzcHZUMVZsZVVOMlVHNVNabk5SWTJKa05sTmlOMnBxT1hoaVZGQmxRWEI2WWxJNFlXdE5Oa3BFU1V4M2NWTTRNbTAyYzNObk1uQnBWSGxMZUc1dFdRcHliRGQ0YmsxSmFYZFZla1l4Y1dkWlRtTkRkR3M1V0ZKbFRGSklSekprWjFwd1lVSnJNemhWVjJwWFVqSkRjV1EzTVcxaVlsaHdRM0puY1VKR05XNTVDbXRMTld0d2VsaFNjbkJQUkM5bFFXVXpkbFZrZEVwcVJXbG1SWE12ZG5ZME9VUkxSR3BuUTA1QmIwZEJaRU5PUXpGNFRXWjZVbVY2ZWxCWE1VSTNSRkVLTjNCa2IyOHlaVVpDVnk4ME0xZEJRMWxyZVZseWRXRlJXRzlEYTJsWVNXcG5XamwxYzNsTlNFUkJiSGxUTWsxRWEzRlBTVmhpUlhaTFlsWTRVWEpwYkFvNE0wcFpiRzlUV2xSYU9YTnljRVE0VmxrMVlYRk5USEZVYmxGQmRGbGxVbnBMTTB4aloyaDFRamxaVkZFeVVWQm9VbTU2Yld4TGRVcFhUMlpNV25obUNuQXhVVkZQTkVkdFpsQmlVbFY1WVRNdlVVaGlSRk13UTJkWlFURnhjVWRrV21GeVMxWjNVRE5NUjFnelZUZDFWMVZIUVhBNVJHUlBOblJwTkZOT1Vua0tWMDFDVEVOWWJYcFFWRzFLZVZWeFZGcE9PVEpDY25kb1lUa3pOSFp5Ykd4R1l6RnZiMFJCYVVSQlpuVnVWRXg1V0VwaVRVMUdUbmRoV0dOTkwxZzBNd3AwUWtweVJURkZNMjlMYjA5WWNHOXpaREZWUTNONFVXaHlTRmRPVURJNFV5OXBhWGRvUW5sTWVuUlBSbWt3TVVGU1QzTm1WMWwxYjNBdlltbE5VQzg0Q21oTkwzQnNVVXRDWjBoWlJHZ3dSV0prYjNoT1ZrSjFOREp6Wkd3eGF6aG5VMkpOWTNKb1ZrWkZjRlZPVDBOTGJYQnBTakJ5Y1ZRNFJVMWpiQzlOWVU0S2Qyb3dSemhwYUVOSlZYSmpiVEpyTm1sclJFRlpOMFJRUmpGMU1rVjJjMmRwZDFCaFNVUlBZVTl6YldKNmVYSnFNbFpVVVVsQ1VHUmtRa0Z3UlhsclF3cDBLek0zTmxGNlRHdDBURTFwVG5wNFFsVjZVSFJaZFROdmJDdDBOMUZ5YWpCbVlsaFBjR1ZVUVU0MWVsQkZVSFZJTDNjMENpMHRMUzB0UlU1RUlGSlRRU0JRVWtsV1FWUkZJRXRGV1MwdExTMHRDZz09Cg=="
+  },
+  "laser": {
+    "dbName": "laser-db",
+    "laserImage" : "galacticfog/gestalt-laser:release-2.1.0-rc1",
+	"laserCpu" : 0.25,
+	"laserMem" : 1024,
+    "laserMaxCoolConnectionTime" : 60,
+    "laserExecutorHeartbeatPeriod" : 5000,
+    "laserExecutorHeartbeatTimeout" : 5000,
+    "globalMinCoolExecutors" : 1,
+    "globalScaleDownTimeSecs" : 15,
+    "computeUsername": "$SECURITY_KEY",
+    "computePassword": "$SECURITY_SECRET",
+    "computeUrl": "$META_URL",
+    "monitorExchange": "default-monitor-echange",
+    "monitorTopic": "default-monitor-topic",
+    "responseExchange": "default-laser-exchange",
+    "responseTopic": "default-response-topic",
+    "listenExchange": "default-listen-exchange",
+    "listenRoute": "default-listen-route",
+	"executors" : [
+
+
+      {
+        "image" : "galacticfog/gestalt-laser-executor-js:release-2.1.0-rc1",
+				"name" : "js",
+				"cmd" : "bin/gestalt-laser-executor-js",
+				"runtime" : "nashorn",
+				"metaType" : "Nashorn",
+        "extraEnv": {
+          "MIN_COOL": "0",
+          "SIZES_0_CPU": "0.1",
+          "SIZES_0_MEM": "512",
+          "SIZES_1_CPU": "0.2",
+          "SIZES_1_MEM": "512",
+          "SIZES_2_CPU": "0.4",
+          "SIZES_2_MEM": "512",
+          "SIZES_3_CPU": "0.5",
+          "SIZES_3_MEM": "512",
+          "SIZES_4_CPU": "0.5",
+          "SIZES_4_MEM": "1024",
+          "SIZES_5_CPU": "1",
+          "SIZES_5_MEM": "1024",
+          "SIZES_0_MIN_COOL": "1"
+        }
+			}
+,
+      {
+        "image" : "galacticfog/gestalt-laser-executor-nodejs:release-2.1.0-rc1",
+				"name" : "nodejs",
+				"cmd" : "bin/gestalt-laser-executor-nodejs",
+				"runtime" : "nodejs",
+				"metaType" : "NodeJS",
+        "extraEnv": {
+          "MIN_COOL": "0",
+          "SIZES_0_CPU": "0.1",
+          "SIZES_0_MEM": "512",
+          "SIZES_1_CPU": "0.2",
+          "SIZES_1_MEM": "512",
+          "SIZES_2_CPU": "0.4",
+          "SIZES_2_MEM": "512",
+          "SIZES_3_CPU": "0.5",
+          "SIZES_3_MEM": "512",
+          "SIZES_4_CPU": "0.5",
+          "SIZES_4_MEM": "1024",
+          "SIZES_5_CPU": "1",
+          "SIZES_5_MEM": "1024",
+          "SIZES_0_MIN_COOL": "0"
+        }
+			}
+,
+      {
+        "image" : "galacticfog/gestalt-laser-executor-jvm:release-2.1.0-rc1",
+				"name" : "jvm",
+				"cmd" : "bin/gestalt-laser-executor-jvm",
+				"runtime" : "java;scala",
+				"metaType" : "Java",
+        "extraEnv": {
+          "MIN_COOL": "0",
+          "SIZES_0_CPU": "0.1",
+          "SIZES_0_MEM": "512",
+          "SIZES_1_CPU": "0.2",
+          "SIZES_1_MEM": "512",
+          "SIZES_2_CPU": "0.4",
+          "SIZES_2_MEM": "512",
+          "SIZES_3_CPU": "0.5",
+          "SIZES_3_MEM": "512",
+          "SIZES_4_CPU": "0.5",
+          "SIZES_4_MEM": "1024",
+          "SIZES_5_CPU": "1",
+          "SIZES_5_MEM": "1024",
+          "SIZES_0_MIN_COOL": "0"
+        }
+			}
+,
+      {
+        "image" : "galacticfog/gestalt-laser-executor-dotnet:release-2.1.0-rc1",
+				"name" : "dotnet",
+				"cmd" : "bin/gestalt-laser-executor-dotnet",
+				"runtime" : "csharp;dotnet",
+				"metaType" : "CSharp",
+        "extraEnv": {
+          "MIN_COOL": "0",
+          "SIZES_0_CPU": "0.1",
+          "SIZES_0_MEM": "512",
+          "SIZES_1_CPU": "0.2",
+          "SIZES_1_MEM": "512",
+          "SIZES_2_CPU": "0.4",
+          "SIZES_2_MEM": "512",
+          "SIZES_3_CPU": "0.5",
+          "SIZES_3_MEM": "512",
+          "SIZES_4_CPU": "0.5",
+          "SIZES_4_MEM": "1024",
+          "SIZES_5_CPU": "1",
+          "SIZES_5_MEM": "1024",
+          "SIZES_0_MIN_COOL": "0"
+        }
+			}
+,
+      {
+        "image" : "galacticfog/gestalt-laser-executor-python:release-2.1.0-rc1",
+				"name" : "python",
+				"cmd" : "bin/gestalt-laser-executor-python",
+				"runtime" : "python",
+				"metaType" : "Python",
+        "extraEnv": {
+          "MIN_COOL": "0",
+          "SIZES_0_CPU": "0.1",
+          "SIZES_0_MEM": "512",
+          "SIZES_1_CPU": "0.2",
+          "SIZES_1_MEM": "512",
+          "SIZES_2_CPU": "0.4",
+          "SIZES_2_MEM": "512",
+          "SIZES_3_CPU": "0.5",
+          "SIZES_3_MEM": "512",
+          "SIZES_4_CPU": "0.5",
+          "SIZES_4_MEM": "1024",
+          "SIZES_5_CPU": "1",
+          "SIZES_5_MEM": "1024",
+          "SIZES_0_MIN_COOL": "0"
+        }
+			}
+,
+      {
+        "image" : "galacticfog/gestalt-laser-executor-ruby:release-2.1.0-rc1",
+				"name" : "ruby",
+				"cmd" : "bin/gestalt-laser-executor-ruby",
+				"runtime" : "ruby",
+				"metaType" : "Ruby",
+        "extraEnv": {
+          "MIN_COOL": "0",
+          "SIZES_0_CPU": "0.1",
+          "SIZES_0_MEM": "512",
+          "SIZES_1_CPU": "0.2",
+          "SIZES_1_MEM": "512",
+          "SIZES_2_CPU": "0.4",
+          "SIZES_2_MEM": "512",
+          "SIZES_3_CPU": "0.5",
+          "SIZES_3_MEM": "512",
+          "SIZES_4_CPU": "0.5",
+          "SIZES_4_MEM": "1024",
+          "SIZES_5_CPU": "1",
+          "SIZES_5_MEM": "1024",
+          "SIZES_0_MIN_COOL": "0"
+        }
+			}
+,
+      {
+        "image" : "galacticfog/gestalt-laser-executor-golang:release-2.1.0-rc1",
+				"name" : "golang",
+				"cmd" : "bin/gestalt-laser-executor-golang",
+				"runtime" : "golang",
+				"metaType" : "GoLang",
+        "extraEnv": {
+          "MIN_COOL": "0",
+          "SIZES_0_CPU": "0.1",
+          "SIZES_0_MEM": "512",
+          "SIZES_1_CPU": "0.2",
+          "SIZES_1_MEM": "512",
+          "SIZES_2_CPU": "0.4",
+          "SIZES_2_MEM": "512",
+          "SIZES_3_CPU": "0.5",
+          "SIZES_3_MEM": "512",
+          "SIZES_4_CPU": "0.5",
+          "SIZES_4_MEM": "1024",
+          "SIZES_5_CPU": "1",
+          "SIZES_5_MEM": "1024",
+          "SIZES_0_MIN_COOL": "0"
+        }
+			}
+		]
+  },
+	"policy" : {
+		"image" : "galacticfog/gestalt-policy:release-2.1.0-rc1",
+		"rabbitExchange" : "policy-exchange",
+		"rabbitRoute" : "policy",
+		"laserUser" : "$SECURITY_KEY",
+		"laserPassword" : "$SECURITY_SECRET"
+	},
+	"kong" : {
+		"image" : "galacticfog/kong:release-2.1.0-rc1",
+        "dbName" : "kong-db",
+		"gatewayVHost" : "$EXTERNAL_GATEWAY_HOST:31113",
+        "externalProtocol" : "http",
+        "servicePort": 31113
+	},
+	"rabbit" : {
+		"host" : "gestalt-rabbit.gestalt-system",
+		"port" : 5672
+	},
+	"gateway" : {
+		"image" : "galacticfog/gestalt-api-gateway:release-2.1.0-rc1",
+		"dbName" : "gateway-db"
+	}
+}
