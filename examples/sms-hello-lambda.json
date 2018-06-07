@@ -1,6 +1,6 @@
 {
   "name": "sms-hello",
-  "description": "https://github.com/GalacticFog/lambda-examples/blob/master/js_lambda/sms.js",
+  "description": "This lambda is a single page application, that allows it's user to specify a message that will be sent to a target phone via sms.  You need to set the environment variables for the target phone number, and for your twilio account. Code is available at: https://github.com/GalacticFog/lambda-examples/blob/master/js_lambda/sms.js",
   "properties": {
     "apiendpoints": [],
     "provider": {
