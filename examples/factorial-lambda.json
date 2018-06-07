@@ -1,6 +1,6 @@
 {
   "name": "factorial",
-  "description": "https://github.com/GalacticFog/lambda-examples/blob/master/js_lambda/lambda-factorial.js",
+  "description": "This lambda shows an example of displaying a UI and calling multiple functions from a single lambda.  Code is available at: https://github.com/GalacticFog/lambda-examples/blob/master/js_lambda/lambda-factorial.js",
   "properties": {
     "provider": {
     },
