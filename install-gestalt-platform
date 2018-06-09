@@ -28,6 +28,7 @@ install_namespace="${install_prefix}-system"
 # Environment checks
 check_kubeconfig
 check_for_kube
+check_cluster_capacity
 check_for_helm
 # check_for_existing_namespace
 check_for_required_namespace
