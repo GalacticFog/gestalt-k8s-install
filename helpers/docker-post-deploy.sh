@@ -15,25 +15,9 @@ kube_ip=localhost
 kube_port=$(kubectl get svc -n gestalt-system gestalt-ui -ojsonpath='{.spec.ports[].nodePort}')
 exit_on_error "Unable to get Gestalt UI service port"
 
-echo "==================================================="
-echo "   Docker for Desktop Post-Install Configuration"
-echo "==================================================="
-echo
-echo "Adding /etc/host entries for Gestalt (requires sudo, you may be asked for your password)..."
-sudo true
-if [ $? -eq 0 ]; then
-  sudo ./helpers/remove-etc-hosts-entry.sh $gestalt_ui_ingress_host >/dev/null
-  sudo ./helpers/remove-etc-hosts-entry.sh $external_gateway_host >/dev/null
-  sudo ./helpers/add-etc-hosts-entry.sh 127.0.0.1 $gestalt_ui_ingress_host >/dev/null
-  sudo ./helpers/add-etc-hosts-entry.sh 127.0.0.1 $external_gateway_host >/dev/null
-  echo "Added Gestalt entries to /etc/hosts."
-  gestalt_login_url="$gestalt_ui_ingress_protocol://$gestalt_ui_ingress_host:$kube_port"
-else
-  echo "Warning: failed to add entries to /etc/hosts.  These should be added manually:"
-  echo "  127.0.0.1 $gestalt_ui_ingress_host"
-  echo "  127.0.0.1 $external_gateway_host"
-  gestalt_login_url="$gestalt_ui_ingress_protocol://localhost:$kube_port"
-fi
+
+# Form the Gestalt login URL
+gestalt_login_url="$gestalt_ui_ingress_protocol://$gestalt_ui_ingress_host:$kube_port"
 
 # Form the Gateway URL
 kong_namespace=$(kubectl get svc --all-namespaces -ojsonpath='{.items[?(@.metadata.name=="kng")].metadata.namespace}')

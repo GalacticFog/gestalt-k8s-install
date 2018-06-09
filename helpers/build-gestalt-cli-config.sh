@@ -81,9 +81,9 @@ if [ ! -z "$gestalt_laser_executor_js_image" ]; then
 				"runtime" : "nashorn",
 				"metaType" : "Nashorn",
         "extraEnv": {
-          "MIN_COOL": "${gestalt_laser_executor_js_mincool-0}",
+          "MIN_COOL": "0",
           $executor_sizes,
-          "SIZES_0_MIN_COOL": "1"
+          "SIZES_0_MIN_COOL": "$gestalt_laser_executor_js_mincool"
         }
 			}
 EOF
@@ -100,9 +100,9 @@ if [ ! -z "$gestalt_laser_executor_nodejs_image" ]; then
 				"runtime" : "nodejs",
 				"metaType" : "NodeJS",
         "extraEnv": {
-          "MIN_COOL": "${gestalt_laser_executor_nodejs_mincool-0}",
+          "MIN_COOL": "0",
           $executor_sizes,
-          "SIZES_0_MIN_COOL": "0"
+          "SIZES_0_MIN_COOL": "$gestalt_laser_executor_nodejs_mincool"
         }
 			}
 EOF
@@ -119,9 +119,9 @@ if [ ! -z "$gestalt_laser_executor_jvm_image" ]; then
 				"runtime" : "java;scala",
 				"metaType" : "Java",
         "extraEnv": {
-          "MIN_COOL": "${gestalt_laser_executor_jvm_mincool-0}",
+          "MIN_COOL": "0",
           $executor_sizes,
-          "SIZES_0_MIN_COOL": "0"
+          "SIZES_0_MIN_COOL": "$gestalt_laser_executor_jvm_mincool"
         }
 			}
 EOF
@@ -138,9 +138,9 @@ if [ ! -z "$gestalt_laser_executor_dotnet_image" ]; then
 				"runtime" : "csharp;dotnet",
 				"metaType" : "CSharp",
         "extraEnv": {
-          "MIN_COOL": "${gestalt_laser_executor_dotnet_mincool-0}",
+          "MIN_COOL": "0",
           $executor_sizes,
-          "SIZES_0_MIN_COOL": "0"
+          "SIZES_0_MIN_COOL": "$gestalt_laser_executor_dotnet_mincool"
         }
 			}
 EOF
@@ -157,9 +157,9 @@ if [ ! -z "$gestalt_laser_executor_python_image" ]; then
 				"runtime" : "python",
 				"metaType" : "Python",
         "extraEnv": {
-          "MIN_COOL": "${gestalt_laser_executor_python_mincool-0}",
+          "MIN_COOL": "0",
           $executor_sizes,
-          "SIZES_0_MIN_COOL": "0"
+          "SIZES_0_MIN_COOL": "$gestalt_laser_executor_python_mincool"
         }
 			}
 EOF
@@ -176,9 +176,9 @@ if [ ! -z "$gestalt_laser_executor_ruby_image" ]; then
 				"runtime" : "ruby",
 				"metaType" : "Ruby",
         "extraEnv": {
-          "MIN_COOL": "${gestalt_laser_executor_ruby_mincool-0}",
+          "MIN_COOL": "0",
           $executor_sizes,
-          "SIZES_0_MIN_COOL": "0"
+          "SIZES_0_MIN_COOL": "$gestalt_laser_executor_ruby_mincool"
         }
 			}
 EOF
@@ -195,9 +195,9 @@ if [ ! -z "$gestalt_laser_executor_golang_image" ]; then
 				"runtime" : "golang",
 				"metaType" : "GoLang",
         "extraEnv": {
-          "MIN_COOL": "${gestalt_laser_executor_golang_mincool-0}",
+          "MIN_COOL": "0",
           $executor_sizes,
-          "SIZES_0_MIN_COOL": "0"
+          "SIZES_0_MIN_COOL": "$gestalt_laser_executor_golang_mincool"
         }
 			}
 EOF
