@@ -69,7 +69,7 @@ echo "Creating Sample resources in Sandbox environment..."
 echo
 
 # Set context
-$fog set-context --org $org --workspace $workspace --environment $environment
+$fog context set --org $org --workspace $workspace --environment $environment
 exit_on_error "Failed to set context, aborting."
 
 # Create API

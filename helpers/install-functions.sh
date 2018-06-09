@@ -495,9 +495,9 @@ display_summary() {
   echo ""
   echo "         http://docs.galacticfog.com/"
   echo ""
-  echo "  - You may view a log of the installation with the following:"
+  echo "  - You login directly to the developer sandbox at:"
   echo ""
-  echo "         less gestalt-installer.log"
+  echo "         `./fog context get-browser-url`"
   echo ""
   echo "Done."
 }
