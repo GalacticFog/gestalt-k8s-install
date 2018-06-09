@@ -78,7 +78,9 @@ spec:
       value: "{{ .Values.meta.port }}"
     - name: META_PROTOCOL
       value: "{{ .Values.meta.protocol }}"
-
+    - name: META_BOOTSTRAP_PARAMS
+      value: "migrate=true"
+      
     #
     # -- Installer-provisioned services --
     #

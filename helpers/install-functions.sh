@@ -63,16 +63,52 @@ check_for_kube() {
   echo "OK - Kubernetes cluster '`kubectl config current-context`' is accessible."
 }
 
+check_cluster_capacity() {
+  echo "Checking cluster capacity..."
+  ./helpers/check-cluster-capacity
+  local check=$?
+  if [ $check -eq 10 ]; then
+    # Meets minimum capacity requirements, but not recommended.  Prompt to continue
+      do_prompt_to_continue \
+        "" \
+        "Proceed anyway?"
+  elif [ $check -ne 0 ]; then
+    # Doesn't meet minimum capacity requirements
+    exit_with_error "Cannot proceed with installation, not enough cluster resources."
+  fi
+}
+
 check_for_helm() {
-  # echo "Checking for Helm..."
+  echo "Checking for Helm..."
   helm >/dev/null 2>&1
   exit_on_error "'helm' could not be found. Install helm first."
 
-  helm version > /dev/null
-  exit_on_error "'helm' doesn't seem to be configured. Try running 'helm version' or 'helm init'"
+  helm version --tiller-connection-timeout 10 > /dev/null
+  # exit_on_error "'helm' doesn't seem to be configured. Try running 'helm version' or 'helm init'"
+  if [ $? -ne 0 ]; then
+    echo Initializing Helm...
+    helm init --upgrade
+    do_wait_for_helm
+  fi
 
-  echo "OK - Helm is installed."
+  echo "OK - Helm is ready."
 }
+
+do_wait_for_helm() {
+  echo "Waiting for Helm to be ready to complete"
+  for i in `seq 1 10`; do
+    sleep 5
+    echo -n "."
+
+    helm version --tiller-connection-timeout 10 > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+      return
+    fi
+  done
+  echo
+  exit_with_error "Helm did not initialize within expected timeframe."
+}
+
 
 create_or_check_for_required_namespace() {
   # echo "Checking for existing Kubernetes namespace '$install_namespace'..."
@@ -176,10 +212,11 @@ prompt_to_continue() {
 }
 
 do_prompt_to_continue() {
-  echo ""
-  echo -e $1
-  echo ""
-
+  if [ ! -z "$1" ]; then
+    echo ""
+    echo -e $1
+    echo ""
+  fi 
   while true; do
       read -p "$2 [y/n]: " yn
       case $yn in
