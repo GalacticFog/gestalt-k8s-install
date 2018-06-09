@@ -1,6 +1,6 @@
 {
   "name": "kafkaProducer",
-  "description": "https://github.com/GalacticFog/lambda-examples/tree/master/scala_lambda/kafka_producer",
+  "description": "This lambda generates a stream of sample data and stores it in a kafka queue.  Code is available at: https://github.com/GalacticFog/lambda-examples/tree/master/scala_lambda/kafka_producer",
   "properties": {
     "apiendpoints": [],
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/kafka-producer-assembly-0.1.jar",
