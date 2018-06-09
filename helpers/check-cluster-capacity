@@ -54,31 +54,6 @@ read_cluster_allocatable_capacity() {
   allocatable_cpu=$total_cpu
 }
 
-read_cluster_total_capacity() {
-
-  local mem=$(kubectl get node -o jsonpath='{.items[*].status.capacity.memory}')
-  local cpu=$(kubectl get node -o jsonpath='{.items[*].status.capacity.cpu}')
-
-  # Example mem output for two nodes: '8071424Ki 8071424Ki'
-  # Example cpu output for two nodes: '2 2'
-
-  # echo "'$mem'"
-  # echo "'$cpu'"
-
-  local mem_bytes=$(echo $mem | sed 's/ / + /g;s/Gi/ * 1024 Mi/g;s/Mi/ * 1024 Ki/g;s/Ki/ * 1024/g; ' | bc)
-  local mem_gb=$(echo "scale=1; $mem_bytes / 1024 / 1024 / 1024" | bc)
-
-  # echo "'$mem_bytes'"
-  # echo "'$mem_gb'"
-
-  local total_cpu=$(echo $cpu | sed 's/ / + /g;' | bc)
-  # echo "'$total_cpu'"
-
-  # Set global vars
-  capacity_mem=$mem_gb
-  capacity_cpu=$total_cpu
-}
-
 # -- Main --
 
 minimum_cpu=1
@@ -87,17 +62,16 @@ recommended_cpu=2
 recommended_mem=12
 
 read_cluster_allocatable_capacity
-read_cluster_total_capacity
 
 echo
 echo "Kubernetes cluster '$(kubectl config current-context)' appears to have the following capacity:"
-echo "  Allocatable: $allocatable_cpu CPUs and $allocatable_mem GiB of memory available."
-echo "  Total:       $capacity_cpu CPUs and $capacity_mem GiB of memory total."
+echo "  CPU:    $allocatable_cpu CPUs"
+echo "  Memory: $allocatable_mem GiB of memory available."
 echo
 
 echo "Requirements:"
-echo "  CPU:    $recommended_cpu recommended, $minimum_cpu required"
-echo "  Memory: $recommended_mem GiB recommended, $minimum_mem GiB required"
+echo "  CPU:    $minimum_cpu required ($recommended_cpu recommended)"
+echo "  Memory: $minimum_mem GiB required ($recommended_mem GiB recommended)"
 echo
 
 min_reqs_met=1
@@ -125,7 +99,7 @@ if [ ! $min_reqs_met ]; then
   echo "Error - insufficient CPU/Memory capacity!"
   echo
   echo "Cluster '$(kubectl config current-context)' does not appear to meet the minimum resource requirements for CPU and Memory."
-  echo "Please free up or provide additional CPU and/or Memory and re-try the installation."
+  echo "Please provide additional CPU and/or Memory and re-try the installation."
   echo
   exit 1
 
@@ -133,7 +107,7 @@ elif [ ! $recommended_reqs_met ]; then
   echo "Warning - Recommended CPU/Memory capacity specifications not met."
   echo
   echo "Cluster '$(kubectl config current-context)' does not appear to meet the recommended resource requirements for CPU and Memory."
-  echo "Recommend freeing up or providing additional CPU and/or Memory and re-try the installation."
+  echo "Recommend providing additional CPU and/or Memory and re-trying the installation."
   echo
   exit 10
 else

@@ -7,9 +7,11 @@ fog="./fog"
 ## Set up Gestalt Hierarchy
 ## ----------------------------------------
 
+echo --------------------------------------------
 echo "Creating sample Gestalt resources..."
+echo --------------------------------------------
 echo
-
+echo 
 $fog login $gestalt_login_url -u $gestalt_admin_username -p $gestalt_admin_password
 exit_on_error "Login failed, aborting."
 
@@ -53,6 +55,7 @@ exit_on_error "Environment creation failed, aborting."
 ## Download and Import Sample Resources
 ## ----------------------------------------
 
+
 org='sandbox'
 workspace='dev-sandbox'
 environment='dev'
@@ -60,6 +63,10 @@ kong='default-kong'
 laser='default-laser'
 api='dev-sandbox'
 caas='default-kubernetes'
+
+echo
+echo "Creating Sample resources in Sandbox environment..."
+echo
 
 # Set context
 $fog set-context --org $org --workspace $workspace --environment $environment
@@ -71,7 +78,6 @@ exit_on_error "Failed to create API resource, aborting."
 
 # Create Containers
 $fog create container -f examples/nginx-container.json --provider $caas
-
 
 ## Kafka
 
@@ -110,3 +116,6 @@ $fog create api-endpoint -f examples/factorial-api-endpoint.json --api $api --la
 $fog create api-endpoint -f examples/sales-api-endpoint.json --api $api --lambda 'sales'
 $fog create api-endpoint -f examples/slack-sales-api-endpoint.json --api $api --lambda 'slack-sales'
 $fog create api-endpoint -f examples/sms-hello-api-endpoint.json --api $api --lambda 'sms-hello'
+
+echo
+echo "Done creating sample resources."
