@@ -147,7 +147,7 @@ check_for_required_namespace() {
     echo ""
     echo "Then ensure that 'Full Control' grants are provided for the '$install_namespace/default' service account."
     echo ""
-    exit_with_error "Kubernetes namespace '$install_namespace' doesn't exists, aborting."
+    exit_with_error "Kubernetes namespace '$install_namespace' doesn't exist, aborting."
   fi
   echo "OK - Kubernetes namespace '$install_namespace' is present."
 }
@@ -258,7 +258,7 @@ accept_eula() {
                     \"name\": \"$name\",\
                     \"company\": \"$company\",\
                     \"email\": \"$email\",\
-                    \"message\": \"EULA Accepted during Gestalt Platform install on Kubernetes\",\
+                    \"message\": \"Gestalt Kubernetes Installer: EULA Accepted\",\
                     \"slackMessage\": \"\
                         \n        EULA Accepted during Gestalt Platform install on Kubernetes. \
                         \n\n          version: release-2.1.0 ($(uname))\
@@ -306,7 +306,7 @@ prompt_for_executor_config() {
 
 do_prompt_to_enable_all_executors() {
     while true; do
-        read -p "  Do you want to enable all lambda runtimes? [y/n]: " yn
+        read -p "  Do you want to enable all lambda runtimes (nodejs, dotnet, golang, jvm, python, ruby)? [y/n]: " yn
         case $yn in
             [Yy]*) return 0 ;;
             [Nn]*) return 1 ;;

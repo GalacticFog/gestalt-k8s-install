@@ -233,7 +233,7 @@ build_cli_config() {
     local os=`uname`
     local data=$(. helpers/build-gestalt-cli-config.sh)
 
-    echo "$data"
+    echo "$data" > ./gestalt-config.json
 
     if [ "$os" == "Darwin" ]; then
       gestaltcli_data=`echo "$data" | base64`
