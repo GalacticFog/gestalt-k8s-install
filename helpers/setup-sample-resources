@@ -19,14 +19,14 @@ go() {
 
     ## Schema migration and stream provider setup
 
-    # echo "Migrating Meta schema..."
-    # mkdir -p ./output
-    # $fog meta POST /migrate -f examples/meta-migrate.json --provider 'default-laser' --debug > ./output/meta-migrate.log 2>&1
-    # exit_on_error "Failed to migrate Meta schema"
+    echo "Migrating Meta schema..."
+    mkdir -p ./output
+    $fog ext meta-schema-V7-migrate -f examples/meta-migrate.json --provider 'default-laser' --debug > ./output/meta-migrate.log 2>&1
+    exit_on_error "Failed to migrate Meta schema"
 
-    # echo "Creating stream providers..."
-    # $fog meta POST /root/providers -f examples/start-stream-default.json
-    # $fog meta POST /root/providers -f examples/stop-stream-default.json
+    echo "Creating stream providers..."
+    $fog meta POST /root/providers -f examples/start-stream-default.json
+    $fog meta POST /root/providers -f examples/stop-stream-default.json
 
     $fog create org --name 'sandbox' --description 'Sandboxes' --org root
     exit_on_error "Org creation failed, aborting."

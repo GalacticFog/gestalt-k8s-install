@@ -44,7 +44,7 @@ kubectl create namespace gestalt-system
 
 ./install-gestalt-platform docker-for-desktop.conf
 ```
-The installer will tell you where it is running at, typically: http://gestalt.local:33000 or http://localhost:33000 for Docker CE for Desktop.
+The installer will tell you where it is running at, typically: http://gestalt.local:31112 or http://localhost:31112 for Docker CE for Desktop.
 
 To uninstall the software simply:
 ```

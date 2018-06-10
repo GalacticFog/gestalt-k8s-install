@@ -4,8 +4,7 @@
       "name": "streamspec-impl-v1",
       "description": "",
       "properties": {
-        "env": {
-        },
+        "env": {},
         "headers": {
           "Accept": "application/json"
         },
@@ -19,6 +18,7 @@
         "public": true,
         "runtime": "nodejs",
         "provider": {
+          "id": "REPLACE",
           "locations": []
         },
         "periodic_info": {},
