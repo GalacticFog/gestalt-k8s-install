@@ -1,5 +1,5 @@
 pull_image() {
-  echo Pulling $1...
+  # echo Pulling $1...
   docker pull $1
   echo
 }
@@ -25,7 +25,7 @@ fi
 ## Pull docker images
 
 echo
-echo "Pulling Gestalt Platform images to Docker environment"
+echo "Pulling Gestalt Platform images to local Docker environment..."
 
 pull_image $gestalt_installer_image
 
