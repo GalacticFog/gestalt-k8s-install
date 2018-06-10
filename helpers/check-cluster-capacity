@@ -65,8 +65,8 @@ read_cluster_allocatable_capacity
 
 echo
 echo "Kubernetes cluster '$(kubectl config current-context)' appears to have the following capacity:"
-echo "  CPU:    $allocatable_cpu CPUs"
-echo "  Memory: $allocatable_mem GiB of memory available."
+echo "  CPU:    $allocatable_cpu"
+echo "  Memory: $allocatable_mem GiB"
 echo
 
 echo "Requirements:"
