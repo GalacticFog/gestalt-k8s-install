@@ -4,7 +4,10 @@
     "properties": {
         "resource": "/hello-python3",
         "methods": [
-            "GET"
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
         ],
         "plugins": {
             "rateLimit": {

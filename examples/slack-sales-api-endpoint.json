@@ -4,7 +4,10 @@
     "properties": {
         "resource": "/slack-sales",
         "methods": [
-            "GET"
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
         ],
         "plugins": {
             "rateLimit": {

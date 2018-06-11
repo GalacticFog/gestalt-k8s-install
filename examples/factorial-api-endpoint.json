@@ -4,7 +4,10 @@
     "properties": {
         "resource": "/factorial-example",
         "methods": [
-            "GET"
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
         ],
         "plugins": {
             "rateLimit": {

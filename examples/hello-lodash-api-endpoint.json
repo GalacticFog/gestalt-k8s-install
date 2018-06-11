@@ -4,7 +4,10 @@
     "properties": {
         "resource": "/hello-lodash",
         "methods": [
-            "GET"
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
         ],
         "plugins": {
             "rateLimit": {

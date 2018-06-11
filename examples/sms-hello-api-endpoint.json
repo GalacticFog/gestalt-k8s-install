@@ -4,7 +4,10 @@
     "properties": {
         "resource": "/sms-hello",
         "methods": [
-            "GET"
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
         ],
         "plugins": {
             "rateLimit": {
