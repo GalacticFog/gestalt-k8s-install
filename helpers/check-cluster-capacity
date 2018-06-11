@@ -104,11 +104,7 @@ if [ ! $min_reqs_met ]; then
   exit 1
 
 elif [ ! $recommended_reqs_met ]; then
-  echo "Warning - Recommended CPU/Memory capacity specifications not met."
-  echo
-  echo "Cluster '$(kubectl config current-context)' does not appear to meet the recommended resource requirements for CPU and Memory."
-  echo "Recommend providing additional CPU and/or Memory and re-trying the installation."
-  echo
+  echo "Warning - Minimum recommended CPU/Memory capacity specifications have been met, however, it is recommended that you have at least $recommended_mem GiB memory and $recommended_cpu CPUs."
   exit 10
 else
   echo "OK - Minimum and recommended CPU/memory requirements met"

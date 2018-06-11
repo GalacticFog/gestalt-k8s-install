@@ -187,7 +187,7 @@ check_for_required_namespace() {
 check_for_prior_install() {
   # echo "Checking for prior installation..."
 
-  helm status gestalt >/dev/null 2>&1
+  $helm status gestalt >/dev/null 2>&1
   if [ $? -eq 0 ]; then
       exit_with_error "Gestalt helm deployment found, aborting."
   fi
