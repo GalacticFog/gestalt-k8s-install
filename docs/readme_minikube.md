@@ -37,12 +37,6 @@ minikube dashboard
 # Enable ingress
 minikube addons enable ingress
 
-# Install helm on the cluster
-helm init
-
-# Create Gestalt namespace
-kubectl create namespace gestalt-system
-
 # Run the Gestalt Platform installer
 ./install-gestalt-platform minikube.conf
 

@@ -9,9 +9,9 @@ A target Kubernetes cluster:
 * PV support on the underlying infrastructure
 
 A workstation for running the installer:
-* Mac OS, Linux, or Windows with Linux environment installed
+* Mac OS or Linux
 * kubectl configured for the target cluster
-* Helm installed
+* Helm installed (Optional, helm will be downloaded by the installer if not already present)
 
 ## Installation instructions
 
@@ -21,7 +21,7 @@ Refer to the installation instructions appropriate for your environment:
 
 - [Installation for Docker EE Kubernetes](./docs/readme_docker_ee.md)
 
-- [Installation for Docker CE for Desktop](./docs/readme_docker_ce_for_desktop.md)
+- [Installation for Docker CE for Desktop with Kubernetes](./docs/readme_docker_ce_for_desktop.md)
 
 - [Installation for Minikube](./docs/readme_minikube.md)
 

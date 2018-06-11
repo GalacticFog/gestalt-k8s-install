@@ -18,8 +18,14 @@ prompt_to_continue(){
 }
 
 remove_gestalt_platform() {
+  if [ -f ./helm ]; then
+    helm=./helm
+  else
+    helm=helm
+  fi
+
   name=$install_prefix
-  helm status $name >/dev/null 2>&1
+  $helm status $name >/dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "Nothing to do - Helm deployment '$name' not found."
   else
@@ -27,7 +33,7 @@ remove_gestalt_platform() {
 
     echo "Removing Helm deployment '$install_prefix' ..."
 
-    helm delete --purge $install_prefix
+    $helm delete --purge $install_prefix
   fi
 
   kubectl get namespace $install_namespace > /dev/null 2>&1

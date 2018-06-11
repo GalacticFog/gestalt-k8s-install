@@ -39,10 +39,11 @@ check_for_required_tools() {
   which sudo      >/dev/null 2>&1 ; exit_on_error "'sudo' not found, aborting."
   which true      >/dev/null 2>&1 ; exit_on_error "'true' not found, aborting."
   which read      >/dev/null 2>&1 ; exit_on_error "'read' not found, aborting."
-  which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
+  # which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
   which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' not found, aborting."
   which curl      >/dev/null 2>&1 ; exit_on_error "'curl' not found, aborting."
   which unzip     >/dev/null 2>&1 ; exit_on_error "'unzip' not found, aborting."
+  which tar       >/dev/null 2>&1 ; exit_on_error "'tar' not found, aborting."
   echo "OK - Required tools found."
 }
 
@@ -56,11 +57,20 @@ check_kubeconfig() {
 
 check_for_kube() {
   echo "Checking for Kubernetes..."
+  local kubecontext="`kubectl config current-context`"
+
+  if [ ! -z "$target_kube_context" ]; then
+      if [ "$kubecontext" != "$target_kube_context" ]; then
+      do_prompt_to_continue \
+        "Warning - The current Kubernetes context name '$kubecontext' does not match the expected value, '$target_kube_context'" \
+        "Proceed anyway?"
+      fi
+  fi
 
   kube_cluster_info=$(kubectl cluster-info)
   exit_on_error "Kubernetes cluster not accessible, aborting."
 
-  echo "OK - Kubernetes cluster '`kubectl config current-context`' is accessible."
+  echo "OK - Kubernetes cluster '$kubecontext' is accessible."
 }
 
 check_cluster_capacity() {
@@ -79,15 +89,21 @@ check_cluster_capacity() {
 }
 
 check_for_helm() {
+  helm=helm
   echo "Checking for Helm..."
   helm >/dev/null 2>&1
-  exit_on_error "'helm' could not be found. Install helm first."
+  # exit_on_error "'helm' could not be found. Install helm first."
+  if [ $? -ne 0 ]; then
+    download_helm
+  else
+    helm=helm
+  fi
 
-  helm version --tiller-connection-timeout 10 > /dev/null
+  $helm version --tiller-connection-timeout 10 > /dev/null
   # exit_on_error "'helm' doesn't seem to be configured. Try running 'helm version' or 'helm init'"
   if [ $? -ne 0 ]; then
     echo Initializing Helm...
-    helm init --upgrade
+    $helm init --upgrade
     do_wait_for_helm
   fi
 
@@ -100,7 +116,7 @@ do_wait_for_helm() {
     sleep 5
     echo -n "."
 
-    helm version --tiller-connection-timeout 10 > /dev/null 2>&1
+    $helm version --tiller-connection-timeout 10 > /dev/null 2>&1
     if [ $? -eq 0 ]; then
       return
     fi
@@ -394,7 +410,7 @@ run_helm_install() {
   [ -z "$install_namespace" ] && exit_with_error "install_namespace not defined"
   [ -z "$install_prefix" ]    && exit_with_error "install_prefix  not defined"
 
-  cmd="helm install --namespace $install_namespace ./gestalt -n $install_prefix -f $1"
+  cmd="$helm install --namespace $install_namespace ./gestalt -n $install_prefix -f $1"
   echo "Installing Gestalt Platform to Kubernetes using Helm..."
   echo "Command: $cmd"
   # $cmd > /dev/null 2>&1
@@ -452,7 +468,7 @@ prompt_or_wait_to_continue() {
 
 wait_for_install_completion() {
   echo "Waiting for Gestalt Platform installation to complete"
-  for i in `seq 1 60`; do
+  for i in `seq 1 100`; do
     echo -n "."
 
     line=$(kubectl logs -n gestalt-system gestalt-installer --tail 10 2> /dev/null)
@@ -504,6 +520,58 @@ display_summary() {
   echo "         http://docs.galacticfog.com/"
   echo ""
   echo "Done."
+}
+
+download_helm() {
+    echo "Checking for 'helm'"
+
+    if [ ! -f ./helm ]; then
+        local os=`uname`
+
+        if [ "$os" == "Darwin" ]; then
+            local url="https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-darwin-amd64.tar.gz"
+        elif [ "$os" == "Linux" ]; then
+            local url="https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-linux-amd64.tar.gz"
+        else
+            echo
+            echo "Warning: unknown OS type '$os', treating as Linux"
+            local url="https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-linux-amd64.tar.gz"
+        fi
+
+        if [ ! -z "$url" ]; then
+            echo
+            echo "Downloading helm version 2.8.2..."
+
+            curl -L $url -o helm.tar.gz
+            exit_on_error "Failed to download helm, aborting."
+
+            echo
+            echo "Extracting..."
+
+            tar xfzv helm.tar.gz
+            exit_on_error "Failed to unzip helm package, aborting."
+
+            if [ "$os" == "Darwin" ]; then
+                cp darwin-amd64/helm .
+                rm -r darwin-amd64
+            elif [ "$os" == "Linux" ]; then
+                cp linux-amd64/helm .
+                rm -r linux-amd64
+            else
+                echo
+                echo "Warning: unknown OS type '$os', treating as Linux"
+                cp darwin-amd64/helm .
+            fi
+            chmod +x ./helm
+            helm="./helm"
+
+            rm helm.tar.gz
+        fi
+    else
+      helm=./helm
+    fi
+
+    echo "OK - $helm present."
 }
 
 download_fog_cli() {
