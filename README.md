@@ -9,7 +9,7 @@ A target Kubernetes cluster:
 * PV support on the underlying infrastructure
 
 A workstation for running the installer:
-* Mac OS or Linux
+* Mac OS, Linux, or Windows with Linux environment installed
 * kubectl configured for the target cluster
 * Helm installed
 
