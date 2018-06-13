@@ -92,17 +92,17 @@ check_for_helm() {
   helm=helm
   echo "Checking for Helm..."
   helm >/dev/null 2>&1
-  # exit_on_error "'helm' could not be found. Install helm first."
   if [ $? -ne 0 ]; then
     download_helm
   else
+    echo "OK - helm client present"
     helm=helm
   fi
 
+  echo "Checking helm installation status..."
   $helm version --tiller-connection-timeout 10 > /dev/null
-  # exit_on_error "'helm' doesn't seem to be configured. Try running 'helm version' or 'helm init'"
   if [ $? -ne 0 ]; then
-    echo Initializing Helm...
+    echo "Helm/Tiller not yet initialized in Kubernetes cluster. Running 'helm init --upgrade'..."
     $helm init --upgrade
     do_wait_for_helm
   fi
@@ -111,14 +111,16 @@ check_for_helm() {
 }
 
 do_wait_for_helm() {
-  echo "Waiting for Helm to be ready to complete"
+  echo -n "Waiting for Helm/Tiller to be ready "
   for i in `seq 1 10`; do
-    sleep 5
+    sleep 10
     echo -n "."
 
-    $helm version --tiller-connection-timeout 10 > /dev/null 2>&1
+    local status=$($helm version --tiller-connection-timeout 10 2>&1)
     if [ $? -eq 0 ]; then
-      return
+      echo
+      echo "$status"
+      return 0
     fi
   done
   echo

@@ -1,11 +1,21 @@
+image_pull_success=0
+
 pull_image() {
   # echo Pulling $1...
   docker pull $1
+  if [ $? -ne 0 ]; then
+    echo
+    echo "Error pulling image '$1', trying one more time..."
+    docker pull $1
+    if [ $? -ne 0 ]; then
+      exit_with_error "Error pulling docker image, installation cannot continue."
+    fi
+  fi
   echo
 }
 
 echo "==========================================="
-echo "  Docker Pre-Install Configuration"
+echo "  Docker CE Pre-Install Configuration"
 echo "==========================================="
 echo
 

@@ -24,7 +24,13 @@ run_diagnostics() {
 
   run ./helpers/check-cluster-capacity
 
-  run helm version --tiller-connection-timeout 10
+  helm=helm
+  which helm
+  if [ $? -ne 0 ]; then
+    helm=./helm
+  fi
+
+  run $helm version --tiller-connection-timeout 10
 
   run ./fog --version
 
