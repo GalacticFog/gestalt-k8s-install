@@ -14,7 +14,7 @@
         "memory": 512,
         "timeout": 30,
         "handler": "index.js;entryPoint",
-        "package_url": "https://s3.amazonaws.com/sy-dev-bucket/lambdas/streamspec_impl.zip",
+        "package_url": "http://gestalt-meta.gestalt-system.svc.cluster.local:10131/assets/system/lambdas/streamspec_impl.zip",
         "public": true,
         "runtime": "nodejs",
         "provider": {
