@@ -28,6 +28,7 @@ gestalt_ui_ingress_protocol=http    # Must be HTTP unless ingress supports https
 [ -z $external_gateway_protocol ]      && external_gateway_protocol=http
 [ -z $gestalt_ui_service_nodeport ]    && gestalt_ui_service_nodeport=31112
 [ -z $gestalt_kong_service_nodeport ]  && gestalt_kong_service_nodeport=31113
+[ -z $gestalt_logging_service_nodeport ] && gestalt_logging_service_nodeport=31114
 
 # if [ ! -z "$PV_STORAGE_CLASS" ]; then
 #   PV_STORAGE_ANNOTATION="storageClassName: $PV_STORAGE_CLASS"
@@ -86,6 +87,12 @@ rabbit:
   port: 5672
   httpPort: 15672
 
+elastic:
+  image: $gestalt_elastic_image
+  hostname: gestalt-elastic.$install_namespace
+  restPort: 9200
+  transportPort: 9300
+
 meta:
   image: $gestalt_meta_image
   exposedServiceType: $exposed_service_type
@@ -96,6 +103,9 @@ meta:
 
 kong:
   nodePort: $gestalt_kong_service_nodeport
+
+logging: 
+  nodePort: $gestalt_logging_service_nodeport
 
 ui:
   image: $gestalt_ui_image

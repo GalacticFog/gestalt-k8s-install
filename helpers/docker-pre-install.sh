@@ -27,6 +27,7 @@ echo "Pulling Gestalt Platform images to local Docker environment..."
 pull_image $gestalt_installer_image
 
 pull_image $gestalt_rabbit_image
+pull_image $gestalt_elastic_image
 pull_image $gestalt_kong_image
 pull_image $gestalt_gateway_manager_image
 pull_image $gestalt_policy_image

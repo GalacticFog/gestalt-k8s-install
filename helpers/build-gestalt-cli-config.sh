@@ -28,6 +28,9 @@ cat - << EOF
     "laserMaxCoolConnectionTime" : 60,
     "laserExecutorHeartbeatPeriod" : 5000,
     "laserExecutorHeartbeatTimeout" : 5000,
+    "esPort": 9200,
+    "esHost": "gestalt-elastic.$install_namespace",
+    "esProtocol": "http",
     "globalMinCoolExecutors" : 1,
     "globalScaleDownTimeSecs" : 15,
     "computeUsername": "\$SECURITY_KEY",
@@ -220,6 +223,19 @@ cat - <<EOF
         "externalProtocol" : "$external_gateway_protocol",
         "servicePort": ${gestalt_kong_service_nodeport:-0}
 	},
+    "logging": {
+        "image" : "$gestalt_log_image",
+        "esClusterName": "myesdb",
+        "esComputeType": "kube",
+        "esColdDays": 1,
+        "esHotDays": 1,
+        "esServiceHost": "gestalt-elastic.$install_namespace",
+        "esServicePort": 9300,
+        "esSnapshotRepo": "",
+        "vhostOverride": "\$EXTERNAL_GATEWAY_HOST:$gestalt_logging_service_nodeport",
+        "vhostProtoOverride": "http",
+        "servicePort": ${gestalt_logging_service_nodeport:-0}
+    },
 	"rabbit" : {
 		"host" : "gestalt-rabbit.$install_namespace",
 		"port" : 5672
