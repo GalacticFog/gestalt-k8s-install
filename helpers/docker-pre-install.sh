@@ -44,3 +44,5 @@ pull_image $gestalt_laser_executor_js_image
 [ ! -z "$gestalt_laser_executor_jvm_image" ] && pull_image $gestalt_laser_executor_jvm_image
 [ ! -z "$gestalt_laser_executor_python_image" ] && pull_image $gestalt_laser_executor_python_image
 [ ! -z "$gestalt_laser_executor_ruby_image" ] && pull_image $gestalt_laser_executor_ruby_image
+
+pull_image $gestalt_laser_hyper_executor_image
