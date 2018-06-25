@@ -42,9 +42,7 @@ cat - << EOF
     "responseTopic": "default-response-topic",
     "listenExchange": "default-listen-exchange",
     "listenRoute": "default-listen-route",
-    "schedulerConfig": {
-      "hyperExecutorImg": "${gestalt_laser_hyper_executor_image}"
-    },
+    "hyperExecutorImg": "${gestalt_laser_hyper_executor_image}",
 	"executors" : [
 
 EOF
