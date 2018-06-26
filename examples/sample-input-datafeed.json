@@ -4,7 +4,7 @@
     "properties": {
         "kind": "kafka",
         "data": {
-            "format": "JSON",
+            "format": "JSON-AVRO",
             "credentials": {},
             "endpoint": "kafka:9092",
             "topic": "avro-input"

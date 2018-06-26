@@ -25,6 +25,6 @@
         "ADVERTISED_HOST": "kafka",
         "ADVERTISED_PORT": "9092"
       },
-      "memory": 2048
+      "memory": 1024
     }
   }

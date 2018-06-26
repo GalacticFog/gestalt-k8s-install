@@ -3,7 +3,7 @@
     "description": "",
     "properties": {
         "provider": "REPLACE root/default-stream-provider",
-        "cpus": 1,
+        "cpus": 0.2,
         "mem": 512,
         "parallelization": 1,
         "processor": {
