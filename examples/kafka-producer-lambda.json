@@ -16,7 +16,7 @@
     "handler": "com.galacticfog.Producer;produce",
     "runtime": "java;scala",
     "env": {
-      "KAFKA_TOPIC": "avro-output",
+      "KAFKA_TOPIC": "avro-input",
       "KAFKA_BROKERS": "REPLACE ME:9092"
     },
     "memory": 256

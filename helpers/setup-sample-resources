@@ -1,7 +1,7 @@
 #!/bin/bash
 
 fog="./fog"
-# fog=fog
+# fog="fog"
 
 go() {
 
@@ -91,7 +91,7 @@ go() {
 
     ## Kafka
 
-    $fog ext create-sample-resources --dir ./examples --provider $caas --laser-provider $laser
+    $fog ext create-sample-resources --dir ./examples --provider $caas --laser-provider $laser --stream-provider 'default-stream-provider'
     # $fog create container -f examples/kafka-container.json --provider 'default-dcos'
     # $fog create lambda -f examples/kafka-consumer-lambda.json --provider laser
     # $fog create lambda -f examples/kafka-producer-lambda.json --provider laser

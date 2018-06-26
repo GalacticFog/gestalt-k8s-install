@@ -1,0 +1,21 @@
+{
+    "name": "fizzbuzz-stream-processor",
+    "description": "Fizz Buzz Stream Processor",
+    "properties": {
+        "env": {},
+        "headers": {
+            "Accept": "text/plain"
+        },
+        "code_type": "package",
+        "compressed": false,
+        "cpus": 0.1,
+        "memory": 512,
+        "timeout": 30,
+        "handler": "com.galacticfog.FizzBuzz;fizz",
+        "package_url": "http://gestalt-meta.gestalt-system:10131/assets/system/lambdas/fizzbuzz-assembly-0.1.jar",
+        "public": true,
+        "runtime": "java;scala",
+        "periodic_info": {},
+        "apiendpoints": []
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "sample-output",
+    "description": "something interesting",
+    "properties": {
+        "kind": "kafka",
+        "data": {
+            "format": "JSON",
+            "credentials": {},
+            "endpoint": "kafka:9092",
+            "topic": "avro-output"
+        }
+    }
+}

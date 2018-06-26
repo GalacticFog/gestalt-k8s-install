@@ -1,0 +1,13 @@
+{
+    "name": "sample-input",
+    "description": "Sample input datafeed",
+    "properties": {
+        "kind": "kafka",
+        "data": {
+            "format": "JSON",
+            "credentials": {},
+            "endpoint": "kafka:9092",
+            "topic": "avro-input"
+        }
+    }
+}
