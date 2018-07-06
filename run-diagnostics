@@ -12,6 +12,8 @@ run() {
 }
 
 run_diagnostics() {
+  run uname -a
+  
   run kubectl version
 
   run kubectl cluster-info
