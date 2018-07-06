@@ -32,18 +32,20 @@ check_for_required_environment_variables() {
 
 check_for_required_tools() {
   # echo "Checking for required tools..."
-  which base64    >/dev/null 2>&1 ; exit_on_error "'base64' not found, aborting."
-  which tr        >/dev/null 2>&1 ; exit_on_error "'tr' not found, aborting."
-  which sed       >/dev/null 2>&1 ; exit_on_error "'sed' not found, aborting."
-  which seq       >/dev/null 2>&1 ; exit_on_error "'seq' not found, aborting."
-  which sudo      >/dev/null 2>&1 ; exit_on_error "'sudo' not found, aborting."
-  which true      >/dev/null 2>&1 ; exit_on_error "'true' not found, aborting."
-  which read      >/dev/null 2>&1 ; exit_on_error "'read' not found, aborting."
+  which base64    >/dev/null 2>&1 ; exit_on_error "'base64' command not found, aborting."
+  which tr        >/dev/null 2>&1 ; exit_on_error "'tr' command not found, aborting."
+  which sed       >/dev/null 2>&1 ; exit_on_error "'sed' command not found, aborting."
+  which seq       >/dev/null 2>&1 ; exit_on_error "'seq' command not found, aborting."
+  which sudo      >/dev/null 2>&1 ; exit_on_error "'sudo' command not found, aborting."
+  which true      >/dev/null 2>&1 ; exit_on_error "'true' command not found, aborting."
+  # 'read' may be implemented as a shell function rather than a separate function
+  # which read      >/dev/null 2>&1 ; exit_on_error "'read' command not found, aborting."
+  which bc        >/dev/null 2>&1 ; exit_on_error "'bc' command not found, aborting."
   # which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
-  which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' not found, aborting."
-  which curl      >/dev/null 2>&1 ; exit_on_error "'curl' not found, aborting."
-  which unzip     >/dev/null 2>&1 ; exit_on_error "'unzip' not found, aborting."
-  which tar       >/dev/null 2>&1 ; exit_on_error "'tar' not found, aborting."
+  which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' command not found, aborting."
+  which curl      >/dev/null 2>&1 ; exit_on_error "'curl' command not found, aborting."
+  which unzip     >/dev/null 2>&1 ; exit_on_error "'unzip' command not found, aborting."
+  which tar       >/dev/null 2>&1 ; exit_on_error "'tar' command not found, aborting."
   echo "OK - Required tools found."
 }
 
