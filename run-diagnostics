@@ -7,7 +7,7 @@ run() {
   echo $cmd
   echo ========================================================================================================================
   echo
-  $cmd
+  $cmd 2>&1
   echo
 }
 
@@ -18,7 +18,13 @@ run_diagnostics() {
 
   run kubectl cluster-info
 
+  run kubectl get deploy --all-namespaces
+
   run kubectl get pods --all-namespaces
+
+  run kubectl get pvc --all-namespaces
+
+  run kubectl get svc --all-namespaces
 
   run kubectl top pod --all-namespaces
 
@@ -38,7 +44,7 @@ run_diagnostics() {
 
   run ./fog status
 
-  echo "Diagnostic info written to './diagnostics/diagnostics.log'."
+  echo
 }
 
 if [ -z "$1" ]; then 
@@ -46,7 +52,9 @@ if [ -z "$1" ]; then
   rm -r ./diagnostics/*
   date > ./diagnostics/diagnostics.log
   ./run-diagnostics run_diagnostics | tee -a ./diagnostics/diagnostics.log
-  cp *.log diagnostics/
+  echo "------------------------------------gestalt-installer.log------------------------------------" >> ./diagnostics/diagnostics.log
+  cat ./gestalt-installer.log >> ./diagnostics/diagnostics.log
+  echo "Diagnostic info written to './diagnostics/diagnostics.log'."
 else
   run_diagnostics
 fi
