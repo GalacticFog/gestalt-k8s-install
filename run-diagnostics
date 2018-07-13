@@ -18,6 +18,10 @@ run_diagnostics() {
 
   run kubectl cluster-info
 
+  run kubectl config current-context
+
+  run kubectl config get-contexts
+
   run kubectl get deploy --all-namespaces
 
   run kubectl get pods --all-namespaces
@@ -25,6 +29,8 @@ run_diagnostics() {
   run kubectl get pvc --all-namespaces
 
   run kubectl get svc --all-namespaces
+
+  run kubectl get all --all-namespaces
 
   run kubectl top pod --all-namespaces
 
