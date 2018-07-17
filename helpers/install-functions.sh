@@ -533,18 +533,22 @@ download_helm() {
         local os=`uname`
 
         if [ "$os" == "Darwin" ]; then
-            local url="https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-darwin-amd64.tar.gz"
+            local helm_os="darwin"
         elif [ "$os" == "Linux" ]; then
-            local url="https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-linux-amd64.tar.gz"
+            local helm_os="linux"
         else
             echo
             echo "Warning: unknown OS type '$os', treating as Linux"
-            local url="https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-linux-amd64.tar.gz"
+            local helm_os="linux"
         fi
+
+        local helm_version="2.9.1"
+
+        local url="https://storage.googleapis.com/kubernetes-helm/helm-v$helm_version-$helm_os-amd64.tar.gz"
 
         if [ ! -z "$url" ]; then
             echo
-            echo "Downloading helm version 2.8.2..."
+            echo "Downloading helm version $helm_version..."
 
             curl -L $url -o helm.tar.gz
             exit_on_error "Failed to download helm, aborting."
@@ -564,7 +568,7 @@ download_helm() {
             else
                 echo
                 echo "Warning: unknown OS type '$os', treating as Linux"
-                cp darwin-amd64/helm .
+                cp linux-amd64/helm .
             fi
             chmod +x ./helm
             helm="./helm"
@@ -629,8 +633,10 @@ download_fog_cli() {
 }
 
 cleanup() {
-    local file=gestalt-installer.log
+    local file=./logs/gestalt-installer.log
+
     echo "Capturing installer logs to '$file'"
+    date > $file
     kubectl logs -n gestalt-system gestalt-installer >> $file
 
     echo "Deleting 'gestalt-installer' pod..."
