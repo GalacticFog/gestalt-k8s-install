@@ -12,8 +12,8 @@ pull_image() {
     if [ $? -eq 0 ]; then
       # It's possibly a known issue: https://github.com/docker/hub-feedback/issues/935
       echo
-      echo "  Error - It appears that your Docker credentials are incorrect."
-      echo "  You may be logged into docker using your email address instead of your Docker ID."
+      echo "  ERROR: It appears that your Docker credentials are incorrect, or you may be logged into Docker"
+      echo "  using your email address instead of your Docker ID."
       echo "  (Refer to issue https://github.com/docker/hub-feedback/issues/935)"
       echo
       echo "  Please either 'docker logout' or log into Docker again using your Docker ID, and try again."
