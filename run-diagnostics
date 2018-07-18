@@ -55,8 +55,7 @@ run_diagnostics() {
 
 capture_log() {
   if [ ! -f $1 ]; then 
-    echo "$1 doesn't exist."
-    echo
+    echo "$1 doesn't exist"
     return 0
   fi
   cat - <<EOF
@@ -75,11 +74,13 @@ if [ -z "$1" ]; then
 
   ./run-diagnostics run_diagnostics | tee -a ./logs/diagnostics.log
 
-  capture_log ./logs/gestalt-installer.log >> ./logs/diagnostics.log
-
   capture_log ./logs/install.log >> ./logs/diagnostics.log
 
+  capture_log ./logs/gestalt-installer.log >> ./logs/diagnostics.log
+
   echo "Diagnostic info written to './logs/diagnostics.log'." | tee -a ./logs/diagnostics.log
-else
+elif [ "$1" == "run_diagnostics" ]; then
   run_diagnostics
+else
+  echo "Usage: ./run_diagnostics"
 fi
