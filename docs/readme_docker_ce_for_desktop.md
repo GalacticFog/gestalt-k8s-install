@@ -27,3 +27,9 @@ To uninstall the software simply:
 ```
 
 In the event of an installation error, you may inspect the output of `gestalt-installer.log`, or run `./run-diagnostics`.
+
+## Known Issues
+
+* **Kubernetes not available until restart** - After installing Docker CE for the first time, Kubernetes may not function until a system restart.  Please restart MacOS after the initial install of Docker CE if you encounter problems with the install.
+
+* **Docker pull error** - The `docker pull` command may fail with `Error response from daemon: Get unauthorized: incorrect username or password` if you are logged into DockerHub using an email address rather than an Docker ID.  Please either `docker logout`, or re-login using your Docker ID instead of email address.  The issue is here: https://github.com/docker/hub-feedback/issues/935
