@@ -86,7 +86,7 @@ fi
 # Check for pre-reqs
 check_for_required_tools
 check_for_kube
-check_for_helm
+check_for_helm_no_download
 
 # Sanity check that gestalt-platform exists
 # check_for_gestalt

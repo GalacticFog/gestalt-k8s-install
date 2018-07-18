@@ -112,6 +112,20 @@ check_for_helm() {
   echo "OK - Helm is ready."
 }
 
+check_for_helm_no_download() {
+  echo "Checking for Helm..."
+  helm >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    helm=helm
+  elif [ -f ./helm ]; then
+      helm=./helm
+  fi
+
+  [ -z $helm ] && exit_with_error "Helm not found."
+
+  echo "OK - '$helm' found."
+}
+
 do_wait_for_helm() {
   echo -n "Waiting for Helm/Tiller to be ready "
   for i in `seq 1 10`; do
