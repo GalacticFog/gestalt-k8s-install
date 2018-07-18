@@ -53,14 +53,33 @@ run_diagnostics() {
   echo
 }
 
+capture_log() {
+  if [ ! -f $1 ]; then 
+    echo "$1 doesn't exist."
+    echo
+    return 0
+  fi
+  cat - <<EOF
+========================================================================================================================
+cat $1
+========================================================================================================================
+`cat $1`
+
+EOF
+}
+
 if [ -z "$1" ]; then 
-  mkdir -p diagnostics
-  rm -r ./diagnostics/*
-  date > ./diagnostics/diagnostics.log
-  ./run-diagnostics run_diagnostics | tee -a ./diagnostics/diagnostics.log
-  echo "------------------------------------gestalt-installer.log------------------------------------" >> ./diagnostics/diagnostics.log
-  cat ./gestalt-installer.log >> ./diagnostics/diagnostics.log
-  echo "Diagnostic info written to './diagnostics/diagnostics.log'."
+  mkdir -p logs
+
+  date > ./logs/diagnostics.log
+
+  ./run-diagnostics run_diagnostics | tee -a ./logs/diagnostics.log
+
+  capture_log ./logs/gestalt-installer.log >> ./logs/diagnostics.log
+
+  capture_log ./logs/install.log >> ./logs/diagnostics.log
+
+  echo "Diagnostic info written to './logs/diagnostics.log'." | tee -a ./logs/diagnostics.log
 else
   run_diagnostics
 fi
