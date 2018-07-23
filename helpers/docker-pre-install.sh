@@ -1,14 +1,14 @@
 image_pull_success=0
 
 pull_image() {
-  # echo Pulling $1...
-  output=$( docker pull $1 2>&1 )   # Note: 'local' doesn't work here - it causes the return code to be 0, and doesn't capture stdin
+  docker pull $1 2>&1 | tee output.tmp
+
+  # Note: The following check of '$?' relies on 'set -o pipefail' being set, otherwise an error with 'docker pull' will be shadowed by 
+  # 'tee' completing successfully
   if [ $? -ne 0 ]; then
 
-    echo "$output"
-
     # Check for known issue:
-    echo "$output" | grep "unauthorized: incorrect username or password" > /dev/null
+    cat output.tmp | grep "unauthorized: incorrect username or password" > /dev/null
     if [ $? -eq 0 ]; then
       # It's possibly a known issue: https://github.com/docker/hub-feedback/issues/935
       echo
@@ -27,9 +27,8 @@ pull_image() {
     if [ $? -ne 0 ]; then
       exit_with_error "Error pulling docker image, installation cannot continue."
     fi
-  else
-    echo "$output"
   fi
+  rm output.tmp
   echo
 }
 
