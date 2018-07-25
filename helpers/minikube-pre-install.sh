@@ -11,7 +11,6 @@ echo "Setup $pvPath on minikube node"
 
 echo "Creating / Re-creating and permissioning $pvPath on minikube node"
 
-miniStatus=""
 miniStatus=$(minikube ssh "
 if [ -d $pvPath ]; then sudo rm -rf $pvPath; fi &&
 sudo mkdir $pvPath &&
