@@ -25,6 +25,28 @@ sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machi
 minikube start --memory 8192 --cpus 4 --vm-driver xhyve
 ```
 
+### Minikube settings adjustment
+
+Elasticsearch requires that the vm.max_map_count be set to at least 262144.
+Due https://github.com/kubernetes/minikube/issues/2367 we are unable set this as part of startup.
+
+```sh
+# Get current vm.max_map_count value. By default it is 65530 that is too low.
+minikube ssh 'sysctl vm.max_map_count'
+
+# Set vm.max_map_count to be persistant across restarts
+minikube ssh 'echo "sysctl -w vm.max_map_count=262144" | sudo tee -a /var/lib/boot2docker/bootlocal.sh'
+
+# Restart minikube
+minikube stop
+minikube start
+
+# Make sure after restart vm.max_map_count value is as expected
+
+# Alternative: you could have also set vm.max_map_count to expected, however it would not persist after restart
+minikube ssh 'sudo sysctl -w vm.max_map_count=262144'
+```
+
 ### Install Gestalt Platform on a Running Minikube Cluster
 
 ```sh
