@@ -63,3 +63,15 @@ minikube addons enable ingress
 ./install-gestalt-platform minikube.conf
 
 ```
+
+## Removing Gestalt Platform from Minikube
+
+Remove Gestalt Platform:
+```sh
+./remove-gestalt-platform
+```
+
+Remove the Gestalt database persistent volume:
+```sh
+minikube ssh 'sudo rm -rf /tmp/gestalt-postgresql-volume'
+```
