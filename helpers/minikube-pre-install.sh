@@ -61,7 +61,8 @@ if [ `echo $miniStatus | sed 's/[^0-9]*//g'` -lt 262144 ]; then
     echo "$miniStatus"
     exit_with_error "Installation failed, aborting."
   fi
-
+else
+  echo "OK - vm.max_map_count =  `echo $miniStatus | sed 's/[^0-9]*//g'` meets Elasticsearch requirements"
 fi
 
 
