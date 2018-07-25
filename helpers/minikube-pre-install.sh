@@ -7,27 +7,26 @@ echo "==========================================="
 pvPath='/tmp/gestalt-postgresql-volume'
 
 # First, create a directory for the PV on the minikube node. If already exists remove and re-create.
+echo "Setup $pvPath on minikube node"
 
-echo "Checking for leftover directory $pvPath from previous installs."
-cleanupMe=$(minikube ssh "if [ -d $pvPath ]; then echo "yes"; else echo "no"; fi")
-exit_on_error "Unable determine presence of directory: $pvPath on minikube node for Kubernetes PV"
-echo 'Done.'
-echo
+echo "Creating / Re-creating and permissioning $pvPath on minikube node"
 
-if [ "$cleanupMe" = "yes" ]; then
-  echo "Removing $pvPath"
-  minikube ssh "sudo rm -rf $pvPath"
-  exit_on_error "Could not remove leftover directory on minikube node for Kubernetes PV. Please attempt manually remove: sudo rm -rf $pvPath"
-  echo 'Done.'
+miniStatus=""
+miniStatus=$(minikube ssh "
+if [ -d $pvPath ]; then sudo rm -rf $pvPath; fi &&
+sudo mkdir $pvPath &&
+sudo chmod 777 $pvPath &&
+sudo chown docker:docker $pvPath &&
+echo 'Successfully created and permissioned.'
+")
+
+echo "$miniStatus" | grep 'Successfully created and permissioned.' > /dev/null
+if [ $? -ne 0 ]; then
   echo
-else
-  echo "Nothing to do: $pvPath not present"
-  echo
+  echo "Could not create and permission directory on minikube node for Kubernetes PV"
+  echo "$miniStatus"
+  exit_with_error "Installation failed, aborting."
 fi
-
-echo "Creating $pvPath on minikube node"
-minikube ssh "sudo mkdir $pvPath && sudo chmod 777 $pvPath && sudo chown docker:docker $pvPath"
-exit_on_error "Could not create and permission directory on minikube node for Kubernetes PV"
 echo 'Done.'
 echo
 
