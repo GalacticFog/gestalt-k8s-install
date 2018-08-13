@@ -100,6 +100,9 @@ meta:
   port: 10131
   protocol: http
   databaseName: gestalt-meta
+  debugEnabled: ${gestalt_meta_debug_enabled-false}
+  debugPort: ${gestalt_meta_debug_port-10000}
+
 
 kong:
   nodePort: $gestalt_kong_service_nodeport
