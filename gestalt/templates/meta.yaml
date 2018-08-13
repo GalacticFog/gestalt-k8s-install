@@ -11,6 +11,11 @@ spec:
     spec:
       containers:
       - name: gestalt-meta
+        {{if .Values.meta.debugEnabled}}
+        args:
+        - "-jvm-debug"
+        - "{{ .Values.meta.debugPort }}"
+        {{end}}
         image: "{{ .Values.meta.image }}"
         imagePullPolicy: {{ .Values.common.imagePullPolicy }}
         ports:
