@@ -14,7 +14,7 @@ spec:
     # imagePullPolicy: {{ .Values.common.imagePullPolicy }}
     # 'deploy' arg signals deployment of gestalt platform
     # 'debug' arg signals debug output
-    args: ["install", "{{ .Values.debugMode }}"]
+    args: ["install", "{{ .Values.installer.mode }}"]
     env:
 
     # General settings
