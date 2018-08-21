@@ -5,13 +5,13 @@ Installer repository: [https://github.com/GalacticFog/gestalt-k8s-install](https
 ## Prerequisites
 
 A target Kubernetes cluster:
-* Kubernetes 1.7+ with Helm installed
+* Kubernetes 1.7+
 * PV support on the underlying infrastructure
 
 A workstation for running the installer:
 * Mac OS or Linux
 * kubectl configured for the target cluster
-* Helm installed (Optional, helm will be downloaded by the installer if not already present)
+* Helm (helm will be downloaded by the installer if not already present on your system)
 
 ## Installation instructions
 

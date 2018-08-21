@@ -11,8 +11,6 @@ Target Kubernetes Cluster:
 Workstation running the Installer:
 * Mac OS or Linux
 * kubectl configured for the cluster
-* Helm installed
-
 
 ## Docker EE Configuration
 
@@ -27,29 +25,8 @@ Next, login to Docker EE, and configure the following:
  - `Full Control` grants for `kube-system/default` for all namespaces (for Helm)
  - `Full Control` grants for `gestalt-system/default` for all namespaces (for Gestalt Platform)
 
-### 2\. Install Helm
 
-Download your desired version (e.g.  https://github.com/kubernetes/helm/releases/tag/v2.8.2) and install to a location in your system PATH:
-
-```sh
-# Example for MacOS
-
-curl -O https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-darwin-amd64.tar.gz
-
-tar xfzv helm-v2.8.2-darwin-amd64.tar.gz
-
-cp darwin-amd64/helm /usr/local/bin/helm
-
-helm init
-```
-
-Verify Helm is working (there should be no errors with the following commands):
-```
-helm version
-helm list
-```
-
-### 3\. Persistent Volume for Gestalt Database
+### 2\. Persistent Volume for Gestalt Database
 
 **Note: The installer performs this step automatically by default.**  The behavior can be altered by modifying the `docker-ee.conf` configuration file.
 
