@@ -20,12 +20,15 @@ prompt_to_continue(){
 remove_gestalt_platform() {
   
   echo ""
-  echo "[`date +%Y%m%d-%H%M`] Starting kubectl delete ..."
+  echo "Removing Gestalt Platform components from '$install_namespace' namespace..."
   kubectl delete daemonsets,replicasets,statefulsets,services,deployments,pods,rc,secrets,configmaps,pvc,ingresses \
     --timeout=30s --all --namespace $install_namespace
   if [ $? -ne 0 ]; then
     echo ""
-    echo "Warning: kubectl delete ... command failed. Re-attempting with kubectl forcefull delete (Cleanup also pods stuck in Terminating) ..."
+    echo "Warning: 'kubectl delete' failed, re-attempting with forceful delete..."
+    echo ""
+    
+    # The --force flag helps clean up pods stuck in the 'Terminating' state
     kubectl delete daemonsets,replicasets,statefulsets,services,deployments,pods,rc,secrets,configmaps,pvc,ingresses \
       --grace-period=0 --force --all --namespace $install_namespace
   fi
