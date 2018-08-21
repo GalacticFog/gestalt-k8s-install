@@ -101,15 +101,7 @@ check_for_helm() {
     helm=helm
   fi
 
-  echo "Checking helm installation status..."
-  $helm version --tiller-connection-timeout 10 > /dev/null
-  if [ $? -ne 0 ]; then
-    echo "Helm/Tiller not yet initialized in Kubernetes cluster. Running 'helm init --upgrade'..."
-    $helm init --upgrade
-    do_wait_for_helm
-  fi
-
-  echo "OK - Helm is ready."
+  echo "OK - Helm is present."
 }
 
 check_for_helm_no_download() {
@@ -205,9 +197,9 @@ check_for_required_namespace() {
 check_for_prior_install() {
   # echo "Checking for prior installation..."
 
-  $helm status gestalt >/dev/null 2>&1
-  if [ $? -eq 0 ]; then
-      exit_with_error "Gestalt helm deployment found, aborting."
+  local num_lines=$( kubectl get all -n $install_namespace --no-headers 2>/dev/null | wc -l)
+  if [ $num_lines -ne 0 ]; then
+      exit_with_error "Gestalt $install_namespace deployment found, aborting."
   fi
 
   kubectl get services --all-namespaces | grep default-kong > /dev/null
@@ -423,28 +415,17 @@ create_namespace() {
   fi
 }
 
-run_helm_install() {
+run_gestalt_install() {
 
   [ -z "$install_namespace" ] && exit_with_error "install_namespace not defined"
   [ -z "$install_prefix" ]    && exit_with_error "install_prefix  not defined"
 
-  cmd="$helm install --namespace $install_namespace ./gestalt -n $install_prefix -f $1"
-  echo "Installing Gestalt Platform to Kubernetes using Helm..."
-  echo "Command: $cmd"
-  # $cmd > /dev/null 2>&1
-  local status=$( $cmd 2>&1)
-  if [ $? -ne 0 ]; then
-      echo "$status"
-      exit_with_error "Error running helm (error code returned), installation failed."
-  fi
-
-  # Check for error in case helm error'd but didn't return an error code
-  if echo $status | grep -i error; then
-      echo "$status"
-      exit_with_error "Error running helm (error detected), installation failed."
-  fi
-
-  # exit_on_error "Installation failed!"
+  echo "Installing Gestalt Platform to Kubernetes..."
+  $helm template ./gestalt --name $install_prefix -f $1 > gestalt.yaml
+  exit_on_error "Helm template creation failed."
+  
+  kubectl apply --namespace $install_namespace -f gestalt.yaml
+  exit_on_error "Installation failed!"
 }
 
 run_pre_install() {

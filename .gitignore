@@ -5,6 +5,7 @@ tmp
 *.zip
 gestalt-config.yaml
 gestalt-config.json
+gestalt.yaml
 my.*
 test
 __*

@@ -18,24 +18,23 @@ prompt_to_continue(){
 }
 
 remove_gestalt_platform() {
-  if [ -f ./helm ]; then
-    helm=./helm
-  else
-    helm=helm
-  fi
-
-  name=$install_prefix
-  $helm status $name >/dev/null 2>&1
+  
+  echo ""
+  echo "[`date +%Y%m%d-%H%M`] Starting kubectl delete ..."
+  kubectl delete daemonsets,replicasets,statefulsets,services,deployments,pods,rc,secrets,configmaps,pvc,ingresses \
+    --timeout=30s --all --namespace $install_namespace
   if [ $? -ne 0 ]; then
-    echo "Nothing to do - Helm deployment '$name' not found."
-  else
-    echo "OK - Helm deployment '$name' found."
-
-    echo "Removing Helm deployment '$install_prefix' ..."
-
-    $helm delete --purge $install_prefix
+    echo ""
+    echo "Warning: kubectl delete ... command failed. Re-attempting with kubectl forcefull delete (Cleanup also pods stuck in Terminating) ..."
+    kubectl delete daemonsets,replicasets,statefulsets,services,deployments,pods,rc,secrets,configmaps,pvc,ingresses \
+      --grace-period=0 --force --all --namespace $install_namespace
   fi
 
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "Warning: kubectl delete ... command failed"
+    echo ""
+  fi
   kubectl get namespace $install_namespace > /dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "Nothing to do - Kubernetes namespace '$install_namespace' isn't present."
@@ -86,7 +85,6 @@ fi
 # Check for pre-reqs
 check_for_required_tools
 check_for_kube
-check_for_helm_no_download
 
 # Sanity check that gestalt-platform exists
 # check_for_gestalt
