@@ -56,7 +56,7 @@ do_install() {
 
   # Perform Gestalt installation
   # create_namespace
-  run_helm_install          gestalt-config.yaml
+  run_gestalt_install          gestalt-config.yaml
   run_post_deploy
 
   wait_for_install_completion
