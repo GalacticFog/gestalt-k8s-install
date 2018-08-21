@@ -1,10 +1,16 @@
 #!/bin/bash
+#
+# Removes Gestalt Platform components from the Kubernetes cluster in the current kubectl context
+#
+# First deletes Gestalt components from the 'gestalt-system' namespace, then prompts user to 
+# delete namespaces in UUID format, assuming those namespaces were created as part of the
+# Gestalt Platform installation.
 
 . helpers/install-functions.sh
 
 prompt_to_continue(){
   echo ""
-  echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`'." # " and namespace '$install_namespace' will be deleted."
+  echo "Gestalt Platform will be removed from Kubernetes cluster '`kubectl config current-context`'."
   echo "This cannot be undone."
   echo ""
 
@@ -77,7 +83,6 @@ install_prefix=$1
 install_namespace=$2
 
 if [ -z "$install_prefix" ]; then
-  # exit_with_error "Must specify install_prefix"
   install_prefix=gestalt
 fi
 
@@ -89,9 +94,6 @@ fi
 # Check for pre-reqs
 check_for_required_tools
 check_for_kube
-
-# Sanity check that gestalt-platform exists
-# check_for_gestalt
 
 prompt_to_continue
 
