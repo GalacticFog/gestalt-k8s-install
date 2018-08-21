@@ -18,12 +18,26 @@ prompt_to_continue(){
 }
 
 remove_gestalt_platform() {
-  
+
+  # First, check if the namespace is even present
+
+  kubectl get namespace $install_namespace > /dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo "Nothing to do - Kubernetes namespace '$install_namespace' isn't present."
+    return 0
+  fi
+
+  # Remove Gestalt Platform
+
   echo ""
   echo "Removing Gestalt Platform components from '$install_namespace' namespace..."
   kubectl delete daemonsets,replicasets,statefulsets,services,deployments,pods,rc,secrets,configmaps,pvc,ingresses \
     --timeout=30s --all --namespace $install_namespace
+
   if [ $? -ne 0 ]; then
+  
+    # Removal was unsuccessful, try force removal
+
     echo ""
     echo "Warning: 'kubectl delete' failed, re-attempting with forceful delete..."
     echo ""
@@ -31,19 +45,6 @@ remove_gestalt_platform() {
     # The --force flag helps clean up pods stuck in the 'Terminating' state
     kubectl delete daemonsets,replicasets,statefulsets,services,deployments,pods,rc,secrets,configmaps,pvc,ingresses \
       --grace-period=0 --force --all --namespace $install_namespace
-  fi
-
-  if [ $? -ne 0 ]; then
-    echo ""
-    echo "Warning: kubectl delete ... command failed"
-    echo ""
-  fi
-  kubectl get namespace $install_namespace > /dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    echo "Nothing to do - Kubernetes namespace '$install_namespace' isn't present."
-  # else
-    # echo "Deleting namespace '$install_namespace'..."
-    # kubectl delete namespace $install_namespace
   fi
 }
 
