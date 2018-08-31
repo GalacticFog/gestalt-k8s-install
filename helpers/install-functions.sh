@@ -252,7 +252,25 @@ do_prompt_to_continue() {
   done
 }
 
+
 accept_eula() {
+
+  eula_data="./.eula_info"
+
+  if [ ! -f ${eula_data} ]; then
+      prompt_eula "${eula_data}"
+  fi
+
+  curl -H "Content-Type: application/json" -X POST -d "$(cat ${eula_data})" https://gtw1.demo.galacticfog.com/gfsales/message > /dev/null 2>&1
+
+  echo "EULA Accepted, proceeding with Gestalt Platform installation." ;
+
+}
+
+
+prompt_eula() {
+
+  local eula_data="$1"
 
   while true; do
 
@@ -293,10 +311,8 @@ accept_eula() {
                         \n\n          email: $email\"\
                 }\
             }"
+            echo $payload > ${eula_data}
 
-            curl -H "Content-Type: application/json" -X POST -d "$payload" https://gtw1.demo.galacticfog.com/gfsales/message > /dev/null 2>&1
-
-            echo "EULA Accepted, proceeding with Gestalt Platform installation." ;
             return 0
             ;;
         [Nn]*)
