@@ -23,9 +23,9 @@ go() {
     exit_on_error "Obtaining token failed, aborting."
     cass_provider_id=$(http "$gestalt_login_url/meta/root/providers?expand=false&type=CaaS" "Authorization:Bearer $gestalt_token"  | jq -r '.[].id')
     exit_on_error "Failed to obtain default CaaS provider id"
-    echo '[{"op": "add", "path": "/properties/config/storage_classes", "value": ['${gestalt_caas_storage_list[@]}']}]' \
+    echo '[{"op": "add", "path": "/properties/config/storage_classes", "value": ['${gestalt_volumes_storage_classes[@]}']}]' \
     | http PATCH "$gestalt_login_url/meta/root/providers/$cass_provider_id" "Authorization:Bearer $gestalt_token"
-    exit_on_error "Failed to obtain default CaaS provider id"
+    exit_on_error "Failed to update default CaaS provider storage classes"
     # If ever want get provider details
     # http "$gestalt_login_url/meta/root/providers/$cass_provider_id" "Authorization:Bearer $gestalt_token"
 
