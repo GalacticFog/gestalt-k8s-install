@@ -17,6 +17,19 @@ go() {
     $fog login $gestalt_login_url -u $gestalt_admin_username -p $gestalt_admin_password
     exit_on_error "Login failed, aborting."
 
+    #Maybe not the best place but for now putting here
+    echo "Setting Storage Class for default provider...."
+    gestalt_token=$(cat ~/.fog/localhost\:31112/auth.json.cached | jq -r '.access_token')
+    exit_on_error "Obtaining token failed, aborting."
+    echo "login uri [$gestalt_login_url]"
+    cass_provider_id=$(http "http://localhost:31112/meta/root/providers?expand=false&type=CaaS" "Authorization:Bearer $gestalt_token"  | jq -r '.[].id')
+    exit_on_error "Failed to obtain default CaaS provider id"
+    echo '[{"op": "add", "path": "/properties/config/storage_classes", "value": ['${gestalt_caas_storage_list[@]}']}]' \
+    | http PATCH "http://localhost:31112/meta/root/providers/$cass_provider_id" "Authorization:Bearer $gestalt_token"
+    exit_on_error "Failed to obtain default CaaS provider id"
+    # If ever want get provider details
+    # http "http://localhost:31112/meta/root/providers/$cass_provider_id" "Authorization:Bearer $gestalt_token"
+
     ## Schema migration and stream provider setup
 
     echo "Migrating Meta schema..."
