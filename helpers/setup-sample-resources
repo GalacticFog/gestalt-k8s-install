@@ -19,7 +19,7 @@ go() {
 
     #Maybe not the best place but for now putting here
     echo "Setting Storage Class for default provider...."
-    gestalt_token=$(cat ~/.fog/localhost\:31112/auth.json.cached | jq -r '.access_token')
+    gestalt_token=$(cat ~/.fog/$(echo ${gestalt_login_url} | awk -F'/' '{print $3}')/auth.json.cached | jq -r '.access_token')
     exit_on_error "Obtaining token failed, aborting."
     cass_provider_id=$(http "$gestalt_login_url/meta/root/providers?expand=false&type=CaaS" "Authorization:Bearer $gestalt_token"  | jq -r '.[].id')
     exit_on_error "Failed to obtain default CaaS provider id"
