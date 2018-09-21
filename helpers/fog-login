@@ -1,0 +1,7 @@
+#!/bin/bash
+
+fog="./fog"
+# fog="fog"
+
+$fog login $gestalt_login_url -u $gestalt_admin_username -p $gestalt_admin_password
+exit_on_error "Login failed, aborting."

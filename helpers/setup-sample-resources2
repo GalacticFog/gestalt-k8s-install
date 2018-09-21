@@ -1,0 +1,135 @@
+#!/bin/bash
+
+fog="./fog"
+# fog="fog"
+
+go() {
+
+    ## ----------------------------------------
+    ## Set up Gestalt Hierarchy
+    ## ----------------------------------------
+
+    echo --------------------------------------------
+    echo "Creating sample Gestalt resources..."
+    echo --------------------------------------------
+    echo
+    echo 
+    $fog login $gestalt_login_url -u $gestalt_admin_username -p $gestalt_admin_password
+    exit_on_error "Login failed, aborting."
+
+    ## Schema migration and stream provider setup
+
+    echo "Migrating Meta schema..."
+    mkdir -p ./logs
+    $fog ext meta-schema-V7-migrate -f examples/meta-migrate.json --provider 'default-laser' --debug > ./logs/meta-migrate.log 2>&1
+    exit_on_error "Failed to migrate Meta schema"
+
+    # echo "Creating stream providers..."
+    # $fog meta POST /root/providers -f examples/start-stream-default.json
+    # $fog meta POST /root/providers -f examples/stop-stream-default.json
+
+    $fog create org --name 'sandbox' --description 'Sandboxes' --org root
+    exit_on_error "Org creation failed, aborting."
+
+    ## Admin Sandbox and environments
+
+    $fog create workspace --org 'sandbox' --name 'admin-sandbox' -d 'Admin Sandbox'
+    exit_on_error "Workspace creation failed, aborting."
+
+    $fog create environment --org 'sandbox' --workspace 'admin-sandbox' --name 'dev' --description 'Development' --type 'development'
+    exit_on_error "Environment creation failed, aborting."
+
+    $fog create environment --org 'sandbox' --workspace 'admin-sandbox' --name 'test' --description 'Test' --type 'test'
+    exit_on_error "Environment creation failed, aborting."
+
+    # $fog create api --name 'admin-sandbox-test' --description 'Admin Sandbox DEV API' \
+    #     --org 'sandbox' --workspace 'admin-sandbox' --environment 'dev' --provider 'default-kong'
+    # exit_on_error "API creation failed, aborting."
+    #
+    # $fog create api --name 'admin-sandbox-test' --description 'Admin Sandbox TEST API' \
+    #     --org 'sandbox' --workspace 'admin-sandbox' --environment 'test' --provider 'default-kong'
+    # exit_on_error "API creation failed, aborting."
+
+
+    ## Developer Sandbox and envrionments
+
+    $fog create workspace --org 'sandbox' --name 'dev-sandbox' -d 'Developer Sandbox'
+    exit_on_error "Workspace creation failed, aborting."
+
+    $fog create environment --org 'sandbox' --workspace 'dev-sandbox' --name 'dev' --description 'Development' --type 'development'
+    exit_on_error "Environment creation failed, aborting."
+
+    $fog create environment --org 'sandbox' --workspace 'dev-sandbox' --name 'test' --description 'Test' --type 'test'
+    exit_on_error "Environment creation failed, aborting."
+
+    ## ----------------------------------------
+    ## Download and Import Sample Resources
+    ## ----------------------------------------
+
+    org='sandbox'
+    workspace='dev-sandbox'
+    environment='dev'
+    kong='default-kong'
+    laser='default-laser'
+    api='dev-sandbox'
+    caas='default-kubernetes'
+
+    echo
+    echo "Creating Sample resources in Sandbox environment..."
+    echo
+
+    # Set context
+    $fog context set --org $org --workspace $workspace --environment $environment
+    exit_on_error "Failed to set context, aborting."
+
+    # Create API
+    $fog create api --name $api --description 'Developer Sandbox API' --provider $kong
+    exit_on_error "Failed to create API resource, aborting."
+
+    # Create Containers
+    $fog create container -f examples/nginx-container.json --provider $caas
+
+    ## Kafka
+
+    $fog ext create-sample-resources --dir ./examples --provider $caas --laser-provider $laser --stream-provider 'default-stream-provider'
+    # $fog create container -f examples/kafka-container.json --provider 'default-dcos'
+    # $fog create lambda -f examples/kafka-consumer-lambda.json --provider laser
+    # $fog create lambda -f examples/kafka-producer-lambda.json --provider laser
+    $fog create api-endpoint -f examples/kafka-consumer-api-endpoint.json --api $api --lambda 'kafkaConsumer'
+    $fog create api-endpoint -f examples/kafka-producer-api-endpoint.json --api $api --lambda 'kafkaProducer'
+
+
+    # # Create Lambdas
+
+    $fog create lambda -f examples/dotnet-hello-lambda.json --provider $laser
+    $fog create lambda -f examples/factorial-lambda.json --provider $laser
+    $fog create lambda -f examples/hello-lodash-lambda.json --provider $laser
+    $fog create lambda -f examples/nashorn-hello-lambda.json --provider $laser
+    $fog create lambda -f examples/periodic-lambda.json --provider $laser
+    $fog create lambda -f examples/python2-hello-lambda.json --provider $laser
+    $fog create lambda -f examples/python3-hello-lambda.json --provider $laser
+    $fog create lambda -f examples/sales-lambda.json --provider $laser
+    $fog create lambda -f examples/slack-sales-lambda.json --provider $laser
+    $fog create lambda -f examples/sms-hello-lambda.json --provider $laser
+
+    # ## Hello lambda API endpoints
+
+    $fog create api-endpoint -f examples/dotnet-hello-api-endpoint.json --api $api --lambda 'dotnet-hello'
+    $fog create api-endpoint -f examples/nashorn-hello-api-endpoint.json --api $api --lambda 'nashorn-hello'
+    $fog create api-endpoint -f examples/hello-lodash-api-endpoint.json --api $api --lambda 'hello-lodash'
+    $fog create api-endpoint -f examples/python2-hello-api-endpoint.json --api $api --lambda 'python2-hello'
+    $fog create api-endpoint -f examples/python3-hello-api-endpoint.json --api $api --lambda 'python3-hello'
+
+    # ## Other Examples
+
+    $fog create api-endpoint -f examples/factorial-api-endpoint.json --api $api --lambda 'factorial'
+    $fog create api-endpoint -f examples/sales-api-endpoint.json --api $api --lambda 'sales'
+    $fog create api-endpoint -f examples/slack-sales-api-endpoint.json --api $api --lambda 'slack-sales'
+    $fog create api-endpoint -f examples/sms-hello-api-endpoint.json --api $api --lambda 'sms-hello'
+}
+
+go
+
+echo
+echo "Done creating sample resources."
+

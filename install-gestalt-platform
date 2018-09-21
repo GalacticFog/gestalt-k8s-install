@@ -34,19 +34,15 @@ do_install() {
   check_kubeconfig
   check_for_kube
   check_cluster_capacity
-  check_for_helm
   create_or_check_for_required_namespace
   check_for_prior_install
 
   download_fog_cli
 
-  # Build Helm config
-  . helpers/build-gestalt-config.sh
-  process_kubeconfig
-  # prompt_for_executor_config
-  build_cli_config
-  generate_gestalt_config > gestalt-config.yaml
-  echo "Helm chart configuration generated."
+  cd client
+  . configure.sh
+  cd -
+  echo "Installer configuration generated."
 
   # Prompt to continue
   summarize_config
@@ -55,8 +51,10 @@ do_install() {
   run_pre_install
 
   # Perform Gestalt installation
-  # create_namespace
-  run_gestalt_install          gestalt-config.yaml
+  cd client
+  . install.sh
+  cd -
+
   run_post_deploy
 
   wait_for_install_completion

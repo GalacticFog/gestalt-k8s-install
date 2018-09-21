@@ -41,7 +41,6 @@ check_for_required_tools() {
   # 'read' may be implemented as a shell function rather than a separate function
   # which read      >/dev/null 2>&1 ; exit_on_error "'read' command not found, aborting."
   which bc        >/dev/null 2>&1 ; exit_on_error "'bc' command not found, aborting."
-  # which helm      >/dev/null 2>&1 ; exit_on_error "'helm' not found, aborting."
   which kubectl   >/dev/null 2>&1 ; exit_on_error "'kubectl' command not found, aborting."
   which curl      >/dev/null 2>&1 ; exit_on_error "'curl' command not found, aborting."
   which unzip     >/dev/null 2>&1 ; exit_on_error "'unzip' command not found, aborting."
@@ -89,52 +88,6 @@ check_cluster_capacity() {
     exit_with_error "Cannot proceed with installation, not enough cluster resources."
   fi
 }
-
-check_for_helm() {
-  helm=helm
-  echo "Checking for Helm..."
-  helm >/dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    download_helm
-  else
-    echo "OK - helm client present"
-    helm=helm
-  fi
-
-  echo "OK - Helm is present."
-}
-
-check_for_helm_no_download() {
-  echo "Checking for Helm..."
-  helm >/dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    helm=helm
-  elif [ -f ./helm ]; then
-      helm=./helm
-  fi
-
-  [ -z $helm ] && exit_with_error "Helm not found."
-
-  echo "OK - '$helm' found."
-}
-
-do_wait_for_helm() {
-  echo -n "Waiting for Helm/Tiller to be ready "
-  for i in `seq 1 10`; do
-    sleep 10
-    echo -n "."
-
-    local status=$($helm version --tiller-connection-timeout 10 2>&1)
-    if [ $? -eq 0 ]; then
-      echo
-      echo "$status"
-      return 0
-    fi
-  done
-  echo
-  exit_with_error "Helm did not initialize within expected timeframe."
-}
-
 
 create_or_check_for_required_namespace() {
   # echo "Checking for existing Kubernetes namespace '$install_namespace'..."
@@ -431,19 +384,6 @@ create_namespace() {
   fi
 }
 
-run_gestalt_install() {
-
-  [ -z "$install_namespace" ] && exit_with_error "install_namespace not defined"
-  [ -z "$install_prefix" ]    && exit_with_error "install_prefix  not defined"
-
-  echo "Installing Gestalt Platform to Kubernetes..."
-  $helm template ./gestalt --name $install_prefix -f $1 > gestalt.yaml
-  exit_on_error "Helm template creation failed."
-  
-  kubectl apply --namespace $install_namespace -f gestalt.yaml
-  exit_on_error "Installation failed!"
-}
-
 run_pre_install() {
   if [ ! -z "$pre_install_script" ]; then
     echo ""
@@ -535,62 +475,6 @@ display_summary() {
   echo "         http://docs.galacticfog.com/"
   echo ""
   echo "Done."
-}
-
-download_helm() {
-    echo "Checking for 'helm'"
-
-    if [ ! -f ./helm ]; then
-        local os=`uname`
-
-        if [ "$os" == "Darwin" ]; then
-            local helm_os="darwin"
-        elif [ "$os" == "Linux" ]; then
-            local helm_os="linux"
-        else
-            echo
-            echo "Warning: unknown OS type '$os', treating as Linux"
-            local helm_os="linux"
-        fi
-
-        local helm_version="2.9.1"
-
-        local url="https://storage.googleapis.com/kubernetes-helm/helm-v$helm_version-$helm_os-amd64.tar.gz"
-
-        if [ ! -z "$url" ]; then
-            echo
-            echo "Downloading helm version $helm_version..."
-
-            curl -L $url -o helm.tar.gz
-            exit_on_error "Failed to download helm, aborting."
-
-            echo
-            echo "Extracting..."
-
-            tar xfzv helm.tar.gz
-            exit_on_error "Failed to unzip helm package, aborting."
-
-            if [ "$os" == "Darwin" ]; then
-                cp darwin-amd64/helm .
-                rm -r darwin-amd64
-            elif [ "$os" == "Linux" ]; then
-                cp linux-amd64/helm .
-                rm -r linux-amd64
-            else
-                echo
-                echo "Warning: unknown OS type '$os', treating as Linux"
-                cp linux-amd64/helm .
-            fi
-            chmod +x ./helm
-            helm="./helm"
-
-            rm helm.tar.gz
-        fi
-    else
-      helm=./helm
-    fi
-
-    echo "OK - $helm present."
 }
 
 download_fog_cli() {

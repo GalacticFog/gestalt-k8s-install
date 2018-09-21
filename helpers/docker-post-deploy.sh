@@ -11,6 +11,25 @@ exit_on_error() {
   fi
 }
 
+# TODO: Make generic function if we use it somewhere else
+wait_for_ui_service() {
+  secs=5
+  for i in `seq 1 10`; do
+    echo "Polling for gestalt-ui service (attempt $i)"
+    output=$(kubectl get service -n gestalt-system gestalt-ui --no-headers 2>/dev/null | wc -l)
+    if [ $output -eq 0 ]; then
+      sleep $secs
+    else
+      echo "gestalt-ui service found"
+      return 0
+    fi
+  done
+
+  exit_with_error "gestalt-ui service not found, aborting".
+}
+
+wait_for_ui_service
+
 kube_ip=localhost
 kube_port=$(kubectl get svc -n gestalt-system gestalt-ui -ojsonpath='{.spec.ports[].nodePort}')
 exit_on_error "Unable to get Gestalt UI service port"
