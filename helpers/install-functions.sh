@@ -263,8 +263,12 @@ accept_eula() {
 
   curl -H "Content-Type: application/json" -X POST -d "$(cat ${eula_data})" https://gtw1.demo.galacticfog.com/gfsales/message > /dev/null 2>&1
 
-  echo "EULA Accepted, proceeding with Gestalt Platform installation." ;
+  if [ $? -ne 0 ]; then
+    echo "[Warning] failed to communicate to Galactic Fog Sales Team ..."
+  fi
 
+  echo "EULA Accepted, proceeding with Gestalt Platform installation."
+  
 }
 
 
