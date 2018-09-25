@@ -34,6 +34,7 @@ kube_ip=localhost
 kube_port=$(kubectl get svc -n gestalt-system gestalt-ui -ojsonpath='{.spec.ports[].nodePort}')
 exit_on_error "Unable to get Gestalt UI service port"
 
+gestalt_ui_ingress_protocol=${gestalt_ui_ingress_protocol-http}
 
 # Form the Gestalt login URL
 gestalt_login_url="$gestalt_ui_ingress_protocol://$gestalt_ui_ingress_host:$kube_port"
