@@ -46,6 +46,7 @@ check_for_required_tools() {
   which curl      >/dev/null 2>&1 ; exit_on_error "'curl' command not found, aborting."
   which unzip     >/dev/null 2>&1 ; exit_on_error "'unzip' command not found, aborting."
   which tar       >/dev/null 2>&1 ; exit_on_error "'tar' command not found, aborting."
+  which jq        >/dev/null 2>&1 ; exit_on_error "'jq' command not found. To obtain do 'bew install jq', aborting."
   echo "OK - Required tools found."
 }
 
@@ -264,10 +265,12 @@ accept_eula() {
   curl -H "Content-Type: application/json" -X POST -d "$(cat ${eula_data})" https://gtw1.demo.galacticfog.com/gfsales/message > /dev/null 2>&1
 
   if [ $? -ne 0 ]; then
-    echo "[Warning] failed to communicate to Galactic Fog Sales Team ..."
+    echo ":)"
+  else
+    echo "EULA Accepted"
   fi
 
-  echo "EULA Accepted, proceeding with Gestalt Platform installation."
+  echo "Proceeding with Gestalt Platform installation."
   
 }
 
