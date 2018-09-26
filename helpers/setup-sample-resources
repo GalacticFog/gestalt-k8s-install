@@ -25,7 +25,7 @@ go() {
     exit_on_error "Failed to obtain default CaaS provider id"
     echo '[{"op": "add", "path": "/properties/config/storage_classes", "value": ['${gestalt_volumes_storage_classes[@]}']}]' \
     | http PATCH "$gestalt_login_url/meta/root/providers/$cass_provider_id" "Authorization:Bearer $gestalt_token" \
-     > ./logs/provider-patch-$cass_provider_id.log 2>&1
+     > ./logs/provider-patch.log 2>&1
     exit_on_error "Failed to update default CaaS provider storage classes"
     # If ever want get provider details
     # http "$gestalt_login_url/meta/root/providers/$cass_provider_id" "Authorization:Bearer $gestalt_token"
