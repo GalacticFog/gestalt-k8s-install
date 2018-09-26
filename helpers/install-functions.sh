@@ -46,6 +46,7 @@ check_for_required_tools() {
   which curl      >/dev/null 2>&1 ; exit_on_error "'curl' command not found, aborting."
   which unzip     >/dev/null 2>&1 ; exit_on_error "'unzip' command not found, aborting."
   which tar       >/dev/null 2>&1 ; exit_on_error "'tar' command not found, aborting."
+  which jq        >/dev/null 2>&1 ; exit_on_error "'jq' command not found. To obtain do 'bew install jq', aborting."
   echo "OK - Required tools found."
 }
 
