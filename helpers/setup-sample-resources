@@ -9,6 +9,8 @@ go() {
     ## Set up Gestalt Hierarchy
     ## ----------------------------------------
 
+    mkdir -p ./logs
+
     echo --------------------------------------------
     echo "Creating sample Gestalt resources..."
     echo --------------------------------------------
@@ -33,7 +35,6 @@ go() {
     ## Schema migration and stream provider setup
 
     echo "Migrating Meta schema..."
-    mkdir -p ./logs
     $fog ext meta-schema-V7-migrate -f examples/meta-migrate.json --provider 'default-laser' --debug > ./logs/meta-migrate.log 2>&1
     exit_on_error "Failed to migrate Meta schema"
 
