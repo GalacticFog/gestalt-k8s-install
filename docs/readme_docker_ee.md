@@ -1,15 +1,19 @@
 # Installing Gestalt Platform on Docker Enterprise Edition Kubernetes
 
-Installer repository: https://github.com/GalacticFog/gestalt-k8s-install
+Installer repository: [https://github.com/GalacticFog/gestalt-k8s-install](https://github.com/GalacticFog/gestalt-k8s-install)
 
 ## Prerequisites
 
 Target Kubernetes Cluster:
+
 * Docker EE with Kubernetes enabled
+
 * PV support on the underlying infrastructure
 
 Workstation running the Installer:
+
 * Mac OS or Linux
+
 * kubectl configured for the cluster
 
 ## Docker EE Configuration
@@ -22,9 +26,48 @@ kubectl create namespace gestalt-system
 ```
 
 Next, login to Docker EE, and configure the following:
+
  - `Full Control` grants for `kube-system/default` for all namespaces (for Helm)
+
  - `Full Control` grants for `gestalt-system/default` for all namespaces (for Gestalt Platform)
 
+If you've enabled [Role Based Access Control](https://kubernetes.io/docs/reference/access-authn-authz/rbac/), you will need to add a 
+[ClusterRoleBinding object](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings) to map the 
+`gestalt-system:default` service account to the Kubernetes `cluster-admin` role.
+
+This YAML defines the required ClusterRoleBinding object:
+```sh
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: gestalt-system-cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: gestalt-system
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+```
+
+You can apply the mapping using `kubectl` with the following command:
+```
+kubectl apply -f - <<EOF
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: gestalt-system-cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: gestalt-system
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+EOF
+```
 
 ### 2\. Persistent Volume for Gestalt Database
 
@@ -58,7 +101,9 @@ EOF
 ### Load balancer for Kubernetes Worker(s).
 
 A load balancer should be set up fronting the Kubernetes worker node(s), with two listeners configured:
+
  * One listener for Gestalt UI (default port 33000)
+
  * One listener for API Gateway (default port 33001)
 
 ## Install Gestalt Platform

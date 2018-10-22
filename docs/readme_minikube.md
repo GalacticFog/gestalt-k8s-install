@@ -1,34 +1,43 @@
-# Quick Start for Minikube (on MacOS)
+# Quickstart for Gestalt on Minikube
 
-Recommend 4 CPUs and 8GB memory for the minikube cluster.
+[Minikube](https://kubernetes.io/docs/setup/minikube/) creates a single-node Kubernetes cluster on a single PC or virtual machine, and
+Gestalt can run on a Minikube instance.  We recommend that you allocate at least 4 CPUs and 12GB of memory to the Minikube cluster.  You 
+may experience startup failures or performance issues when running Gestalt on a smaller cluster.
 
-### Option 1 - Install Minikube with virtual-box VM driver
+While __we don't recommend that you use Minikube to support a production Gestalt deployment__, it's well-suited for demonstration purposes.
+
+## Install Minikube on your host OS
+
+In order to run Gestalt on a Minikube Kubernetes cluster, you'll first need to install Minikube.
+
+- [Install Minikube on MacOS](./readme_minikube_macos.md)
+
+- [Install Minikube on Linux](./readme_minikube_linux.md)
+
+## Install Gestalt on Minikube
+
+Once your Minikube cluster is up and running, you can proceed to install Gestalt on the cluster.
+
+First, make sure that your Minikube installation is up and running, if you haven't already done so.
+
 ```sh
-brew cask install minikube
+# Ensure kubectl is pointing to minikube
+kubectl config current-context   # should report 'minikube'
 
-minikube start --memory 8192 --cpus 4 --vm-driver virtualbox
+# Verify that minikube is running
+minikube status
 
+# List your running Kubnernetes services
+sudo kubectl get services --all-namespaces
+
+# List your running Kubernetes pods
+sudo kubectl get pods --all-namespaces
+
+# Optional - open the Minikube dashboard in your local browser.
+minikube dashboard
 ```
 
-
-### Option 2 - Install Minikube with xhyve VM driver
-
-```sh
-brew cask install minikube
-
-brew install docker-machine-driver-xhyve
-
-# docker-machine-driver-xhyve need root owner and uid
-sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-
-minikube start --memory 8192 --cpus 4 --vm-driver xhyve
-```
-
-### Minikube settings adjustment
-
-Elasticsearch requires that the vm.max_map_count be set to at least 262144.
-Due https://github.com/kubernetes/minikube/issues/2367 we are unable set this as part of startup.
+Next, you may need to [increase the vm.max_map_count setting to at least 262144](https://github.com/kubernetes/minikube/issues/2367) so that Elastisearch work properly.
 
 ```sh
 # Get current vm.max_map_count value. By default it is 65530 that is too low.
@@ -43,22 +52,23 @@ minikube start
 
 # Make sure after restart vm.max_map_count value is as expected
 
-# Alternative: you could have also set vm.max_map_count to expected, however it would not persist after restart
+# Alternative: you could have also set vm.max_map_count with a single command, however it would not persist after restart
 minikube ssh 'sudo sysctl -w vm.max_map_count=262144'
 ```
 
-### Install Gestalt Platform on a Running Minikube Cluster
+Then, allow [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) traffic on your Minikube cluster by enabling the
+included [NGINX Ingress Controller Add-on](https://github.com/kubernetes/ingress-nginx/).
 
 ```sh
-# Ensure kubectl is pointing to minikube
-kubectl config current-context   # should report 'minikube'
-
-# Check that kubernetes is up
-minikube dashboard
-
 # Enable ingress
 minikube addons enable ingress
 
+```
+
+Finally, just run the `install-gestalt-platform` script against the `minikube.conf` configuration file.  The installer script should complete the 
+rest of the Gestalt install procedure for you.
+
+```sh
 # Run the Gestalt Platform installer
 ./install-gestalt-platform minikube.conf
 
@@ -66,12 +76,15 @@ minikube addons enable ingress
 
 ## Removing Gestalt Platform from Minikube
 
-Remove Gestalt Platform:
+You may occasionally need to remove the Gestalt platform from Minikube either to restart a failed installation or to install something else.
+The `remove-gestalt-platform` script should take care of most of the removal process automatically.
+
 ```sh
 ./remove-gestalt-platform
 ```
 
-Remove the Gestalt database persistent volume:
+If you want to delete all of Gestalt's data as well, simply remove the persistent volume used by Gestalt's postgres database.
+
 ```sh
 minikube ssh 'sudo rm -rf /tmp/gestalt-postgresql-volume'
 ```
