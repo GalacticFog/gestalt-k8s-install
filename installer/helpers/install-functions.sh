@@ -62,9 +62,6 @@ check_for_kube() {
   echo "Checking for Kubernetes..."
   local kubecontext="`kubectl config current-context`"
 
-  echo "$kubecontext"
-  echo $target_kube_context
-
   if [ ! -z "$target_kube_context" ]; then
       if [ "$kubecontext" != "$target_kube_context" ]; then
       do_prompt_to_continue \

@@ -65,12 +65,12 @@ minikube addons enable ingress
 
 ```
 
-Finally, just run the `install-gestalt-platform` script against the `minikube.conf` configuration file.  The installer script should complete the 
+Finally, just run the `install-gestalt-platform` script against the `minikube` profile.  The installer script should complete the 
 rest of the Gestalt install procedure for you.
 
 ```sh
 # Run the Gestalt Platform installer
-./install-gestalt-platform minikube.conf
+./install-gestalt-platform minikube
 
 ```
 
@@ -80,7 +80,7 @@ You may occasionally need to remove the Gestalt platform from Minikube either to
 The `remove-gestalt-platform` script should take care of most of the removal process automatically.
 
 ```sh
-./remove-gestalt-platform
+./remove.sh
 ```
 
 If you want to delete all of Gestalt's data as well, simply remove the persistent volume used by Gestalt's postgres database.
