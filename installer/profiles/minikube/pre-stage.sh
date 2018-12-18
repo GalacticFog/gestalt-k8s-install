@@ -1,0 +1,7 @@
+cat >> config.yaml <<EOF
+KONG_0_VIRTUAL_HOST: $(minikube ip):31113
+KONG_0_EXTERNAL_PROTOCOL: http
+
+LOGGING_SERVICE_HOST: $(minikube ip):31114
+LOGGING_SERVICE_PROTOCOL: http
+EOF

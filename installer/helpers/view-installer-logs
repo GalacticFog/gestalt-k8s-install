@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# cmd="kubectl logs -n gestalt-system gestalt-installer --follow"
+cmd="kubectl logs -n gestalt-system gestalt-installer"
+# echo Running $cmd
+# echo Ctrl-C to exit
+# echo
+$cmd $@

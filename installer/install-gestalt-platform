@@ -1,0 +1,86 @@
+#!/bin/bash
+
+set -o pipefail
+
+gestalt_cli_version=0.10.6
+
+do_install() {
+
+  date
+
+  . helpers/install-functions.sh
+  . gestalt.conf
+
+  kube_type=$1
+
+  if [ -z "$kube_type" ]; then
+    exit_with_error "Must specify a kubernetes environment type"
+  elif [ ! -d ./profiles/$kube_type ]; then
+    exit_with_error "Invalid Kubernetes type: $kube_type" 
+  fi
+
+  envfile=profiles/$kube_type/env.conf
+
+  if [ ! -f "$envfile" ]; then
+    exit_with_error "Configuration file '$envfile' not found, aborting."
+  fi
+
+  . $envfile
+
+  echo "Checking for required dependencies..."
+
+  download_fog_cli
+
+  ./precheck.sh $kube_type
+  exit_on_error "Precheck failed, aborting"
+
+  prompt_or_wait_to_continue
+
+  mkdir -p ./stage
+  rm -r ./stage/*
+  mkdir -p ./stage/config
+
+  run_helper pre-stage
+
+  cp gestalt-license.json ./stage/config/
+
+    cat > ./stage/config/install-config.yaml <<EOF
+`cat base-config.yaml`
+`cat credentials.yaml`
+`cat ./profiles/$kube_type/config.yaml`
+EOF
+    
+  exit_on_error "Failed to generate config, aborting"
+
+  ./stage.sh
+  exit_on_error "Stage failed, aborting"
+
+  run_helper pre-install
+
+  ./install.sh
+  exit_on_error "Install failed, aborting"
+
+  if ! wait_for_installer_launch ; then
+    cleanup
+    exit_with_error "Install Pod did not launch in the expected timeframe, aborting."
+  fi
+
+  wait_for_install_completion
+
+  cleanup
+
+  run_helper post-install
+
+  fog_cli_login
+
+  display_summary
+}
+
+if [ "$1" != "do_install" ]; then 
+  mkdir -p ./logs
+  rm ./logs/*
+  ./install-gestalt-platform do_install $@ 2>&1 | tee -a ./logs/install.log
+else
+  shift
+  do_install $@
+fi

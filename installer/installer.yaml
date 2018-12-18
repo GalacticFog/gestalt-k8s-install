@@ -1,0 +1,30 @@
+# This is a pod w/ restartPolicy=Never so that the installer only runs once.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gestalt-installer
+  labels:
+    gestalt-app: installer
+spec:
+  restartPolicy: Never
+  imagePullSecrets:
+  - name: imagepullsecret-1
+  - name: imagepullsecret-2
+  - name: imagepullsecret-3
+  - name: imagepullsecret-4
+  - name: imagepullsecret-5
+  containers:
+  - name: gestalt-installer
+    image: "docker.io/galacticfog/gestalt-installer:5.0.0"
+    imagePullPolicy: Always
+    # imagePullPolicy: IfNotPresent
+    args: 
+    - install
+    - debug
+    volumeMounts:
+    - mountPath: /install-data
+      name: install-data
+  volumes:
+    - name: install-data
+      configMap:
+        name: install-data
