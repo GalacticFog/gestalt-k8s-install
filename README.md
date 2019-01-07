@@ -13,6 +13,19 @@ A workstation for running the installer:
 * kubectl configured for the target cluster
 * Helm (helm will be downloaded by the installer if not already present on your system)
 
+## Quick Start
+
+```sh
+git clone https://github.com/GalacticFog/gestalt-k8s-install
+
+cd gestalt-k8s-install/installer
+
+./install-gestalt-platform docker-for-desktop    # for docker for desktop
+
+./install-gestalt-platform minikube              # for minikube
+
+```
+
 ## Installation instructions
 
 Refer to the installation instructions appropriate for your environment:

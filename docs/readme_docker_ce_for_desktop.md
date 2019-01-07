@@ -17,7 +17,7 @@ kubectl cluster-info
 
 Then run the installation wizard and follow the instructions:
 ```
-./install-gestalt-platform docker-for-desktop.conf
+./install-gestalt-platform docker-for-desktop
 ```
 The installer will tell you where Gestalt is running, typically [http://localhost:31112](http://localhost:31112) for Docker CE for Desktop.
 
